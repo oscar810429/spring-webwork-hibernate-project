@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <!-- ======================== FILTER CHAIN ======================= -->
+    <bean id="filterChainProxy" class="org.acegisecurity.util.FilterChainProxy">
+        <property name="filterInvocationDefinitionSource">
+            <value>
+                CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
+                PATTERN_TYPE_APACHE_ANT
+                /**=httpSessionContextIntegrationFilter,logoutFilter,authenticationProcessingFilter,securityContextHolderAwareRequestFilter,rememberMeProcessingFilter,anonymousProcessingFilter,exceptionTranslationFilter,filterInvocationInterceptor
+            </value>
+            <!-- Put channelProcessingFilter before remoteUserFilter to turn on SSL switching -->
+            <!-- It's off by default b/c Canoo WebTest doesn't support SSL out-of-the-box -->
+        </property>
+    </bean>
+    
+    <bean id="httpSessionContextIntegrationFilter" class="org.acegisecurity.context.HttpSessionContextIntegrationFilter"/>
+
+    <bean id="logoutFilter" class="com.painiu.webapp.security.LogoutFilter">
+        <constructor-arg value="/" /> 
+    	<!--<constructor-arg value="/account/logout_confirm.html" />--> <!-- URL redirected to after logout -->
+    	<constructor-arg>
+    		<list>
+    			<!-- ref bean="passportLogoutHandler"/-->
+    			<ref bean="rememberMeServices"/>
+    			<bean class="com.painiu.webapp.security.DefaultLogoutHandler" />
+    			<ref bean="discuzLogoutHandler"/> <!-- !important: must be the last one -->
+    		</list>
+    	</constructor-arg>
+    	<property name="filterProcessesUrl" value="/account/logout" />
+    </bean>
+
+    <bean id="authenticationProcessingFilter" class="com.painiu.webapp.security.AuthenticationProcessingFilter">
+		<property name="rememberMeServices" ref="rememberMeServices"/>
+        <property name="handlers">
+        	<list>
+			<ref bean="discuzAuthenticationHandler"/>
+    			<ref bean="tokenAuthenticationHandler"/>
+    			<ref bean="existsAuthenticationHandler"/>
+    			<ref bean="defaultAuthenticationHandler"/>
+         </list>
+        </property>
+    </bean>
+    
+    <bean id="defaultAuthenticationHandler" class="com.painiu.webapp.security.DefaultAuthenticationHandler">
+		<property name="userManager" ref="userManager" />
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="authenticationFailureUrl" value="/account/login?error=Xns-hFk2D6jh17Ai" />
+		<property name="defaultTargetUrl" value="/" />
+		<property name="filterProcessesUrl" value="/account/auth/" />
+    </bean>
+   
+    <!-- Exists authentication -->
+    
+    <bean id="existsAuthenticationHandler" class="com.painiu.webapp.security.exists.ExistsAuthenticationHandler">
+    	<property name="authenticationManager" ref="authenticationManager" />
+    	<property name="filterProcessesUrl" value="/account/login" />
+    </bean>
+	
+	<bean id="existsAuthenticationProvider" class="com.painiu.webapp.security.exists.ExistsAuthenticationProvider"/>
+    
+    <!-- Token -->
+    
+    <bean id="tokenAuthenticationHandler" class="com.painiu.webapp.security.token.TokenAuthenticationHandler">
+    	<property name="authenticationManager" ref="authenticationManager" />
+    </bean>
+    
+    <bean id="tokenAuthenticationProvider" class="com.painiu.webapp.security.token.TokenAuthenticationProvider">
+    	<property name="tokenManager" ref="tokenManager" />
+    	<property name="userDetailsService" ref="userDAO"/>
+    </bean>
+	
+	<!-- Discuz passport -->
+    
+    <bean id="discuzPassport" class="com.painiu.webapp.security.discuz.DiscuzPassport">
+    	<property name="discuzUrlPrefix" value="http://bbs.painiu.com/" />
+    	<property name="key" value="songfu.zhang@gmail.com" />
+    	<!--<property name="encoding" value="gb2312" />-->
+    	<property name="userManager"><ref bean="userManager"/></property>
+    </bean>
+    
+    <bean id="discuzAuthenticationHandler" class="com.painiu.webapp.security.discuz.DiscuzAuthenticationHandler">
+		<property name="passport" ref="discuzPassport"/>
+		<property name="defaultHandler" ref="defaultAuthenticationHandler"/>
+    </bean>
+    
+    <bean id="discuzLogoutHandler" class="com.painiu.webapp.security.discuz.DiscuzLogoutHandler">
+    	<property name="passport" ref="discuzPassport"/>
+    </bean>
+    
+    <!-- end Discuz passport -->
+    
+
+    
+    <bean id="securityContextHolderAwareRequestFilter" class="org.acegisecurity.wrapper.SecurityContextHolderAwareRequestFilter"/>
+
+    <bean id="rememberMeProcessingFilter" class="org.acegisecurity.ui.rememberme.RememberMeProcessingFilter">
+    	    <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="rememberMeServices" ref="rememberMeServices"/>
+    </bean>
+    
+    <bean id="anonymousProcessingFilter" class="org.acegisecurity.providers.anonymous.AnonymousProcessingFilter">
+        <property name="key" value="anonymous"/>
+        <property name="userAttribute" value="anonymous,ROLE_ANONYMOUS"/>
+    </bean>
+    
+    <bean id="exceptionTranslationFilter" class="org.acegisecurity.ui.ExceptionTranslationFilter">
+    	<property name="authenticationEntryPoint">
+    		<bean class="org.acegisecurity.ui.webapp.AuthenticationProcessingFilterEntryPoint">
+		        <property name="loginFormUrl" value="/account/login"/>
+		        <property name="forceHttps" value="false"/>
+		    </bean>
+    	</property>
+    </bean>
+    
+    <bean id="filterInvocationInterceptor" class="org.acegisecurity.intercept.web.FilterSecurityInterceptor">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="accessDecisionManager" ref="accessDecisionManager"/>
+        <property name="objectDefinitionSource">
+            <value>
+                CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
+                PATTERN_TYPE_APACHE_ANT
+                /account/signup_confirm*=freeman
+                /account/*signup*=ROLE_ANONYMOUS,freeman
+                /account/login*=ROLE_ANONYMOUS,freeman
+                /account/jopen*=ROLE_ANONYMOUS,freeman
+                /account/auth*=ROLE_ANONYMOUS,freeman
+                /account/logout*=ROLE_ANONYMOUS,freeman
+                /account/logout_confirm*=ROLE_ANONYMOUS,freeman
+                /account/forget_password*=ROLE_ANONYMOUS,freeman
+                /account/confirm_password*=ROLE_ANONYMOUS,freeman
+                /account/reset_password*=ROLE_ANONYMOUS,freeman
+                /account/**=freeman
+                
+                /console/users/block=admin,manager
+                /console/users/unblock=admin,manager
+                /console/users/save_ranks=cs,admin,manager
+                /console/users/search=admin,manager
+                /console/users/fast_apply=cs,admin,manager
+                /console/users/**=admin
+                /console/system/news=admin,manager
+                /console/system/news_edit=admin,manager
+                /console/system/news_save=admin,manager
+                /console/system/news_create=admin,manager
+                /console/system/news_delete=admin,manager
+                /console/system/image=admin,manager
+                /console/system/image_edit=admin,manager
+                /console/system/image_save=admin,manager
+                /console/system/image_delete=admin,manager
+                /console/system/image_create=admin,manager
+                /console/system/abuse=cs,admin,manager
+                /console/system/abuse_done=cs,admin,manager
+                /console/system/abuse_delete=cs,admin,manager
+                /console/system/**=admin,manager
+                /console/link/**=admin,manager
+                /console/camera/**=admin
+                /console/cooperation/**=admin
+                /console/auditing/**=cs,admin,manager
+                /console/**=admin,manager
+            </value>
+        </property>
+    </bean>
+
+    <bean id="authenticationManager" class="org.acegisecurity.providers.ProviderManager">
+        <property name="providers">
+            <list>
+                <ref local="daoAuthenticationProvider"/>
+                <ref local="anonymousAuthenticationProvider"/>
+                <ref local="rememberMeAuthenticationProvider"/>
+				       <ref local="existsAuthenticationProvider"/>
+                <ref local="tokenAuthenticationProvider"/>
+             </list>
+        </property>
+    </bean>
+   
+	<!-- Log failed authentication attempts to commons-logging -->
+	<bean id="loggerListener" class="org.acegisecurity.event.authentication.LoggerListener"/>
+	
+	<bean id="loginListener" class="com.painiu.webapp.security.LoginListener">
+		<property name="userManager"><ref bean="userManager"/></property>
+		<property name="messageEngine"><ref bean="messageEngine"/></property>
+		<property name="systemMessageManager"><ref bean="systemMessageManager"/></property>
+	</bean>
+    
+	<bean id="daoAuthenticationProvider" class="org.acegisecurity.providers.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService" ref="userDAO"/>
+		<!-- 
+		<property name="userCache" ref="userCache"/>
+		-->
+		<property name="passwordEncoder" ref="passwordEncoder"/>
+		<property name="forcePrincipalAsString"><value>true</value></property>
+	</bean>
+    
+    <!-- This bean definition must be available to ApplicationContext.getBean() so StartupListener
+         can look for it and detect if password encryption is turned on or not -->
+    <bean id="passwordEncoder" class="org.acegisecurity.providers.encoding.ShaPasswordEncoder"/>
+
+	<!-- 
+    <bean id="userCache" class="org.acegisecurity.providers.dao.cache.EhCacheBasedUserCache">
+        <property name="cache">
+            <bean class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+                <property name="cacheManager">
+                    <bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
+                </property>
+                <property name="cacheName" value="userCache"/>
+            </bean>
+        </property>
+    </bean>
+    -->
+
+    <bean id="anonymousAuthenticationProvider" class="org.acegisecurity.providers.anonymous.AnonymousAuthenticationProvider">
+        <property name="key" value="anonymous"/>
+    </bean>
+
+    <bean id="roleVoter" class="org.acegisecurity.vote.RoleVoter">
+        <property name="rolePrefix" value=""/>
+    </bean>
+
+    <bean id="accessDecisionManager" class="org.acegisecurity.vote.AffirmativeBased">
+        <property name="allowIfAllAbstainDecisions" value="false"/>
+        <property name="decisionVoters">
+            <list>
+                <ref local="roleVoter"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="signupService" class="com.painiu.core.service.impl.DefaultSignupService">     
+        <property name="userDAO" ref="userDAO"/>
+        <property name="roleDAO" ref="roleDAO"/>
+        <property name="passwordEncoder" ref="passwordEncoder"/>
+        
+    </bean>
+    
+    <bean id="rememberMeServices" class="com.painiu.webapp.security.DaoBasedRememberMeServices">     
+        <property name="userManager" ref="userManager"/>
+        <property name="userDetailsService" ref="userDAO"/>
+        <property name="key" value="painiushow"/>
+    </bean>
+  
+    <bean id="rememberMeAuthenticationProvider" class="org.acegisecurity.providers.rememberme.RememberMeAuthenticationProvider"> 
+        <property name="key" value="painiushow"/>
+    </bean>
+    
+    <bean id="securityUtils" class="com.painiu.core.security.SecurityUtils"> 
+        <property name="userManager"><ref bean="userManager"/></property>
+    </bean>
+
+</beans>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model" >
+	<class  name="Partner" 
+			table="pn_partner" 
+			lazy="true" >
+
+		<id	name="id" 
+			column="partner_id"
+			type="string" 
+			unsaved-value="null">			
+			<generator 	class="uuid" />
+		</id>
+		
+		
+		<property 	name="name"
+					column="partner_name"
+					type="string" 
+					not-null="true" />
+					
+		<property	name="key"
+					column="partner_key"
+					type="string" 
+					not-null="true" />
+					
+		<property 	name="returnUrl"
+					column="partner_return_url"
+					type="string" 
+					not-null="false" />
+					
+		<property 	name="ypUrl"
+					column="yupoo_url"
+					type="string" 
+					not-null="true" />
+		
+		<property 	name="ypKey" 
+					column="yupoo_key" 
+					type="string" 
+					not-null="true" />
+					
+		<property 	name="ypReturnUrl"
+					column="yupoo_return_url"
+					type="string" 
+					not-null="true" />
+					
+		<property 	name="token"
+					column="yupoo_token"
+					type="string" 
+					not-null="true" />
+					
+	</class>
+</hibernate-mapping>

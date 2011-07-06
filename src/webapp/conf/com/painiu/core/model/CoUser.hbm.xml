@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+	<class 	name="CoUser" 
+			table="pn_cousers" 
+			lazy="true">
+
+		<composite-id 	name="id" 
+						class="CoUser$Id" >
+
+			<key-property 	name="collaId" 
+							access="field"
+							column="colla_id" />
+
+			<key-property 	name="collaUserId" 
+							access="field"
+							column="colla_user_id" />
+		</composite-id>
+
+		<many-to-one 	name="user" 
+						column="user_id" 
+						class="User"
+						cascade="none" />
+
+		<many-to-one 	name="colla" 
+						column="colla_id" 
+						class="Collaborator"
+						update="false"
+						insert="false"
+						cascade="none"
+						outer-join="false" />
+
+		<property 	name="collaUserId" 
+					column="colla_user_id"
+					update="false"
+					insert="false"
+					type="string" />
+					
+		<property 	name="createdDate" 
+					column="created_date"
+					type="timestamp" 
+					update="false" />
+
+	</class>
+
+</hibernate-mapping>

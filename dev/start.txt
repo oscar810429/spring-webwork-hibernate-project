@@ -1,0 +1,9 @@
+-Xms128m
+-Xmx128m
+-XX:printCompilation
+-XX:MaxNewSize=128m
+-XX:MaxPermSize=128m
+-Djava.library.path=/usr/local/tomcat-apr/lib
+-Dcatalina.home=/home/administrator/cluster_tomcat/Tomcat6A
+-Dcatalina.base=/home/administrator/cluster_tomcat/Tomcat6A
+-Djava.io.tmpdir=/home/administrator/cluster_tomcat/Tomcat6A/temp

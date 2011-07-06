@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<config>
+	<app	scheme="http"
+			host="www.painiu.com"
+			port="80"
+			base=""
+			domain="painiu.com"
+			media-root="http://www.painiu.com"
+			user-domain-pattern="http://www.painiu.com"
+			flash-domain="http://f.painiu.com"
+			dev-mode="false" />
+	
+	<cache provider="com.painiu.cache.MemCacheProvider" ></cache>
+	
+	<message check-interval="300000"></message>
+
+	<photo url-pattern="http://photo${host}.painiu.com/${dir}/${filename}" 
+			mail-upload-api-key="353b3ffa8dadacc26db8d628c109c000"
+			batch-size="10"
+			pnfs="false">
+	
+		<repositories default="1">
+			<repository host="1" directory="/var/www/photo/photo1.painiu.com" weight="1"/>
+			<repository host="2" directory="/var/www/photo/photo2.painiu.com" weight="2" />
+		</repositories>
+		
+		<image-types>
+			<content-type>image/jpg</content-type>
+			<content-type>image/jpeg</content-type>
+			<content-type>image/pjpeg</content-type>
+			<content-type>image/gif</content-type>
+			<content-type>image/png</content-type>
+			<content-type>image/bmp</content-type>
+			<content-type>image/x-png</content-type>
+		</image-types>
+		
+		<zip-types>
+			<content-type>application/zip</content-type>
+			<content-type>application/x-zip-compressed</content-type>
+			<!-- Firefox in some machines submit zip file as those content-types: -->
+			<content-type>application/octet-stream</content-type>
+			<content-type>application/force-download</content-type>
+		</zip-types>
+		
+	    <maximum length="5242880" width="5000" height="5000" />
+		
+		<progress update-interval="1000" delay="100" />
+		
+		
+	</photo>
+
+	<set>
+		<create-limit>
+			<maximum role="freeman" value="2" />
+			<maximum role="hotman" value="2" />
+			<maximum role="proman" value="100" />
+			<maximum role="volunteer" value="2" />
+			<maximum role="manager" value="100" />
+			<maximum role="admin" value="100" />
+			<maximum role="frozenman" value="0" />
+			<maximum role="agent" value="2" />
+			<maximum role="finance" value="2" />
+		</create-limit>
+	</set>
+
+	<icon url-pattern="http://photo${host}.painiu.com/${dir}/${filename}">
+		<album>/images/default_set_photo.gif</album>
+		<group>/images/default_group_logo.gif</group>
+		<!-- account icons -->
+		<buddy>/images/default_buddy_icon.jpg</buddy>
+		<staff>/images/icon_role_staff.gif</staff>
+		<pro>/images/icon_role_pro.gif</pro>
+		<hot>/images/icon_role_hot.gif</hot>
+		<volunteer>/images/icon_role_vol.gif</volunteer>
+		<!-- bad taste image alt -->
+		<mosaic>/images/mosaic.gif</mosaic>
+		<vipNormal>/images/icon_role_vipnormal.gif</vipNormal>
+		<vipBusiness>/images/icon_role_vipbusiness.gif</vipBusiness>
+	</icon>
+	
+	<webwork>
+		<excludes>
+			<ext>js</ext>
+			<ext>css</ext>
+			<ext>gif</ext>
+			<ext>jpg</ext>
+			<ext>png</ext>
+			<ext>ico</ext>
+			<ext>txt</ext>
+			<ext>htm</ext>
+			<ext>jsp</ext>
+			<ext>reg</ext>
+			<ext>xpi</ext>
+			<dir>/photos/url</dir>
+			<dir>/help</dir>
+			<dir>/images</dir>
+			<dir>/styles</dir>
+			<dir>/scripts</dir>
+			<dir>/dwr</dir>
+			<dir>/api</dir>
+			<dir>/big</dir>
+			<dir>/sms</dir>
+			<dir>/trackback</dir>
+			<dir>/cooperate/check</dir>
+		</excludes>
+	</webwork>
+	
+	<i18n>
+		<locales>
+			<locale>zh_CN</locale>
+			<locale>en_US</locale>
+		</locales>
+	</i18n>
+	
+</config>

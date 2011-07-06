@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="relation">
+		<param name="enumClassname">com.painiu.core.model.Relation</param>
+	</typedef>
+
+	<class 	name="Contact" 
+			table="pn_contact" 
+			lazy="true">
+
+		<composite-id 	name="id" 
+						class="Contact$Id" >
+
+			<key-property 	name="ownerId" 
+							access="field"
+							column="owner_id" />
+							
+			<key-property 	name="userId" 
+							access="field"
+							column="user_id" />
+		</composite-id>
+
+		<many-to-one 	name="owner" 
+						column="owner_id" 
+						class="User"
+						not-null="true"
+						insert="false" 
+						update="false"
+						cascade="none"
+						outer-join="false" />
+
+		<many-to-one 	name="user" 
+						column="user_id"
+						class="User" 
+						not-null="true"
+						insert="false" 
+						update="false"
+						cascade="none"
+						outer-join="false" />
+
+		<property 	name="relation" 
+					column="contact_type"
+					type="relation" 
+					not-null="true" />
+
+		<property 	name="reversedRelation" 
+					column="reversed_type"
+					type="relation" 
+					not-null="true" />
+
+		<property 	name="addedDate" 
+					column="added_date"
+					type="timestamp" 
+					not-null="true"
+					update="false" />
+
+	</class>
+
+<sql-query name="updatedContacts">
+	<return alias="user" class="User"/>
+	<![CDATA[
+	select  u.user_id			as {user.id}, 
+			u.username			as {user.username}, 
+			u.password			as {user.password},
+			u.email				as {user.email},
+			u.nick_name			as {user.nickname},
+			u.blast				as {user.blast},
+			u.locale			as {user.locale},
+			u.status			as {user.state},
+			u.created_date		as {user.createdDate},
+			u.role_names		as {user.roleNames}
+	from pn_users u, pn_contact uc
+	where p.user_id = uc.user_id
+			and uc.user_id = u.user_id
+			and uc.reversed_type & p.privacy > 0
+			and uc.owner_id = :user
+	group by uc.user_id desc
+	]]>
+</sql-query>
+
+</hibernate-mapping>

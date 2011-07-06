@@ -1,0 +1,267 @@
+
+dir: lib
+
+compile-classpath: [
+                xmlrpc, 
+                json, 
+                msnm, 
+                ant, 
+                spring,
+                spring-aspects,
+                acegi,
+                hibernate,
+                aspectj,
+                dom4j,
+                dwr,
+                freemarker,
+                jakarta-commons,
+                jakarta-log4j,
+                jakarta-taglibs,
+                openid,
+                memcached,
+                metadata-extractor,
+                pinyin4j,
+                quartz,
+                servletapi,
+                sitemesh,
+                webwork,
+                google,
+                ehcache,
+                javamail,
+                jmagick,
+                slf4j,
+                painiu-common,
+                painiu-ypfs,
+                captcha,
+                jopenid,
+                jexcel
+            ]
+
+js-compression-classpath: [yui-tools]
+
+deploy-classpath: [
+                spring,
+                spring-aspects,
+                hibernate,
+                jta,
+                webwork,
+                acegi,
+                javamail,
+                ant,
+                aspectj,
+                jakarta-commons,
+                jakarta-log4j,
+                jakarta-taglibs,
+                dom4j,
+                dwr,
+                freemarker,
+                google,
+                metadata-extractor,
+                memcached,
+                pinyin4j,
+                quartz,
+                oscache,
+                sitemesh,
+                velocity,
+                xmlrpc,
+                xerces,
+                json,
+                msnm,
+                openid,
+                slf4j,
+                painiu-events,
+                painiu-common,
+                painiu-ypfs,
+                captcha,
+                jopenid,
+                jexcel
+            ]
+
+painiu-common:
+    dir: painiu
+    jar: painiu-common-0.7.jar
+	
+painiu-ypfs:
+    dir: painiu
+    jar: ypfs-0.2.jar
+
+painiu-tools:
+    dir: painiu
+    jar: painiu-tools-0.2.jar
+    
+painiu-events:
+    dir: painiu
+    jar: painiu_events.jar
+
+jmagick:
+    dir: painiu
+    jar: jmagick.jar
+
+json:
+    dir: painiu
+    jar: json.jar
+    
+msnm:
+    dir: painiu
+    jar: msnm.jar
+    
+xmlrpc:
+    dir: painiu
+    jar: xmlrpc-2.0.jar
+
+rhino:
+    dir: painiu
+    jar: custom_rhino.jar
+    
+ant:
+    dir: ant-1.6.5
+    jar: ant.jar
+
+spring:
+    dir: spring-2.0.1
+    jar: spring.jar
+    
+spring-aspects:
+    dir: spring-2.0.1
+    jar: spring-aspects.jar
+
+acegi:
+    require: [spring]
+    dir: spring-2.0.1
+    jar: acegi-security-1.0.3.jar
+    
+hibernate:
+    require: [asm, antlr, c3p0, cglib]
+    dir: hibernate-3.1
+    jar: hibernate3.jar
+
+jta:
+    dir: hibernate-3.1
+    jar: jta.jar
+    
+ehcache:
+    dir: ehcache-1.2.3
+    jar: ehcache-1.2.3.jar
+
+c3p0:
+    dir: hibernate-3.1
+    jar: c3p0-0.9.0.jar
+
+cglib:
+    dir: cglib-2.1_3
+    jar: cglib-nodep-2.1_3.jar
+
+asm:
+    dir: asm-2.2.2
+    jar: [asm-2.2.2.jar, asm-commons-2.2.2.jar, asm-util-2.2.2.jar]
+
+antlr:
+    dir: antlr
+    jar: antlr-2.7.6.jar
+
+aspectj:
+    dir: aspectJ-5
+    jar: [aspectjrt.jar, aspectjweaver.jar]
+    
+dom4j:
+    dir: dom4j-1.6.1
+    jar: dom4j-1.6.1.jar
+    
+dwr:
+    dir: dwr-1.1.beta3
+    jar: dwr.jar
+    
+freemarker:
+    dir: freemarker-2.3.6
+    jar: freemarker.jar
+    
+google:
+    dir: google
+    jar: [g4j-0.3.19.jar, gdata-client-1.0.jar]
+    
+jakarta-commons:
+    dir: jakarta-commons
+    jar: [commons-beanutils.jar, commons-codec.jar, commons-collections.jar, commons-configuration.jar, commons-digester.jar, commons-fileupload.jar, commons-httpclient-3.0.jar, commons-io.jar, commons-lang.jar, commons-logging.jar, jakarta-oro.jar]
+    
+jakarta-log4j:
+    dir: jakarta-log4j-1.2.9
+    jar: log4j-1.2.9.jar
+    
+jakarta-taglibs:
+    dir: jakarta-taglibs
+    jar: [jstl.jar, standard.jar]
+    
+openid:
+    dir: janrain-openid-2006-07-04
+    jar: [janrain.jar, libidn-0.6.3.jar]
+    
+memcached:
+    dir: java_memcached
+    jar: java_memcached-release_1.5.1.jar
+    
+
+javamail:
+    dir: javamail-1.3.1
+    jar: [mail.jar, activation.jar]
+
+
+metadata-extractor:
+    dir: metadata-extractor-2.3.1
+    jar: metadata-extractor-2.3.1.jar
+    
+oscache:
+    dir: oscache-2.2
+    jar: oscache-2.2.jar
+    
+pinyin4j:
+    dir: pinyin4j-2.0.0
+    jar: pinyin4j-2.0.0.jar
+    
+quartz:
+    dir: quartz-1.6.0
+    jar: quartz-1.6.0.jar
+    
+servletapi:
+    dir: servletapi-2.3
+    jar: servletapi-2.3.jar
+    
+sitemesh:
+    dir: sitemesh-2.2.1
+    jar: sitemesh-2.2.1.jar
+    
+velocity:
+    dir: velocity-1.4
+    jar: velocity-1.4.jar
+    
+webwork:
+    dir: webwork-2.2.2
+    jar: [ognl.jar, oscore.jar, rife-continuations.jar, xwork.jar, webwork-2.2.2.jar]
+    
+xerces:
+    dir: xerces-2.8.0
+    jar: [resolver.jar, xercesImpl.jar, xml-apis.jar]
+    
+slf4j:
+    dir: slf4j-1.4.3
+    jar: [slf4j-api-1.4.3.jar, slf4j-log4j12-1.4.3.jar]
+    
+captcha:
+    dir: captcha
+    jar: kaptcha-2.3.jar
+    
+yui-tools:
+    dir: yui-compressor-2.4.2
+    jar: yuicompressor-2.4.2.jar
+    
+jexcel:
+    dir: jexcle-2.6.12
+    jar: jxl.jar 
+    
+junit:
+    dir: junit-3.8.1
+    jar: junit.jar
+    
+jopenid:
+    dir: jopenid-1.0.7
+    jar: jopenid-1.0.7.jar
+

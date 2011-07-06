@@ -1,0 +1,15 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.1.1//EN" "http://www.opensymphony.com/xwork/xwork-1.1.1.dtd">
+
+<xwork>
+  
+  
+  <package name="apidoc/" namespace="/apidoc" extends="default">
+
+        <action name="default" class="apidocAction">
+          <interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/apidoc.ftl</result>
+        </action>
+ </package>
+ 
+</xwork>
+ 

@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+    
+<hibernate-mapping package="com.painiu.core.model">
+	<class 
+	    name="Category" 
+	    table="pn_category"
+	    lazy="false"
+	    dynamic-update="true">
+	    
+		<id name="id" 
+			column="category_id"
+			type="string" 
+			unsaved-value="null">
+			<generator 	class="uuid" />
+		</id>
+		    
+	    <many-to-one 	name="parentCategory" 
+						class="Category" 
+						column="parent_category_id"
+						not-null="false" 
+						cascade="none" 
+						outer-join="false" 
+						update="false" />
+	    
+	    <property
+	        name="name"
+	        type="string"
+	        column="category_name"
+	        not-null="true"
+	    />
+	    
+	    <property
+	        name="createdDate"
+	        type="timestamp"
+	        update="false"
+	        column="created_date"
+	        not-null="true"
+	    />
+	
+		<property
+	        name="privacyCreateGroup"
+	        type="boolean"
+	        column="privacy_create_group"
+	        not-null="true"
+	    />
+	    
+	    <property
+	        name="privacyCreateSubcategory"
+	        type="boolean"
+	        column="privacy_create_category"
+	        not-null="true"
+	    />
+	    
+	   <property
+          name="amount"
+          type="integer"
+          column="amount"
+          not-null="true"
+      />
+	    
+		<set name="categories" 
+				cascade="all,delete-orphan" 
+				inverse="true"
+				sort="natural"
+				lazy="true">
+				
+			<key column="parent_category_id" />
+			
+			<one-to-many 	class="Category" />
+		</set>
+	    
+    
+	    
+	</class>
+	
+</hibernate-mapping>

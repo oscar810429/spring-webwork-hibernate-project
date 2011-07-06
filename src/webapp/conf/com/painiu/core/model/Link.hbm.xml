@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model.link" >
+	<class  name="Link" 
+			table="pn_link" 
+			lazy="true"
+			abstract="true" >
+
+		<id	name="id" 
+			column="link_id"
+			type="string" 
+			unsaved-value="null">			
+			<generator 	class="uuid" />
+		</id>
+		
+		<discriminator 	column="link_type" 
+    					type="string"/>
+		
+		<property 	name="title"
+					column="title"
+					type="string" />
+					
+		<property 	name="kind"
+					column="kind"
+					type="integer" />
+					
+		<property 	name="urlBlank"
+					column="url_blank"
+					type="integer" />
+		
+		<property 	name="createdDate" 
+					column="created_date" 
+					type="timestamp" 
+					not-null="true" />
+					
+		<property 	name="modifiedDate" 
+					column="modified_date" 
+					type="timestamp" 
+					not-null="true" />
+					
+		<property 	name="expiredDate"
+					column="expired_date"
+					type="timestamp" />
+		
+		<property 	name="url"
+					column="url"
+					type="string" />
+					
+		<many-to-one 	name="author"
+						class="com.painiu.core.model.User" 
+						column="author"
+						cascade="none"
+						outer-join="false" 
+						not-null="false" />
+    	
+    	<subclass 	name="TextLink"
+					abstract="true">
+					
+					<property 	name="content" 
+								column="content" 
+								type="string" />
+					
+					<subclass 	name="GroupNews" 
+								discriminator-value="GROUPNEWS">							
+					</subclass>
+					
+					<subclass 	name="Advertisement" 
+								discriminator-value="ADVERTISEMENT">							
+					</subclass>
+					
+					<subclass 	name="ImportantNews" 
+								discriminator-value="IMPORTANTNEWS">							
+					</subclass>
+					
+					<subclass 	name="TagNews" 
+								discriminator-value="TAGNEWS">							
+					</subclass>
+					
+					<subclass 	name="TextLinkage" 
+								discriminator-value="TEXTLINK">	
+								<property 	name="order" 
+								column="link_order" 
+								type="integer" />		
+					</subclass>
+    						
+		</subclass>
+		
+		<subclass 	name="TagLink"
+					discriminator-value="TAG">
+					
+					<property 	name="weight" 
+								column="weight" 
+								type="integer" />
+								
+					<property 	name="order" 
+								column="link_order"
+								type="integer" />
+								
+					
+		</subclass>
+		
+		<subclass 	name="ImageLink"
+					abstract="true">
+					
+					<property 	name="order" 
+								column="link_order" 
+								type="integer" />
+								
+					<property 	name="src" 
+								column="src" 
+								type="string" />
+								
+					<property 	name="alt" 
+								column="content" 
+								type="string" />	
+					
+					<subclass 	name="IndexImage" 
+								discriminator-value="INDEXIMAGE">			
+					</subclass>	
+					
+					<subclass 	name="ActivityImage" 
+								discriminator-value="ACTIVITYIMAGE">			
+					</subclass>	
+					
+					<subclass 	name="PictureLink" 
+								discriminator-value="IMAGELINK">			
+					</subclass>	
+					
+					<subclass 	name="PartnerImage" 
+								discriminator-value="PARTNER">			
+					</subclass>	
+		</subclass>
+		
+	</class>
+</hibernate-mapping>

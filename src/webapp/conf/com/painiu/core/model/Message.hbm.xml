@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="message_state">
+    	<param name="enumClassname">com.painiu.core.model.Message$State</param>
+	</typedef>
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="situation">
+    	<param name="enumClassname">com.painiu.core.model.Comment$Situation</param>
+	</typedef>
+	<class 	name="Message" 
+			table="pn_message" 
+			dynamic-update="true"
+			lazy="true">
+
+		<id	name="id" 
+			column="message_id"
+			type="string" 
+			unsaved-value="null">
+			
+			<generator 	class="uuid" />
+		</id>
+    	
+		<many-to-one 	name="owner" 
+						class="User" 
+						column="owner_id"
+						cascade="none" 
+						outer-join="false" 
+						update="false" />
+    	
+		<many-to-one 	name="sender" 
+						class="User" 
+						column="sender"
+						cascade="none" 
+						outer-join="false" 
+						update="false" />
+    	
+  		<many-to-one 	name="recipient" 
+						class="User" 
+						column="recipient"
+						not-null="true" 
+						cascade="none" 
+						outer-join="false" 
+						update="false" />
+    	
+		<property 	name="subject"
+					column="subject"
+					type="string"
+					not-null="true" />
+    	
+		<property 	name="content"
+					column="content"
+					type="string"
+					not-null="true" />
+		
+		<property 	name="sentDate" 
+					column="sent_date" 
+					type="timestamp" 
+					update="false" />
+											
+		<property 	name="state"
+					column="status"
+					type="message_state" />
+					
+		<property 	name="situation"
+					column="situation"
+					type="situation" 
+					not-null="true" />
+					
+	</class>
+</hibernate-mapping>

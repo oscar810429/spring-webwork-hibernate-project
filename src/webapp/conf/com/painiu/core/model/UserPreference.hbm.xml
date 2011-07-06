@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="privacy">
+	    <param name="enumClassname">com.painiu.core.model.Privacy</param>
+	</typedef>
+	
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="license">
+    	<param name="enumClassname">com.painiu.core.model.License</param>
+	</typedef>
+	
+	<class 	name="UserPreference" 
+			table="pn_user_preference" 
+			lazy="true">
+
+		<id name="id" column="user_id" unsaved-value="null">
+			<generator class="foreign">
+				<param name="property">user</param>
+			</generator>
+		</id>
+
+		<one-to-one name="user" class="User" constrained="true" />
+		
+		<property name="privacy" column="privacy" type="privacy" />
+		
+		<property name="comment" column="comment" type="privacy" />
+
+		<property name="tag" column="tag" type="privacy" />
+
+		<property name="note" column="note" type="privacy" />
+		
+		<property name="download" column="download" type="privacy" />
+		
+		<property name="blog" column="blog" type="privacy" />
+		
+		<property name="license" column="license" type="license" />
+		
+		<property name="exif" column="exif" type="privacy" />
+		
+		<property name="layout" column="layout" type="integer" />
+
+		<property name="customWidth" column="custom_width" type="integer" />
+		
+		<property name="customHeight" column="custom_height" type="integer" />
+		
+		<property name="safetyLevel" column="safety_level" type="string" />
+		
+		<property name="contentType" column="content_type" type="string" />
+
+	</class>
+</hibernate-mapping>

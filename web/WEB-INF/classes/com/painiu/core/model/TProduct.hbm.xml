@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="com.painiu.core.model">
+	
+   <class name="TProduct" table="pn_tuangou_product" lazy="true" dynamic-update="true">
+        
+        <id name="id" column="id" type="integer">
+            <generator class="native" />
+		</id>
+		
+		<property name="tuanId" type="string" column="tuan_id"/>
+		
+		<property name="webSite" type="string" column="web_site"/>
+		
+		<property name="title" type="string" column="title"/>
+		
+		<property name="imageUrl" type="string" column="image"/>
+		
+		<property name="webUrl" type="string" column="web_url"/>
+		
+		<property name="siteUrl" type="string" column="site_url"/>
+		
+		<property name="startTime" type="timestamp" column="start_time"/>
+		
+		<property name="endTime" type="timestamp" column="end_time"/>
+		
+		<property name="basePrice" type="double" column="value"/>
+		
+		<property name="salePrice" type="double" column="price"/>
+		
+		<property name="discount" type="double" column="rebate"/>
+		
+		<property name="amount" type="integer" column="bought"/>
+		
+		<property name="pyName" type="string" column="city_pyname"/>
+		
+		<property name="cityName" type="string" column="city_name"/>
+		
+		
+		
+	</class>
+	
+	
+</hibernate-mapping>		

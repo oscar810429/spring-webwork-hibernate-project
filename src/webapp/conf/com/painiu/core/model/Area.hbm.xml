@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="com.painiu.core.model">
+
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="area_type">
+		<param name="enumClassname">com.painiu.core.model.Area$AreaType</param>
+	</typedef>
+	
+   <class name="Area" table="pn_regions" lazy="true" dynamic-update="true">
+        
+        <id name="id" column="region_id" type="integer">
+            <generator class="native" />
+		</id>
+		
+		<property name="name" type="string" column="local_name"/>
+		
+		<property name="ename" type="string" column="en_name"/>
+		
+		<property name="aliasname1" type="string" column="p_1"/>
+		
+		<property name="aliasname2" type="string" column="p_2"/>
+		
+		<property name="regionsPath" type="string" column="region_path"/>
+		
+		<property name="areaPackage" type="string" column="package"/>
+		
+		<property name="position" type="integer" column="ordernum"/>
+		
+		<property name="grade" type="integer" column="region_grade"/>
+		
+		<property 	name="areaType"
+					column="disabled" 
+					type="area_type" 
+					not-null="false" />
+					
+		<many-to-one name="parentArea" column="p_region_id" class="Area" not-null="false"/>
+		
+		<set name="childAreas" cascade="save-update" inverse="true">
+		  <key column="p_region_id"/>
+		  <one-to-many class="Area" /> 
+		</set> 			
+					
+	 </class>
+
+
+</hibernate-mapping>

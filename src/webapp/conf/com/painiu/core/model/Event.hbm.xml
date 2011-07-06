@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+
+	<class 	name="Event" 
+			table="pn_event"
+			lazy="true">
+
+		<id name="id" 
+			column="event_id"
+			type="string" 
+			unsaved-value="null">
+			<generator 	class="uuid" />
+		</id>
+		
+		<property 	name="name"
+					column="name"
+					type="string"  />
+					
+		<property 	name="kind"
+					column="kind"
+					type="integer"  />
+					
+		<property 	name="alias"
+					column="alias"
+					type="string"  />
+				
+		<property   name="tags" 
+		            column="tags" 
+		            type="string" />
+
+        <property   name="logo" 
+		            column="logo" 
+		            type="string" />
+		            
+		<property   name="smallLogo" 
+		            column="small_logo" 
+		            type="string" />
+		            
+		<property   name="url" 
+		            column="url" 
+		            type="string" />
+		           
+		<property   name="weight" 
+		            column="weight" 
+		            type="integer" />
+		
+		<property   name="eventOrder" 
+		            column="event_order" 
+		            type="integer" />
+		
+		<property 	name="description" 
+					column="description" 
+					type="string" />
+
+		<property   name="startDate" 
+		            type="timestamp"
+			        column="start_date" 
+			        not-null="false" />
+			        
+		<property   name="endDate" 
+		            type="timestamp"
+			        column="end_date" 
+			        not-null="false" />
+			        
+		<property   name="createdDate" 
+		            type="timestamp"
+			        column="create_date" 
+			        not-null="true" />
+			        
+		<property   name="modifiedDate" 
+		            type="timestamp"
+			        column="modify_date" 
+			        />
+			
+		<!--<many-to-one 	name="group"
+						class="Group" 
+						column="group_id"
+						cascade="none"
+						outer-join="false" 
+						not-null="false" />-->
+	</class>
+
+</hibernate-mapping>

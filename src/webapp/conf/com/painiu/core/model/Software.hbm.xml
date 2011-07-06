@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+	
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="software_state">
+    	<param name="enumClassname">com.painiu.core.model.Software$State</param>
+	</typedef>
+	
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="privacy">
+	    <param name="enumClassname">com.painiu.core.model.Privacy</param>
+	</typedef>
+		
+	<class 	name="Software" 
+			table="pn_software" 
+			dynamic-update="true"
+			lazy="true">
+
+		<id	name="id" 
+			column="software_id"
+			type="string" 
+			unsaved-value="null">
+			
+			<generator 	class="uuid" />
+		</id>
+
+		<property name="name" column="software_name" type="string" />
+		
+		<property name="content" column="software_content" type="string" />
+		
+		<property name="rawTags" column="raw_tags" type="string" />
+		
+		<property name="postedDate" column="posted_date" type="timestamp" not-null="true"/>
+		
+		<property 	name="timestamp"  type="long" column="posted_timestamp" not-null="true" />
+		
+		<property name="tokenDate" column="token_date" type="timestamp" not-null="true"/>
+		
+		<property name="osName" column="software_os" type="string" />
+
+		<property name="devStatus" column="software_developer_status" type="string" />
+		
+		<property name="language" column="software_language" type="string" />
+		
+		<property name="license" column="software_license" type="string" />
+		
+		<many-to-one 	name="category" 
+						column="category_id"
+						class="Category" 
+						not-null="true"
+						cascade="none"
+						outer-join="false" />
+						
+		<many-to-one 	name="user" 
+						class="User" 
+						column="user_id"
+						not-null="true" 
+						cascade="none" 
+						outer-join="false" 
+						update="false" />	
+						
+		<property 	name="state" 
+					column="status" 
+					type="software_state" />
+					
+		<!--<property 	name="userId" 
+					column="user_id" 
+					type="string"
+					insert="false"
+					update="false"
+					not-null="true" />-->
+		
+		<property 	name="username" 
+					column="username" 
+					type="string" />
+					
+		<set 	name="softwareTags" 
+				cascade="none" 
+				inverse="true"
+				lazy="true"
+				order-by="tagged_date" >
+				
+			<key column="software_id" />
+			
+			<one-to-many 	class="SoftwareTag" />
+		</set>	
+		
+		<one-to-one name="permission" 
+					class="SoftwarePermission" 
+					cascade="all"
+					access="field"
+					constrained="true"
+					outer-join="false" />
+
+		<one-to-one name="stat" 
+					class="SoftwareStat" 
+					cascade="all"
+					access="field"
+					constrained="true"
+					outer-join="false" />
+					
+		<property 	name="privacy" 
+					column="privacy" 
+					type="privacy" />											
+
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,41 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.1.1//EN" "http://www.opensymphony.com/xwork/xwork-1.1.1.dtd">
+
+<xwork>
+	<package name="photos" namespace="/photos" extends="default">
+	
+	<interceptors>
+            <interceptor name="multipart-parse" class="com.mingda.webapp.interceptor.MultipartParseInterceptor"/>
+            <interceptor name="multipart-extract" class="com.mingda.webapp.interceptor.MultipartExtractInterceptor"/>
+            
+            <interceptor-stack name="uploadStack">
+            	<interceptor-ref name="exception" />
+            	<interceptor-ref name="servlet-config" />
+            	<interceptor-ref name="multipart-parse" />
+            	<interceptor-ref name="multipart-extract" />
+            </interceptor-stack>
+
+        </interceptors>
+		
+	   <!--<action name="default" class="uploadAction">
+			<interceptor-ref name="exceptionWorkFlow" />
+			<result name="success">/WEB-INF/templates/upload.ftl</result>
+		</action>
+		
+		<action name="save_upload" class="uploadAction" method="save">
+			<interceptor-ref name="uploadStack" />
+			<result name="success" type="redirect">/photos/</result>
+		</action>-->
+		
+		<action name="save_upload" class="photoUploadAction" method="save">
+        	<interceptor-ref name="uploadStack" />
+            <result name="input">/WEB-INF/templates/photos/upload.ftl</result>
+            <result name="batch" type="redirect">/photos/batch?ids=${ids}&amp;upload=1</result>
+            <result name="success" type="redirect">/photos/</result>
+            <result name="activity">/WEB-INF/templates/photos/upload_activity.ftl</result>
+            <result name="simple">/WEB-INF/templates/photos/upload_simple.ftl</result>
+        </action>
+		
+	
+     </package>
+
+</xwork>

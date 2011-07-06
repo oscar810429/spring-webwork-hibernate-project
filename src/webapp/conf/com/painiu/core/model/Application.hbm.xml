@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="app_type">
+    	<param name="enumClassname">com.painiu.core.model.Application$Type</param>
+	</typedef>
+	
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="auth_perms">
+    	<param name="enumClassname">com.painiu.core.model.Authentication$Permission</param>
+	</typedef>
+
+	<class 	name="Application" 
+			table="pn_apps"
+			lazy="true">
+
+		<id name="apiKey" 
+			column="api_key"
+			type="string" >
+			
+			<generator 	class="assigned" />
+		</id>
+
+		<property 	name="sequence"
+					column="app_seq"
+					type="long" />
+
+		<property 	name="title" 
+					column="title" 
+					type="string" />
+					
+		<property 	name="description" 
+					column="description" 
+					type="string" />
+
+		<many-to-one 	name="user" 
+						class="User" 
+						column="user_id"
+						cascade="none" 
+						outer-join="false"  
+						update="false" />
+		
+		<property 	name="secret" 
+					column="secret" 
+					type="string" />
+					
+    	<component name="logo" class="Icon">
+        	<property   name="host"
+                    	type="integer"
+                    	column="logo_host"/>
+
+        	<property   name="dir"
+                   	 	type="string"
+                    	column="logo_dir"/>
+
+        	<property   name="filename"
+                    	type="string"
+                    	column="logo_filename"/>
+    	</component>
+    	
+		<property 	name="url" 
+					column="app_url" 
+					type="string" />
+
+		<property 	name="callbackUrl" 
+					column="callback_url" 
+					type="string" />
+				
+		<property 	name="permission" 
+					column="permission" 
+					type="auth_perms" />
+				
+		<property 	name="type" 
+					column="app_type" 
+					type="app_type" />
+
+		<property 	name="createdDate"
+					column="created_date"
+					type="timestamp" 
+					update="false" />
+					
+		<property 	name="expireDate"
+					column="expire_date"
+					type="timestamp" 
+					update="false" />
+					
+		<property 	name="configured"
+					column="configured"
+					type="boolean" />					
+					
+	</class>
+
+</hibernate-mapping>

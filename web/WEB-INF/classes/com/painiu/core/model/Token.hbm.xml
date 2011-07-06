@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+
+	<class 	name="Token" 
+			table="pn_tokens"
+			lazy="true">
+
+		<id name="id" 
+			column="token_id"
+			type="string" 
+			unsaved-value="null">
+			
+			<generator 	class="assigned" />
+		</id>
+
+		<many-to-one 	name="user"
+						class="User" 
+						column="user_id"
+						update="false"
+						cascade="none"
+						outer-join="false" />
+						
+		<property 	name="createdDate"
+					column="created_date"
+					type="timestamp" 
+					update="false" />
+
+		<property 	name="expireDate"
+					column="expire_date"
+					type="timestamp" 
+					update="false" />
+
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,62 @@
+*{margin:0;padding:0}
+body{color:#000;font-family:"宋体";font-size:12px; background:#fff;}
+h1,h2,h3,h4,input,textarea,from{ font-size:12px;}
+img{border:0}
+ul,li{list-style:none}
+pre{ white-space: pre-wrap;/* css-3 */white-space: -moz-pre-wrap; /* Mozilla, since 1999 */white-space: -pre-wrap;/* Opera 4-6 */white-space: -o-pre-wrap;/* Opera 7 */word-wrap: break-word;/* Internet Explorer 5.5+ */}
+.l{float:left}
+.r{float:right}
+a{color:#014ccc;text-decoration:none}
+a:hover{color:#ff5500; text-decoration:underline}
+.clear{clear:both;}
+.clear8{clear:both;height:8px; font-size:1px;}
+.clear10{clear:both;height:10px; font-size:1px;}
+.up12{margin-top:12px}
+/*宽度*/
+.w960{width:960px;margin:0 auto;}
+.w220{width:220px;}
+.w222{width:222px;}
+.w200{width:200px;}
+.w202{width:202px;}
+/*面包屑*/
+.nav{ width:960px; height:27px; line-height:27px; margin:0 auto; overflow:hidden; clear:both}
+.nav h1{display:inline; font-weight:normal}
+.nav h1.a2{ font-weight:bold}
+.nav a{ text-decoration:underline;}
+.nav .a1{ width:76px; text-align:center; color:#555;}
+.nav i{ font:normal bold 13px Arial; padding:0 2px}
+/*文字大小*/
+.f14{font-size:14px;}
+.f16{font-size:16px;}
+/*文字颜色*/
+.fh{color:#666;}
+.fh a{color:#666;}
+.fh a:hover{color:#ff5500}
+.fh444{color:#444;}
+.fh444 a{color:#444;}
+.fh444 a:hover{color:#ff5500}
+.fr{color:red}
+.fo{ color:#ff5500}
+.fo a{color:#ff5500}
+.fo a:hover{color:#ff5500;}
+a.fo{color:#ff5500;}
+a:hover.fo{color:#ff5500;}
+.fbl{color:#000;}
+.fbl a{color:#000;}
+.fbl a:hover{color:#ff5500;}
+a.fbl{color:#000;}
+a:hover.fbl{color:#ff5500;}
+/*左右边距*/
+.ml8{margin-left:8px; display:inline;}
+.mr8{margin-left:8px; display:inline;}
+
+/*图片与文字水平对齐*/
+span.img-align{ vertical-align:middle;}
+/*图片居中*/
+.holder{ text-align:center; display:table-cell; vertical-align:middle;}
+.holder-2{display:table-cell; vertical-align:middle;}/*上下居中*/
+.edge{ width:0; height:100%; display:inline-block; vertical-align:middle;}
+.cont{ vertical-align:middle; display:inline-block;}
+
+.link{ line-height:21px; border:1px solid #e2e2e2}
+.link li{ float:left; width:100px; text-align:left}

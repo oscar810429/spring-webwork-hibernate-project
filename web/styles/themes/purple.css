@@ -1,0 +1,13 @@
+body{
+background:url(http://www.painiu.com/images/themes/purple/bg.png) repeat-x #FFF; 
+}
+
+.skins-topbg
+{    
+width:1002px;
+height:160px;
+_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.painiu.com/images/themes/purple/top.png',sizingMethod='image');
+background:url(http://www.painiu.com/images/themes/purple/top.png) no-repeat !important;
+_background:none;
+margin:10px auto 0px auto;
+}

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+		
+    <bean id="adminInterceptor" class="com.painiu.webapp.interceptor.UserRoleAuthorizationInterceptor">
+	     <property name="authorizedRoles"><value>admin</value></property>
+	</bean>
+	
+	 <bean id="apidocAction" class="com.painiu.webapp.action.ApidocAction" scope="prototype">
+   </bean>
+
+	<bean id="homeAction" class="com.painiu.webapp.action.HomeAction" scope="prototype">
+	    <property name="taskExecutor"><ref bean="taskExecutor"/></property>
+		<property name="categoryManager"><ref bean="categoryManager"/></property>
+		<property name="productManager"><ref bean="productManager"/></property>
+		<property name="areaManager"><ref bean="areaManager"/></property>
+	</bean>
+	
+	<bean id="signupAction" class="com.painiu.webapp.action.account.SignupAction" scope="prototype">
+	     <property name="signupService"><ref bean="signupService"/></property>
+	     <property name="messageEngine"><ref bean="messageEngine"/></property>
+	</bean>
+     
+    <bean id="categoryAction" class="com.painiu.webapp.action.CategoryAction" scope="prototype">
+	     <property name="categoryManager"><ref bean="categoryManager"/></property>
+	</bean>
+	
+	<bean id="uploadProcessor" class="com.painiu.webapp.upload.UploadProcessor">
+	     <property name="photoManager"><ref bean="photoManager"/></property>
+	</bean>
+	
+    <!--<bean id="uploadAction" class="com.painiu.webapp.action.UploadAction" scope="prototype">
+	    <property name="categoryManager"><ref bean="categoryManager"/></property> 
+	    <property name="userManager"><ref bean="userManager"/></property>
+		<property name="uploadProcessor"><ref bean="uploadProcessor"/></property>
+	</bean>-->
+	
+	<!--
+	<bean id="photoUploadAction" class="com.painiu.webapp.action.PhotoUploadAction" scope="prototype">
+		<property name="userManager"><ref bean="userManager"/></property>
+		<property name="photoManager"><ref bean="photoManager"/></property>
+		<property name="groupManager"><ref bean="groupManager"/></property>
+		<property name="uploadProcessor"><ref bean="uploadProcessor"/></property>		
+    </bean>
+    -->
+    
+    <bean id="photoUploadAction" class="com.painiu.webapp.action.PhotoUploadingAction" scope="prototype">
+		<property name="userManager"><ref bean="userManager"/></property>
+		<property name="photoManager"><ref bean="photoManager"/></property>
+		<!--<property name="groupManager"><ref bean="groupManager"/></property>-->
+		<property name="uploadProcessor"><ref bean="uploadProcessor"/></property>		
+    </bean>
+	
+   <!--<bean id="schedulingAction" class="com.painiu.webapp.action.console.SchedulingAction" scope="prototype">
+		<property name="scheduler" ref="scheduler" />
+	</bean>-->
+	
+    <bean id="softwareAction" class="com.painiu.webapp.action.SoftwareAction" scope="prototype">
+      <property name="softwareManager" ref="softwareManager" />
+      <property name="categoryManager" ref="categoryManager" />
+      <property name="userManager" ref="userManager" />
+   </bean>
+	
+	<!--ManagerMy Account Action settings -->
+	
+	<bean id="softwareManagerAction" class="com.painiu.webapp.action.SoftwareManagerAction" scope="prototype">
+		 <property name="userManager"><ref bean="userManager"/></property>
+      	 <!--<property name="groupManager"><ref bean="groupManager"/></property>-->
+    	     <property name="areaManager"><ref bean="areaManager"/></property>
+    	     <property name="categoryManager"><ref bean="categoryManager"/></property>
+    	     <property name="softwareManager"><ref bean="softwareManager"/></property>		
+    </bean>
+	
+	
+	 <bean id="softwareCategoryAction" class="com.painiu.webapp.action.SoftwareCategoryAction" scope="prototype">
+   		 <property name="userManager"><ref bean="userManager"/></property>
+        <!-- <property name="groupManager"><ref bean="groupManager"/></property>-->    
+         <property name="categoryManager"><ref bean="categoryManager"/></property>
+         <property name="areaManager"><ref bean="areaManager"/></property>       
+     </bean> 
+     
+     <bean id="passwordHintAction" class="com.painiu.webapp.action.PasswordHintAction" scope="prototype">
+         <property name="userManager"><ref bean="userManager"/></property>
+         <property name="tokenManager"><ref bean="tokenManager"/></property>
+         <property name="messageEngine"><ref bean="messageEngine"/></property>
+     </bean>
+     
+    <bean id="profileAction" class="com.painiu.webapp.action.account.ProfileAction" scope="prototype">
+		 <property name="userManager"><ref bean="userManager"/></property>
+		 <property name="passwordEncoder"><ref bean="passwordEncoder"/></property>
+    </bean>
+    
+    <bean id="buddyIconAction" class="com.painiu.webapp.action.BuddyIconAction" scope="prototype">
+		 <property name="userManager"><ref bean="userManager"/></property>
+    </bean>
+    
+    <bean id="searchAction" class="com.painiu.webapp.action.SearchAction" scope="prototype">
+		<property name="userManager"><ref bean="userManager"/></property>
+		<property name="photoManager"><ref bean="photoManager"/></property>
+		<!--<property name="groupManager"><ref bean="groupManager"/></property>-->
+		<property name="categoryManager"><ref bean="categoryManager"/></property>
+	</bean>
+    
+    
+	
+	
+	<!--Manager Console Action settings -->
+	
+	 <bean id="serviceAction" class="com.painiu.webapp.action.ServiceAction" scope="prototype">
+     <property name="abuseManager"><ref bean="abuseManager"/></property>
+   </bean>
+	
+    <bean id="consoleAction" class="com.painiu.webapp.action.console.HomeAction" scope="prototype">
+	   <property name="userManager"><ref bean="userManager"/></property>
+	 </bean>
+	
+	 <bean id="importSoftwareAction" class="com.painiu.webapp.action.console.ImportSoftwareAction" scope="prototype">
+	   <property name="userManager"><ref bean="userManager"/></property>
+	   <property name="softwareManager"><ref bean="softwareManager"/></property>
+	   <property name="categoryManager"><ref bean="categoryManager"/></property>
+   	</bean>
+	
+    <bean id="areaManagerAction" class="com.painiu.webapp.action.console.AreaManagerAction" scope="prototype">
+	   <property name="areaManager"><ref bean="areaManager"/></property>
+	 </bean>	
+	
+	 <bean id="systemNewsAction" class="com.painiu.webapp.action.console.SystemNewsAction" scope="prototype">
+		<property name="userManager"><ref bean="userManager"/></property>
+		<property name="systemNewsManager"><ref bean="systemNewsManager" /></property>
+		<!-- <property name="categoryManager"><ref bean="categoryManager"/></property>-->
+	 </bean>
+
+	<bean id="systemMessageAction" class="com.painiu.webapp.action.console.SystemMessageAction" scope="prototype">
+		<property name="userManager"><ref bean="userManager"/></property>
+		<property name="systemMessageManager"><ref bean="systemMessageManager" /></property>
+	</bean>
+	
+	<bean id="linkAction" class="com.painiu.webapp.action.console.LinkAction" scope="prototype">
+		<property name="linkManager"><ref bean="linkManager"/></property>
+	</bean>
+	
+	<bean id="systemEventAction" class="com.painiu.webapp.action.console.SystemEventAction" scope="prototype">
+		<property name="eventManager"><ref bean="eventManager"/></property>
+		<!--<property name="groupManager"><ref bean="groupManager"/></property>-->
+	</bean>
+	
+	<bean id="userRoleAction" class="com.painiu.webapp.action.console.UserRoleAction" scope="prototype">
+		<property name="userManager"><ref bean="userManager"/></property>
+		<!-- <property name="photoManager"><ref bean="photoManager"/></property>-->		
+		<property name="roleManager"><ref bean="roleManager"/></property>
+		<!--<property name="flowmeterManager"><ref bean="flowmeterManager"/></property>
+		<property name="messageEngine"><ref bean="messageEngine"/></property>
+		<property name="applyManager"><ref bean="applyManager"/></property>
+		<property name="paymentManager"><ref bean="paymentManager"/></property>-->
+	</bean>
+	
+	
+	<bean id="manageUserAction" class="com.painiu.webapp.action.console.ManageUserAction" scope="prototype">
+		<property name="userManager"><ref bean="userManager"/></property>
+		<!--<property name="photoManager"><ref bean="photoManager"/></property>
+		<property name="messageEngine"><ref bean="messageEngine"/></property>-->
+	</bean>
+	
+	<bean id="cooperationManageAction" class="com.painiu.webapp.action.CooperationManageAction" scope="prototype">
+		<property name="collaboratorManager"><ref bean="collaboratorManager"/></property>
+		<!-- <property name="applicationManager"><ref bean="applicationManager"/></property>-->
+	</bean>
+	
+    <bean id="messageAction" class="com.painiu.webapp.action.MessageAction" scope="prototype">
+    	<property name="userManager"><ref bean="userManager"/></property>
+    	<!--<property name="contactManager"><ref bean="contactManager"/></property>-->
+    	<property name="messageManager"><ref bean="messageManager"/></property>
+    	<!--<property name="blockedUserManager"><ref bean="blockedUserManager"/></property>-->
+    </bean>
+	
+	<bean id="tagManageAction" class="com.painiu.webapp.action.console.TagManageAction" scope="prototype">
+		<property name="tagsManager"><ref bean="tagsManager"/></property>
+		<property name="linkManager"><ref bean="linkManager"/></property>
+	</bean>
+	
+	<bean id="forumAction" class="com.painiu.webapp.action.SystemForumAction" scope="prototype">
+    	<property name="userManager"><ref bean="userManager"/></property>
+    	<property name="forumManager"><ref bean="forumManager"/></property>
+    	<!--<property name="featureManager"><ref bean="featureManager"/></property>-->
+    </bean>
+
+    <bean id="topicAction" class="com.painiu.webapp.action.TopicAction" scope="prototype">
+    	<property name="userManager"><ref bean="userManager"/></property>
+    	<property name="forumManager"><ref bean="forumManager"/></property>
+    	<!-- property name="topicGroupCategoryManager"><ref bean="topicGroupCategoryManager"/></property-->
+    </bean>
+    
+    <bean id="postAction" class="com.painiu.webapp.action.PostAction" scope="prototype">
+    	<property name="userManager"><ref bean="userManager"/></property>
+    	<property name="forumManager"><ref bean="forumManager"/></property>
+    </bean>
+	
+</beans>

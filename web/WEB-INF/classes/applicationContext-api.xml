@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="apiHandler" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target"><ref bean="defaultHandler"/></property>
+		<property name="interceptorNames">
+			<list>
+				<value>apiContextInterceptor</value>
+				<value>securityContextInterceptor</value>
+				<value>signatureAdvice</value>
+				<value>permissionAdvice</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="defaultHandler" class="com.painiu.service.api.DefaultHandler">
+		<property name="targetMap">
+			<map>
+			    <entry>
+					<key><value>area</value></key>
+					<ref bean="areaTarget"/>
+				</entry>
+				<entry>
+        			<key><value>user</value></key>
+          		<ref bean="userTarget"/>
+       			</entry>
+			</map>
+		</property>
+	</bean>
+	
+    <bean id="apiContextInterceptor" class="com.painiu.service.api.ApiContextInterceptor">
+    		<property name="applicationManager"><ref bean="applicationManager"/></property>
+    		<property name="authenticationManager"><ref bean="authManager"/></property>
+    		<property name="userManager"><ref bean="userManager"/></property>
+    </bean>
+    
+    <bean id="securityContextInterceptor" class="com.painiu.service.api.SecurityContextInterceptor">
+    	<!-- <property name="sessionManager"><ref bean="sessionManager"/></property>-->
+    </bean>
+    
+    <bean id="signatureAdvice" class="com.painiu.service.api.SignatureAdvice">
+		<property name="signMethods">
+			<set>
+			  
+			  <!-- areas -->
+				<!--<value>area.getList</value>
+				<value>area.getCity</value>-->
+				
+				<!-- user -->
+        			<!--<value>user.setMeta</value>
+				<value>area.getUser</value>-->
+				
+			</set>
+		</property>
+    </bean>
+    
+    <bean id="permissionAdvice" class="com.painiu.service.api.PermissionAdvice">
+		<property name="perms">
+			<set>
+			 <!-- areas -->
+		     <value>area.getList:read</value>
+			<!-- user -->	
+			<value>user.setMeta:write</value>
+				
+			</set>
+		</property>
+    </bean>
+	
+	<bean id="areaTarget" class="com.painiu.service.api.methods.AreaTarget">
+	  <property name="userManager"><ref bean="userManager"/></property>
+	  <property name="areaManager"><ref bean="areaManager"/></property>
+	</bean>
+	
+	<bean id="userTarget" class="com.painiu.service.api.methods.UserTarget">
+    		<property name="userManager"><ref bean="userManager"/></property>
+    </bean>
+	
+</beans>

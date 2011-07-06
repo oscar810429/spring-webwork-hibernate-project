@@ -1,0 +1,24 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.1.1//EN" "http://www.opensymphony.com/xwork/xwork-1.1.1.dtd">
+
+<xwork>
+
+    <package name="softwares" namespace="/softwares" extends="default">
+      
+      <action name="view" class="softwareAction" method="view">
+          <interceptor-ref name="basicStack" />
+          <result name="success">/WEB-INF/templates/softwares/view.ftl</result>
+       </action>
+       
+       <action name="tag" class="softwareAction" method="tag">
+          <interceptor-ref name="basicStack" />
+          <result name="success">/WEB-INF/templates/softwares/default.ftl</result>
+       </action>
+       
+       <action name="categorymap" class="softwareAction" method="categorylist">
+          <interceptor-ref name="basicStack" />
+          <result name="success">/WEB-INF/templates/categorymap.ftl</result>
+       </action>
+  
+    </package>
+
+</xwork>

@@ -1,0 +1,51 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.1.1//EN" "http://www.opensymphony.com/xwork/xwork-1.1.1.dtd">
+
+<xwork>
+	
+	<package name="profile/messages" namespace="/profile/messages" extends="default">
+
+		<action name="default" class="messageAction">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/messages/inbox_new.ftl</result>
+        </action>
+        
+        <action name="inbox" class="messageAction">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/messages/inbox_new.ftl</result>
+        </action>
+
+        <action name="outbox" class="messageAction" method="sent">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/messages/outbox_new.ftl</result>
+        </action>
+        
+        <action name="read" class="messageAction" method="view">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/messages/view_new.ftl</result>
+        </action>
+        
+        <action name="delete" class="messageAction" method="delete">
+	        <interceptor-ref name="basicStack" />
+            <result name="success" type="redirect">/profile/messages/inbox</result>
+        </action>
+        
+        <action name="operation" class="messageAction" method="operation">
+	        <interceptor-ref name="basicStack" />
+            <result name="success" type="redirect">/profile/messages/inbox</result>
+            <result name="inbox">/WEB-INF/templates/messages/inbox_new.ftl</result>
+            <result name="outbox">/WEB-INF/templates/messages/outbox_new.ftl</result>
+        </action>
+        
+        <action name="compose" class="messageAction" method="compose">
+	        <interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/messages/compose_new.ftl</result>
+        </action>
+
+        <action name="send" class="messageAction" method="send">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input" type="redirect">/profile/messages/compose</result>
+        	<result name="success" type="redirect">/profile/messages/inbox</result>
+        </action>
+        
+  	</package>
+</xwork>

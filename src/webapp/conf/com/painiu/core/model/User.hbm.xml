@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="com.painiu.core.model">
+	
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="user_state">
+		<param name="enumClassname">com.painiu.core.model.User$State</param>
+	</typedef>
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="rank">
+		<param name="enumClassname">com.painiu.core.model.User$UserRank</param>
+	</typedef>
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="user_type">
+		<param name="enumClassname">com.painiu.core.model.User$UserType</param>
+	</typedef>
+	
+	<typedef class="com.painiu.core.persistence.StringSetUserType" name="string_set" />
+	
+	<class 	name="User" 
+			table="pn_users" 
+			dynamic-update="true"
+			lazy="true">
+
+		<id	name="id" 
+			column="user_id"
+			type="string" 
+			unsaved-value="null">
+			
+			<generator 	class="uuid" />
+		</id>
+		
+		<property name="username" type="string" not-null="true" />
+
+		<property name="password" type="string" not-null="true" />
+		
+		<property name="email" type="string" not-null="true" unique="true" access="field" />
+	
+    	<component name="buddyIcon" class="Icon">
+        	<property   name="host"
+                    	type="integer"
+                    	column="icon_host"/>
+
+        	<property   name="dir"
+                   	 	type="string"
+                    	column="icon_dir"/>
+
+        	<property   name="filename"
+                    	type="string"
+                    	column="icon_filename"/>
+                    	
+            <!-- PNFS attributes -->
+            <!--<property   name="username"
+						column="username"
+						type="string"
+						insert="false"
+						update="false" />
+						
+            <property 	name="fileKey" 
+						column="icon_file_key" 
+						type="string" />-->
+    	</component>
+    	
+    	<property name="blast" column="blast" type="string" />
+		
+		<property name="nickname" column="nick_name" type="string" />
+
+		<property name="locale" type="locale" />
+
+		<property 	name="state"
+					column="status" 
+					type="user_state" 
+					not-null="true" />
+
+		<property 	name="createdDate" 
+					type="timestamp" 
+					update="false"
+					column="created_date" 
+					not-null="true" />
+
+		<set 		name="roles" 
+					table="pn_user_role" 
+					cascade="none"
+					lazy="true"
+					access="field" >
+
+			<key column="user_id" />
+
+			<many-to-many 	class="Role" 
+							column="role_name" 
+							outer-join="auto" />
+		</set>
+		
+		<property   name="roleNames"
+					type="string_set"
+					column="role_names"
+					not-null="true" />
+		
+		<property 	name="userRank"
+					column="user_rank" 
+					type="rank" 
+					not-null="true" />
+					
+		<one-to-one name="stat" 
+					class="UserStat" 
+					cascade="all"
+					access="field"
+					constrained="true"
+					outer-join="false" />
+		
+		<one-to-one name="profile" 
+					class="UserProfile" 
+					cascade="all"
+					access="field"
+					constrained="true"
+					outer-join="false" />
+		
+		<one-to-one name="preference" 
+					class="UserPreference" 
+					cascade="all"
+					access="field"
+					constrained="true"
+					outer-join="false" />		
+
+					
+	</class>
+
+</hibernate-mapping>

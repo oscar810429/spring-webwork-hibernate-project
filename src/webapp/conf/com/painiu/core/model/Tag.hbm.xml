@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+	<class 	name="Tag" 
+			table="pn_tag"
+			dynamic-update="true"
+			lazy="true">
+
+		<id name="name" 
+			column="name" 
+			type="string"
+			unsaved-value="version">
+			
+			<generator class="assigned" />
+		</id>
+		
+		<version 	name="version" 
+					column="version" 
+					type="integer" />
+
+		<property 	name="times" 
+					column="count" 
+					type="integer" />
+
+		<property 	name="users" 
+					column="user_count" 
+					type="integer" />
+					
+		<property 	name="createdDate"
+					column="created_date"
+					type="timestamp" 
+					update="false" />
+
+		<!--
+		<set 	name="taggedPhotos" 
+				cascade="all, delete-orphan"
+				inverse="true"
+				lazy="true" >
+				
+			<key column="tag_name" />
+			<one-to-many class="PhotoTag" />
+		</set>
+		-->
+		
+	</class>
+
+</hibernate-mapping>

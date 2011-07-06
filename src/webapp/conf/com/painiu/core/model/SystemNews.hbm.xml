@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+
+	<class 	name="SystemNews" 
+			table="pn_news"
+			lazy="true">
+
+		<id name="id" 
+			column="news_id"
+			type="string" 
+			unsaved-value="null">
+			
+			<generator 	class="uuid" />
+		</id>
+		
+		<property 	name="title" 
+					column="title" 
+					type="string"
+					not-null="true" />
+					
+		<property 	name="url" 
+					column="url" 
+					type="string"
+					not-null="false" />
+					
+		<property 	name="urlBlank" 
+					column="url_blank" 
+					type="integer"/>
+					
+		<property 	name="content" 
+					column="content" 
+					type="string"
+					not-null="false" />
+					
+		<property 	name="weight" 
+					column="weight" 
+					type="integer" />
+					
+		<property 	name="createdDate"
+					column="created_date"
+					type="timestamp"  />
+		
+		<property 	name="modifiedDate"
+					column="modified_date"
+					type="timestamp" />
+		
+		<property 	name="kind" 
+					column="kind" 
+					type="integer"
+					not-null="true" />
+					
+		<property 	name="image" 
+					column="image" 
+					type="integer"
+					 />
+					
+		<property 	name="expiredDate"
+					column="expired_date"
+					type="timestamp" 
+					update="true" />
+					
+		<many-to-one 	name="user"
+						class="User" 
+						column="user_id"
+						cascade="none"
+						outer-join="false" 
+						not-null="false" />
+		
+	</class>
+
+</hibernate-mapping>

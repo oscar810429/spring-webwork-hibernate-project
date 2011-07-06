@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+	<class 	name="Cotag" 
+			table="pn_cotags" 
+			lazy="true">
+
+		<composite-id 	name="id" 
+						class="Cotag$Id" >
+
+			<key-property 	name="tagName" 
+							access="field"
+							column="tag_name" />
+
+			<key-property 	name="cotagName" 
+							access="field"
+							column="cotag_name" />
+		</composite-id>
+
+		<!--<many-to-one 	name="tag" 
+						column="tag_name" 
+						class="Tag"
+						insert="false" 
+						update="false"
+						cascade="none" />
+
+		<many-to-one 	name="cotag" 
+						column="cotag_name" 
+						class="Tag"
+						update="false"
+						insert="false"
+						cascade="none"
+						outer-join="false" />-->
+
+		<property 	name="count" 
+					column="count"
+					type="integer" 
+					not-null="true" />
+
+		<property 	name="tagName" 
+					column="tag_name"
+					type="string" 
+					update="false"
+					insert="false" />
+					
+		<property 	name="cotagName" 
+					column="cotag_name"
+					type="string" 
+					update="false"
+					insert="false" />
+
+	</class>
+
+</hibernate-mapping>

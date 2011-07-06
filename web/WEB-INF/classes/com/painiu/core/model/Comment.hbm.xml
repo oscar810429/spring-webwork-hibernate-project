@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="situation">
+    	<param name="enumClassname">com.painiu.core.model.Comment$Situation</param>
+	</typedef>
+	<class 	name="Comment" 
+			table="pn_comment" 
+			lazy="true"
+			abstract="true">
+
+		<id	name="id" 
+			column="comment_id"
+			type="string" 
+			unsaved-value="null">
+			
+			<generator 	class="uuid" />
+		</id>
+
+    	<discriminator 	column="comment_type" 
+    					type="string"/>
+
+		<many-to-one 	name="parent" 
+						class="Comment" 
+						column="parent_id"
+						cascade="none" 
+						outer-join="false" 
+						update="false" />
+
+		<many-to-one 	name="author" 
+						class="User" 
+						column="author" 
+						cascade="none" 
+						outer-join="false" 
+						update="false" />
+
+		<!-- 
+		<property 	name="authorName" 
+					column="author" 
+					type="string" 
+					insert="false" 
+					update="false" />
+		-->	
+				
+		<property 	name="content"
+					column="content"
+					type="string"
+					not-null="true" />
+		
+		<property 	name="postedDate" 
+					column="posted_date" 
+					type="timestamp" 
+					update="false" />
+					
+		<property 	name="modifiedDate" 
+					column="modified_date" 
+					type="timestamp" />
+					
+		<property 	name="situation"
+					column="situation"
+					type="situation" 
+					not-null="true" />
+					
+		<many-to-one 	name="modifiedBy" 
+						class="User" 
+						column="modified_by" 
+						cascade="none" 
+						outer-join="false" />
+		
+		<many-to-one 	name="targetOwner" 
+						class="User" 
+						column="target_user_id" 
+						cascade="none" 
+						outer-join="false"
+						update="false" />
+		
+		<!--<subclass 	name="SoftwareComment" 
+					discriminator-value="SC">
+					
+			<many-to-one 	name="target" 
+							class="Software" 
+							column="target_id"
+							not-null="true" 
+							cascade="none" 
+							outer-join="false" 
+							update="false" />
+							
+			<many-to-one 	name="software" 
+							class="Software" 
+							column="target_id"
+							not-null="true" 
+							cascade="none" 
+							outer-join="false" 
+							insert="false"
+							update="false" />
+	
+			<subclass 	name="PhotoTrackbackComment" 
+						discriminator-value="PTC">
+
+				<property 	name="blogName"
+							type="string"
+							column="blog_name" />
+						
+				<property 	name="permalink"
+							type="string"
+							column="permalink" />
+			</subclass>
+		</subclass>-->
+		
+		<!--<subclass 	name="AlbumComment" 
+					discriminator-value="AC">
+					
+			<many-to-one 	name="target" 
+							class="Album" 
+							column="target_id"
+							not-null="true" 
+							cascade="none" 
+							outer-join="false" 
+							update="false" />
+							
+			<many-to-one 	name="album" 
+							class="Album" 
+							column="target_id"
+							not-null="true" 
+							cascade="none" 
+							outer-join="false" 
+							insert="false"
+							update="false" />
+		</subclass>-->
+	</class>
+
+</hibernate-mapping>

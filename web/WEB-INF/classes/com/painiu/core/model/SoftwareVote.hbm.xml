@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+
+	<class 	name="SoftwareVote" 
+			table="pn_software_votes" 
+			dynamic-update="true"
+			lazy="true">
+	<composite-id 	name="id" 
+						class="SoftwareVote$Id" >
+
+			<key-property 	name="softwareId" 
+							access="field"
+							column="software_id" />
+
+			<key-property 	name="voteIp" 
+							access="field"
+							column="vote_ip" />
+							
+			<key-property 	name="voteId" 
+							access="field"
+							column="vote_id" />
+							
+			<key-property 	name="voteDate" 
+					column="vote_date" 
+					type="timestamp" 
+					access="field" />
+			
+		</composite-id>
+		
+		<many-to-one name="software" 
+						column="software_id"
+						class="Software" 
+						not-null="true"
+						insert="false" 
+						update="false"
+						cascade="none"
+						outer-join="false" />
+						
+		<many-to-one name="user" 
+						column="user_id"
+						class="User" 
+						insert="true" 
+						update="false"
+						cascade="none"
+						outer-join="false" />
+						
+    	
+		<property 	name="score"
+					column="score"
+					type="integer"
+					not-null="true" />
+					
+         <property 	name="voteIp" 
+					column="vote_ip" 
+					type="string"
+					not-null="true"
+					insert="false" 
+					update="false" />
+							
+	</class>
+</hibernate-mapping>

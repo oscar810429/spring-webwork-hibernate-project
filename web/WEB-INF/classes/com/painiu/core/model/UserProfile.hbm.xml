@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="user_sex">
+		<param name="enumClassname">com.painiu.core.model.UserProfile$Sex</param>
+	</typedef>
+
+	<class 	name="UserProfile" 
+			table="pn_user_profiles" 
+			lazy="true">
+
+		<id name="id" column="user_id" unsaved-value="null">
+			<generator class="foreign">
+				<param name="property">user</param>
+			</generator>
+		</id>
+
+		<one-to-one name="user" class="User" constrained="true" />
+
+		<property name="name" type="string" />
+		<property name="sex" type="user_sex" />
+		<property name="birthday" type="timestamp" />
+		<property name="description" type="string" />
+		<property name="marriageState" column="marriage_state" type="integer" />
+		<property name="country" type="string" />
+		<property name="province" type="string" />
+		<property name="city" type="string" />
+		<property name="street" type="string" />
+		<property name="postal" type="string" />
+		<property name="mobile" type="string" />
+		<property name="website" type="string" />
+		<property name="websiteName" column="website_name" type="string" />
+		<property name="msn" type="string" />
+		<property name="oicq" type="string" />
+		<property name="gtalk" type="string" />
+		<property name="skype" type="string" />
+		<property name="occupation" type="integer" />
+		<property name="interestedBook" column="interest_book" type="string" />
+		<property name="interestedMusic" column="interest_music" type="string" />
+		<property name="interestedMovie" column="interest_movie" type="string" />
+		<property name="interestedSport" column="interest_sport" type="string" />
+		<property name="interestedPerson" column="interest_person" type="string" />
+		<property name="interestedBrand" column="interest_brand" type="string" />
+		<property name="interestedCollege" column="interest_college" type="string" />
+		<property name="interestedOther" column="interests" type="string" />
+		
+		<property name="footprint" column="footprint" type="integer" />
+	</class>
+
+</hibernate-mapping>

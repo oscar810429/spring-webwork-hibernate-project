@@ -1,0 +1,27 @@
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0//EN" 
+	"http://www.opensymphony.com/xwork/xwork-validator-1.0.dtd">
+<validators>
+    <field name="group.name">
+        <field-validator type="requiredstring">
+            <message key="errors.required"/>
+        </field-validator>
+    </field>
+    <field name="group.description">
+        <field-validator type="requiredstring">
+            <message key="errors.required"/>
+        </field-validator>
+    </field>
+    <field name="group.urlName">
+    	<field-validator type="requiredstring">
+            <message key="errors.required"/>
+        </field-validator>
+    	<field-validator type="stringlength">
+    		<param name="maxLength">32</param>
+    		<message key="errors.maxlength"/>
+    	</field-validator>
+    	<field-validator type="stringregex">
+    		<param name="regex"><![CDATA[([0-9a-zA-Z-_]+)]]></param>
+    		<message key="errors.invalid.character"/>
+    	</field-validator>
+    </field>
+</validators>

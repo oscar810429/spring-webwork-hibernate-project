@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+	<class 	name="SoftwareStat" 
+			table="pn_software_stat" 
+			lazy="true">
+
+		<id name="id" column="software_id" unsaved-value="null">
+			<generator class="foreign">
+				<param name="property">software</param>
+			</generator>
+		</id>
+
+		<one-to-one name="software" class="Software" constrained="true" />
+
+		<property name="views" column="views" type="integer" />
+
+		<property name="comments" column="comments" type="integer" />
+
+		<property name="notes" column="notes" type="integer" />
+
+		<property name="favorites" column="favorites" type="integer" />
+		
+		<property name="interests" column="interests" type="integer" />
+		
+		<property name="score" column="score" type="integer" />
+		
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.1.1//EN" "http://www.opensymphony.com/xwork/xwork-1.1.1.dtd">
+
+<xwork>
+	
+	<package name="profile/buddyicon" namespace="/profile/buddyicon" extends="default">
+
+        <action name="default" class="buddyIconAction">
+        	<interceptor-ref name="exceptionWorkFlow" />
+            <result name="success">/WEB-INF/templates/buddyicon/default.ftl</result>
+        </action>
+
+        <action name="upload" class="buddyIconAction" method="upload">
+        	<interceptor-ref name="uploadStack" />
+        	<result name="input">/WEB-INF/templates/buddyicon/default.ftl</result>
+            <result name="success">/WEB-INF/templates/buddyicon/default.ftl</result>
+        </action>
+        
+        <action name="delete" class="buddyIconAction" method="delete">
+	        <interceptor-ref name="exceptionWorkFlow" />
+            <result name="success">/WEB-INF/templates/buddyicon/default.ftl</result>
+        </action>
+  	</package>
+</xwork>

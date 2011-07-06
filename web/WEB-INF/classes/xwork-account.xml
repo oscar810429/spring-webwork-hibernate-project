@@ -1,0 +1,64 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.1.1//EN" "http://www.opensymphony.com/xwork/xwork-1.1.1.dtd">
+
+<xwork>
+	<package name="account" namespace="/account" extends="default">
+
+		<action name="signup" class="signupAction">
+			<result name="input">/WEB-INF/templates/account/signup.ftl</result>
+			<result name="success" type="chain">save_signup</result>
+        </action>
+      
+		<action name="save_signup" class="signupAction" method="save">
+			<interceptor-ref name="validationWorkflow" />
+			<result name="input">/WEB-INF/templates/account/signup.ftl</result>
+			<result name="success" type="redirect-action">
+				<param name="namespace">/account</param>
+				<param name="actionName">signup_confirm</param>
+			</result>
+		</action>
+        
+		<action name="signup_confirm" class="signupAction" method="confirm">
+			<interceptor-ref name="exceptionWorkFlow" />
+			<result name="success">/WEB-INF/templates/account/signup_confirm.ftl</result>
+		</action>
+		
+		<action name="login" class="com.painiu.webapp.action.account.LoginAction">
+			<interceptor-ref name="validationWorkflow" />
+			<result name="success">/WEB-INF/templates/account/login.ftl</result>
+		</action>
+		
+		<action name="logout_confirm" class="com.painiu.webapp.action.account.LoginAction">
+        	<interceptor-ref name="exceptionWorkFlow" />
+        	<result name="success">/WEB-INF/templates/account/logout_confirm.ftl</result>
+        </action>
+        
+        <action name="forget_password" class="passwordHintAction" method="send">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/account/forget_password.ftl</result>
+        	<result name="reset">/WEB-INF/templates/account/reset_password.ftl</result>
+        	<result name="success" type="redirect-action">confirm_password</result>
+        </action>
+
+        
+        <!--<action name="test_mail" class="passwordHintAction" method="testMail">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/account/forget_password.ftl</result>
+        	<result name="reset">/WEB-INF/templates/account/reset_password.ftl</result>
+        	<result name="success" type="redirect-action">confirm_password</result>
+        </action>-->
+        
+        <action name="confirm_password" class="passwordHintAction">
+        	<interceptor-ref name="exceptionWorkFlow" />
+        	<result name="success">/WEB-INF/templates/account/confirm_password.ftl</result>
+        </action>
+        
+        <action name="reset_password" class="passwordHintAction" method="reset">
+        	<interceptor-ref name="validationWorkflow" />
+        	<result name="input">/WEB-INF/templates/account/reset_password.ftl</result>
+        	<result name="success" type="redirect">/account/login</result>
+        </action>
+
+  
+	</package>
+
+</xwork>

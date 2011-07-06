@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+    <display-name>Painiu</display-name>
+
+	<!-- Define the basename for a resource bundle for I18N -->
+	<context-param>
+		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+		<param-value>ApplicationResources</param-value>
+	</context-param>
+	
+	<!-- Fallback locale if no bundles found for browser's preferred locale -->
+	<context-param>
+		<param-name>javax.servlet.jsp.jstl.fmt.fallbackLocale</param-name>
+		<param-value>zh_CN</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext-*.xml</param-value>
+	</context-param>
+
+	<!-- Filter definitions -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter>
+		<filter-name>containerFilter</filter-name>
+		<filter-class>com.painiu.webapp.filter.ContainerFilter</filter-class>
+		<init-param>
+			<param-name>enableAccessProtect</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>addNoCacheHeader</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+		<filter-name>openHibernateSessionFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>sessionFactoryBeanName</param-name>
+			<param-value>sessionFactory</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+        <filter-name>securityFilter</filter-name>
+        <filter-class>org.acegisecurity.util.FilterToBeanProxy</filter-class>
+        <init-param>
+            <param-name>targetClass</param-name>
+            <param-value>org.acegisecurity.util.FilterChainProxy</param-value>
+        </init-param>
+    </filter>
+    
+   <!--<filter>
+    <filter-name>openReadOnlyHibernateSessionFilter</filter-name>
+    <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+    <init-param>
+      <param-name>sessionFactoryBeanName</param-name>
+      <param-value>readOnlySessionFactory</param-value>
+    </init-param>
+  </filter>-->
+  
+    
+    <filter>
+		<filter-name>contextFilter</filter-name>
+		<filter-class>com.painiu.webapp.filter.ContextFilter</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>webwork-cleanup</filter-name>
+		<filter-class>com.opensymphony.webwork.dispatcher.ActionContextCleanUp</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.painiu.webapp.views.sitemesh.FreemarkerPageDecorator</filter-class>
+	</filter>
+	
+	<filter>
+		<filter-name>webwork</filter-name>
+		<filter-class>com.opensymphony.webwork.dispatcher.FilterDispatcher</filter-class>
+	</filter>
+
+	<!-- Filter mappings -->
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>containerFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>openHibernateSessionFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+   <filter-mapping>
+		<filter-name>securityFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+   <!--<filter-mapping>
+    <filter-name>openReadOnlyHibernateSessionFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+   </filter-mapping>-->
+  
+  <filter-mapping>
+		<filter-name>contextFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>webwork-cleanup</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>webwork</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Start Listener definition  -->
+	<listener>
+		<listener-class>com.painiu.webapp.listener.StartupListener</listener-class>
+	</listener>
+	<!-- End Listener definition  -->
+
+	<!-- Start Servlet definition  -->
+	<servlet>
+	    <servlet-name>JspSupportServlet</servlet-name>
+		<display-name>JspSupportServlet</display-name>
+		<description></description>
+	    <servlet-class>com.opensymphony.webwork.views.JspSupportServlet</servlet-class>
+	    <load-on-startup>10</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>dwr</servlet-name>
+        <servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>api</servlet-name>
+        <servlet-class>com.painiu.webapp.servlet.ApiDispatcherServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>StickyCaptcha</servlet-name>
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+        <init-param>
+          <param-name>kaptcha.border</param-name>
+          <param-value>yes</param-value>
+        </init-param>
+        <init-param>
+            <param-name>kaptcha.image.width</param-name>
+            <param-value>160</param-value>
+        </init-param>
+        <init-param>
+            <param-name>kaptcha.image.height</param-name>
+            <param-value>55</param-value>
+        </init-param>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>jopen</servlet-name>
+        <servlet-class>com.painiu.webapp.servlet.OpenIdServlet</servlet-class>
+    </servlet>
+
+	<!-- End Servlet definition  -->
+
+	<!-- Start Servlet mapping definition  -->
+    <servlet-mapping>
+        <servlet-name>dwr</servlet-name>
+        <url-pattern>/dwr/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>api</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>StickyCaptcha</servlet-name>
+        <url-pattern>/action/user/captcha</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>jopen</servlet-name>
+        <url-pattern>/jopen/*</url-pattern>
+    </servlet-mapping>
+    
+
+	<!-- Start Servlet mapping definition  -->
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	
+	<error-page>
+		<error-code>500</error-code>
+		<location>/500.html</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>503</error-code>
+		<location>/500.html</location>
+	</error-page>
+	
+	<!--<error-page>
+		<error-code>400</error-code>
+		<location>/home</location>
+	</error-page>-->
+	
+	<error-page>
+		<error-code>403</error-code>
+		<location>/403.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.html</location>
+	</error-page>
+	
+	<taglib>
+		<taglib-uri>/WEB-INF/painiu.tld</taglib-uri>
+		<taglib-location>/WEB-INF/painiu.tld</taglib-location>
+	</taglib>
+
+</web-app>

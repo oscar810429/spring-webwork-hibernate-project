@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="com.painiu.core.model">
+
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="privacy">
+	    <param name="enumClassname">com.painiu.core.model.Privacy</param>
+	</typedef>
+
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="license">
+    	<param name="enumClassname">com.painiu.core.model.License</param>
+	</typedef>
+
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="photo_state">
+    	<param name="enumClassname">com.painiu.core.model.Photo$State</param>
+	</typedef>
+	
+	<class 	name="Photo" 
+			table="pn_photo" 
+			dynamic-update="true"
+			lazy="true">
+
+		<id	name="id" 
+			column="photo_id"
+			type="string" 
+			unsaved-value="null">
+			
+			<generator 	class="uuid" />
+		</id>
+
+		<property 	name="title" 
+					column="title" 
+					type="string"
+					not-null="true" />
+
+		<property 	name="description" 
+					column="description" 
+					type="string" />
+
+		<property 	name="creativeType" 
+					column="creative_type"
+					type="integer" 
+					not-null="true" />
+
+		<property 	name="postedDate" 
+					type="timestamp"
+					column="posted_date" 
+					not-null="true" />
+
+		<property 	name="timestamp" 
+					type="long"
+					column="posted_timestamp" 
+					not-null="true" />
+
+		<property 	name="rawTags" 
+					column="raw_tags" 
+					type="string" />
+
+		<property 	name="originalFilename" 
+					column="original_filename"
+					type="string" 
+					update="false" />
+
+		<property 	name="fileLength" 
+					column="file_length" 
+					type="integer"
+					update="false" />
+
+		<property 	name="reserved" 
+					column="reserved" 
+					type="boolean" />
+
+		<component 	name="address" 
+					class="PhotoAddress"
+					update="false"
+					access="field">
+					
+			<property 	name="host" 
+						column="host" 
+						type="integer"
+						update="false" />
+						
+			<property 	name="dir" 
+						column="dir" 
+						type="string"
+						update="false" />
+						
+			<property	name="filename" 
+						column="filename" 
+						type="string"
+						update="false" />
+						
+			<property 	name="secret" 
+						column="secret" 
+						type="string"
+						update="false" />
+						
+			<!-- PNFS attributes -->
+			<property   name="username"
+						column="username"
+						type="string"
+						insert="false"
+						update="false" />
+						
+			<!-- <property 	name="fileKey" 
+						column="file_key" 
+						type="string"
+						update="false" />-->
+		</component>
+
+		<property 	name="width" 
+					column="width" 
+					type="integer"
+					update="false" />
+
+		<property 	name="height" 
+					column="height" 
+					type="integer"
+					update="false" />
+
+		<!--<property 	name="license" 
+					column="license" 
+					type="license" />-->
+
+		<!--<property 	name="privacy" 
+					column="privacy" 
+					type="privacy" />
+
+		<one-to-one name="permission" 
+					class="PhotoPermission" 
+					cascade="all"
+					access="field"
+					constrained="true"
+					outer-join="false" />-->
+
+		<!--<one-to-one name="stat" 
+					class="PhotoStat" 
+					cascade="all"
+					access="field"
+					constrained="true"
+					outer-join="false" />-->
+
+		<property 	name="state" 
+					column="status" 
+					type="photo_state" />
+					
+		<property 	name="userId" 
+					column="user_id" 
+					type="string"
+					insert="false"
+					update="false"
+					not-null="true" />
+		
+		<property 	name="username" 
+					column="username" 
+					type="string" />
+
+		<many-to-one 	name="user" 
+						class="User" 
+						column="user_id"
+						not-null="true" 
+						cascade="none" 
+						outer-join="false" 
+						update="false" />
+
+	     <!--<set 	name="photoTags" 
+				cascade="none" 
+				inverse="true"
+				lazy="true"
+				order-by="tagged_date" >
+				
+			<key column="photo_id" />
+			
+			<one-to-many 	class="PhotoTag" />
+		</set>
+		
+		<set 	name="albumPhotos" 
+				cascade="none" 
+				inverse="true"
+				lazy="true" >
+				
+			<key column="photo_id" />
+			
+			<one-to-many 	class="AlbumPhoto" />
+		</set>-->
+
+		<!--<set 	name="groupPhotos" 
+				cascade="none" 
+				inverse="true"
+				lazy="true" >
+				
+			<key column="photo_id" />
+			
+			<one-to-many 	class="GroupPhoto" />
+		</set>-->
+
+		<!--<set 	name="comments" 
+				cascade="delete"
+				inverse="true" 
+				sort="natural"
+				lazy="true" >
+				
+			<key column="target_id" />
+			
+			<one-to-many 	class="PhotoComment" />
+		</set>
+
+	    <set 	name="notes" 
+				cascade="delete"
+				inverse="true" 
+				lazy="true" >
+				
+			<key column="photo_id" />
+			
+			<one-to-many 	class="PhotoNote" />
+		</set>
+		
+		<set 	name="favoritePhotos" 
+				cascade="delete" 
+				inverse="true"
+				lazy="true" >
+				
+			<key column="photo_id" />
+			
+			<one-to-many 	class="FavoritePhoto" />
+		</set>-->
+		
+		<!-- PhotoMeta -->
+		
+		<property 	name="takenDate" 
+					type="timestamp"
+					column="taken_date" />
+					
+		<property 	name="cameraModel" 
+					column="camera_model" 
+					type="string" />
+		
+		<!-- 
+		<one-to-one name="metadata" 
+					class="PhotoMeta" 
+					cascade="all"
+					access="field"
+					constrained="true"
+					outer-join="false" />
+		-->
+	</class>
+<!--
+<query name="prevPhoto">
+<![CDATA[
+	from Photo photo 
+	where photo.user = :user and bitwise_and(photo.privacy, :relation) > 0 
+		and photo.timestamp < :timestamp 
+	order by photo.timestamp desc
+]]>
+</query>
+
+<query name="nextPhoto">
+<![CDATA[
+	from Photo photo 
+	where photo.user = :user and bitwise_and(photo.privacy, :relation) > 0 
+		and photo.timestamp > :timestamp
+	order by photo.timestamp
+]]>
+</query>
+
+<query name="prevFavoritePhoto">
+<![CDATA[
+	select photo
+	from FavoritePhoto ap inner join ap.photo photo  
+	where ap.user=:user and bitwise_and(photo.privacy, :relation) > 0
+			and ap.addedDate < :addedDate
+	order by ap.addedDate desc
+]]>
+</query>
+
+<query name="nextFavoritePhoto">
+<![CDATA[
+	select photo 
+	from FavoritePhoto ap inner join ap.photo photo 
+	where ap.user=:user and bitwise_and(photo.privacy, :relation) > 0
+			and ap.addedDate > :addedDate
+	order by ap.addedDate desc
+]]>
+</query>
+
+<query name="prevAlbumPhoto">
+<![CDATA[
+	select photo
+	from AlbumPhoto ap inner join ap.photo photo  
+	where ap.album = :album and bitwise_and(photo.privacy, :relation) > 0
+			and ap.position < :position
+	order by ap.position desc
+]]>
+</query>
+<query name="nextAlbumPhoto">
+<![CDATA[
+	select photo 
+	from AlbumPhoto ap inner join ap.photo photo  
+	where ap.album = :album and bitwise_and(photo.privacy, :relation) > 0
+			and ap.position > :position
+	order by ap.position
+]]>
+</query>
+
+<query name="prevGroupPhoto">
+<![CDATA[
+	select photo 
+	from GroupPhoto gp inner join gp.photo photo 
+	where gp.group = :group and bitwise_and(photo.privacy, :relation) > 0
+			and gp.position < :position
+	order by gp.position desc
+]]>
+</query>
+<query name="nextGroupPhoto">
+<![CDATA[
+	select photo 
+	from GroupPhoto gp inner join gp.photo photo 
+	where gp.group = :group and bitwise_and(photo.privacy, :relation) > 0
+			and gp.position > :position
+	order by gp.position
+]]>
+</query>-->
+
+<!-- 
+<sql-query name="interestingnessPhotos">
+<return-scalar column="date" type="date" />
+<return-scalar column="ids" type="string" />
+<![CDATA[
+	select 	date(p.posted_date) as date,
+			substring_index(group_concat(p.photo_id order by stat.interests desc),',',:limit) as ids 
+	from yp_photo p inner join yp_photo_stat stat on stat.photo_id = p.photo_id 
+	where stat.score > 0 and p.privacy & :relation > 0 and p.posted_date >= :fromDate and p.posted_date < :toDate 
+	group by date(p.posted_date)
+]]>
+</sql-query>
+-->
+ 
+</hibernate-mapping>

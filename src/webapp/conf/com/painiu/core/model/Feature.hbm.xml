@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+
+	<class 	name="Feature" 
+			table="pn_feature"
+			lazy="true">
+
+		<id name="id" 
+			column="id"
+			type="string" 
+			unsaved-value="null">
+			
+			<generator 	class="uuid" />
+		</id>
+		
+		<property 	name="title" 
+					column="title" 
+					type="string"
+					not-null="true" />
+					
+		<property 	name="url" 
+					column="url" 
+					type="string"
+					not-null="false" />
+					
+		<property 	name="urlBlank" 
+					column="url_blank" 
+					type="integer"/>
+					
+		<property 	name="content" 
+					column="content" 
+					type="string"
+					not-null="false" />
+					
+		<property 	name="order" 
+					column="feature_order" 
+					type="integer" />
+					
+		<property 	name="releasedDate"
+					column="released_date"
+					type="timestamp"  />
+					
+		<property 	name="createdDate"
+					column="created_date"
+					type="timestamp"  />
+		
+		<property 	name="modifiedDate"
+					column="modified_date"
+					type="timestamp" />
+		
+		<property 	name="kind"
+					column="kind" 
+					type="integer"/>					
+	</class>
+
+</hibernate-mapping>

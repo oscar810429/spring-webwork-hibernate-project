@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>mingda</short-name>
+	<description><![CDATA[Custom tag library for this application]]></description>
+
+	<!--
+	<tag>
+		<name>constants</name>
+		<tag-class>com.yupoo.webapp.taglib.ConstantsTag</tag-class>
+		<tei-class>com.yupoo.webapp.taglib.ConstantsTei</tei-class>
+		<attribute>
+			<name>className</name>
+		</attribute>
+		<attribute>
+			<name>scope</name>
+		</attribute>
+		<attribute>
+			<name>var</name>
+		</attribute>
+	</tag>
+	-->
+
+	<tag>
+		<name>i18nUrl</name>
+		<tag-class>com.mingda.webapp.taglib.I18nResourceURLTag</tag-class>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>pageProperty</name>
+		<tag-class>com.mingda.webapp.taglib.PagePropertyTag</tag-class>
+		<attribute>
+			<name>property</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>condition</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+
+</taglib>

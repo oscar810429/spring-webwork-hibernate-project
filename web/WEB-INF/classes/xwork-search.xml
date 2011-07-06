@@ -1,0 +1,39 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.1.1//EN" "http://www.opensymphony.com/xwork/xwork-1.1.1.dtd">
+
+<xwork>
+  	<package name="search" namespace="/search" extends="default">
+		<action name="default" class="searchAction">
+			<interceptor-ref name="basicStack" />
+			<result name="input-softwares">/WEB-INF/templates/search/default.ftl</result>
+			<!--<result name="input-groups">/WEB-INF/templates/search/groups.ftl</result>
+			<result name="input-people">/WEB-INF/templates/search/people.ftl</result>-->
+			<result name="softwares">/WEB-INF/templates/search/result_softwares.ftl</result>
+			<!--<result name="groups">/WEB-INF/templates/search/result_groups.ftl</result>
+			<result name="people">/WEB-INF/templates/search/result_people.ftl</result>-->
+		</action>
+
+		<action name="softwares" class="searchAction" method="softwares">
+			<interceptor-ref name="basicStack" />
+			<result name="input">/WEB-INF/templates/search/default.ftl</result>
+			<result name="success">/WEB-INF/templates/search/result_softwares.ftl</result>
+		</action>
+		
+		<!--<action name="groups" class="searchAction" method="groups">
+			<interceptor-ref name="basicStack" />
+			<result name="input">/WEB-INF/templates/search/groups.ftl</result>
+			<result name="success">/WEB-INF/templates/search/result_groups.ftl</result>
+		</action>
+		
+		<action name="citys" class="searchAction" method="citys">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/search/result_groups.ftl</result>
+		</action>
+		
+		<action name="people" class="searchAction" method="people">
+			<interceptor-ref name="basicStack" />
+			<result name="input">/WEB-INF/templates/search/people.ftl</result>
+			<result name="success">/WEB-INF/templates/search/result_people.ftl</result>
+		</action>
+		-->
+  	</package>
+</xwork>

@@ -1,0 +1,770 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.1.1//EN" "http://www.opensymphony.com/xwork/xwork-1.1.1.dtd">
+
+<xwork>
+	<!--<package name="console" namespace="/console"
+		extends="default">
+
+		<action name="default" class="consoleAction">
+			<interceptor-ref name="basicStack" />
+			<result name="success">
+				/WEB-INF/templates/console/home.ftl
+			</result>
+		</action>
+
+	</package>-->
+	
+	<package name="console/users" namespace="/console/users" extends="default">
+        <action name="edit_role" class="userRoleAction">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/users/edit_role.ftl</result>
+        </action>
+        
+        <action name="save_role" class="userRoleAction" method="save">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input" type="redirect">/console/users/edit_role?person=${person}</result>
+			<result name="success" type="redirect">/</result>
+        </action>
+        
+        <action name="delete_buddyicon" class="userRoleAction" method="deleteBuddyicon">
+        	<interceptor-ref name="basicStack" />
+			<result name="success" type="redirect">/console/users/edit_role?person=${person}</result>
+        </action>
+        
+        <action name="save_rank" class="manageUserAction" method="saveRank">
+        	<interceptor-ref name="basicStack" />
+        	<result name="from" type="redirect">${from}</result>
+			<result name="success" type="redirect">/</result>
+        </action>
+        
+        <action name="save_ranks" class="manageUserAction" method="saveRanks">
+        	<interceptor-ref name="basicStack" />
+        	<result name="from" type="redirect">${from}</result>
+			<result name="success" type="redirect">/</result>
+        </action>
+        
+        <action name="save_type" class="manageUserAction" method="saveType">
+        	<interceptor-ref name="basicStack" />
+        	<result name="from" type="redirect">${from}</result>
+			<result name="success" type="redirect">/</result>
+        </action>
+        
+        <action name="search" class="manageUserAction" method="search">
+        	<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/console/users/search.ftl</result>
+        </action>
+        
+        <action name="fast_apply" class="manageUserAction" method="searchApply">
+        	<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/console/users/fast_check_apply.ftl</result>
+        </action>
+        
+        <action name="save_bandwidth" class="userRoleAction" method="bandwidth">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="input" type="redirect">/console/users/edit_role?person=${person}</result>
+        	<result name="success" type="redirect">/</result>
+        </action>
+        
+        <action name="demotion" class="userRoleAction" method="demotion">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="input" type="redirect">/console/users/edit_role?person=${person}</result>
+        	<result name="success" type="redirect">/</result>
+        </action>
+        
+        <action name="block" class="userRoleAction" method="block">
+        	<interceptor-ref name="basicStack" />
+        	<result name="success" type="redirect">/</result>
+        </action>
+        
+        <action name="unblock" class="userRoleAction" method="unblock">
+        	<interceptor-ref name="basicStack" />
+        	<result name="success" type="redirect">/</result>
+        </action>
+        
+        <!--<action name="melt_applies" class="meltApplyAction">
+        	<interceptor-ref name="exceptionWorkFlow"/>
+        	<result name="success">/WEB-INF/templates/console/users/melt_applies.ftl</result>
+        </action>
+        
+        <action name="melt_apply_reject" class="meltApplyAction" method="reject">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success" type="redirect-action">melt_applies</result>
+        </action>
+        
+        <action name="daren_list" class="darenAction" method="list">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success">/WEB-INF/templates/console/users/daren_list.ftl</result>
+        </action>
+        
+        <action name="daren" class="darenAction">
+        	<interceptor-ref name="exceptionWorkFlow"/>
+        	<result name="success">/WEB-INF/templates/console/users/daren.ftl</result>
+        </action>
+        
+        <action name="daren_edit" class="darenAction" method="edit">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success">/WEB-INF/templates/console/users/daren.ftl</result>
+        </action>
+        
+        <action name="save_enable_daren" class="darenAction" method="saveEnableYupooman">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success">/WEB-INF/templates/console/users/daren_list.ftl</result>
+        </action>
+        
+        <action name="daren_delete" class="darenAction" method="delete">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success">/WEB-INF/templates/console/users/daren_list.ftl</result>
+        </action>
+        
+        <action name="daren_save" class="darenAction" method="save">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success">/WEB-INF/templates/console/users/daren.ftl</result>
+        </action>
+        
+        <action name="testimonial" class="testimonialAction" method="search">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success">/WEB-INF/templates/console/users/testimonial.ftl</result>
+        </action>
+        
+        <action name="delete_testimonial" class="testimonialAction" method="deleteTestimonial">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success" type="redirect-action">testimonial</result>
+        </action>
+        
+        <action name="batch_delete_testimonial" class="testimonialAction" method="batchDelete">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success" type="redirect-action">testimonial</result>
+        </action>-->
+        
+        <action name="ip_record" class="manageUserAction" method="listUserIPRecord">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success">/WEB-INF/templates/console/users/ip_record.ftl</result>
+        </action>
+        
+        <action name="search_by_email" class="manageUserAction" method="searchByEmail">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success">/WEB-INF/templates/console/users/search_by_email.ftl</result>
+        </action>
+        
+        <action name="search_out_flow" class="manageUserAction" method="searchOutFlow">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success">/WEB-INF/templates/console/users/search_out_flow.ftl</result>
+        </action>
+        
+        <action name="search_vip_out_flow" class="manageUserAction" method="searchVipOutFlow">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success">/WEB-INF/templates/console/users/search_vip_out_flow.ftl</result>
+        </action>
+        
+        <action name="repair_upload_flow_bug" class="userRoleAction" method="repairUploadFlow">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success">/WEB-INF/templates/console/users/daren.ftl</result>
+        </action>
+        
+  	</package>
+
+
+	<package name="console/system" namespace="/console/system"
+		extends="default">
+			
+		<action name="city_create" class="areaManagerAction" method="create">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/console/system/city_form.ftl</result>
+		</action>
+		
+		<action name="search_city" class="areaManagerAction" method="search">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/console/system/city_list.ftl</result>
+		</action>
+
+		<action name="city" class="areaManagerAction" method="list">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/console/system/city_list.ftl</result>
+		</action>
+		
+	   <action name="subcity" class="areaManagerAction" method="citylist">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/console/system/city_list.ftl</result>
+		</action>
+		
+		<action name="city_edit" class="areaManagerAction" method="edit">
+		    <interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/console/system/city_form.ftl</result>
+		</action>
+
+		 <action name="city_save" class="areaManagerAction" method="save">
+		    <interceptor-ref name="basicStack" />
+			 <result name="input">/WEB-INF/templates/console/system/city_form.ftl</result>
+			 <result name="success" type="redirect">/console/system/city.html</result>	
+		 </action>
+		
+	     <action name="testcity" class="areaManagerAction" method="testcity">
+		    <interceptor-ref name="basicStack" />
+			  <result name="success" type="redirect">/console/system/city.html</result>	
+		  </action>
+
+
+		   <action name="delete" class="areaManagerAction" method="delete">
+			  <interceptor-ref name="basicStack" />
+			  <result name="success" type="redirect">/console/system/city.html</result>
+		   </action>
+		
+	     <action name="abuse" class="serviceAction" method="listAbuse">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/system/abuse_list.ftl</result>
+        </action>
+        
+        <action name="abuse_done" class="serviceAction" method="doneAbuse">
+        	<interceptor-ref name="basicStack" />
+            <result name="success" type="redirect">/console/system/abuse</result>
+        </action>
+        
+        <action name="abuse_delete" class="serviceAction" method="deleteAbuse">
+        	<interceptor-ref name="basicStack" />
+            <result name="success" type="redirect">/console/system/abuse</result>
+        </action>
+		
+		    <action name="caches" class="com.painiu.webapp.action.console.MemcachedAction">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success">/WEB-INF/templates/console/system/caches.ftl</result>
+        </action>
+        
+        <action name="caches_flush" class="com.painiu.webapp.action.console.MemcachedAction" method="flush">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success" type="redirect-action">caches</result>
+        </action>
+        
+        <!-- System News -->
+        <action name="news" class="systemNewsAction" method="textList">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/system/news_list.ftl</result>
+        </action>
+        
+        <action name="image" class="systemNewsAction" method="imageList">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/system/image_list.ftl</result>
+        </action>
+
+        <action name="news_edit" class="systemNewsAction" method="edit">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/system/create_news_form.ftl</result>
+        </action>
+        
+         <action name="image_edit" class="systemNewsAction" method="edit">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/system/image_form.ftl</result>
+        </action>
+
+        <action name="news_ad_edit" class="systemNewsAction" method="editAd">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/system/news_form_ad.ftl</result>
+        </action>
+        
+        <action name="news_create" class="systemNewsAction">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/system/create_news_form.ftl</result>
+        </action>
+        
+        <action name="image_create" class="systemNewsAction">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/system/image_form.ftl</result>
+        </action>
+        
+        <action name="news_ad_create" class="systemNewsAction" method="addNewsAd">
+        	<interceptor-ref name="exceptionWorkFlow" />
+            <result name="success">/WEB-INF/templates/console/system/news_form_ad.ftl</result>
+        </action>
+        
+        <action name="news_save" class="systemNewsAction" method="save">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/console/system/news_form.ftl</result>
+            <result name="success" type="redirect-action">news</result>
+        </action>
+        
+         <action name="image_save" class="systemNewsAction" method="save">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/console/system/image_form.ftl</result>
+            <result name="success" type="redirect-action">image</result>
+         </action>
+        
+        <action name="news_delete" class="systemNewsAction" method="delete">
+        	<interceptor-ref name="basicStack" />
+            <result name="success" type="redirect-action">news</result>
+        </action>
+        
+        <action name="image_delete" class="systemNewsAction" method="delete">
+        	<interceptor-ref name="basicStack" />
+            <result name="success" type="redirect-action">image</result>
+        </action>
+        
+		<!-- System Messages -->
+        <action name="messages" class="systemMessageAction" method="list">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/system/message_list.ftl</result>
+        </action>
+
+        <action name="messages_edit" class="systemMessageAction" method="edit">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/system/message_form.ftl</result>
+        </action>
+
+        <action name="messages_create" class="systemMessageAction">
+        	<interceptor-ref name="exceptionWorkFlow" />
+            <result name="success">/WEB-INF/templates/console/system/message_form.ftl</result>
+        </action>
+        
+        <action name="messages_save" class="systemMessageAction" method="save">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/console/system/message_form.ftl</result>
+            <result name="success" type="redirect-action">messages</result>
+        </action>
+        
+        <action name="messages_delete" class="systemMessageAction" method="delete">
+        	<interceptor-ref name="basicStack" />
+            <result name="success" type="redirect-action">messages</result>
+        </action>
+        
+        <action name="event" class="systemEventAction" method="list">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success">/WEB-INF/templates/console/system/event_list.ftl</result>
+        </action>
+        
+        <action name="event_create" class="systemEventAction">
+        	<interceptor-ref name="exceptionWorkFlow" />
+            <result name="success">/WEB-INF/templates/console/system/create_event_form.ftl</result>
+        </action>
+        
+        <action name="collection_create" class="systemEventAction">
+        	<interceptor-ref name="exceptionWorkFlow" />
+            <result name="success">/WEB-INF/templates/console/system/create_collection_form.ftl</result>
+        </action>
+        
+        <action name="theme_create" class="systemEventAction">
+        	<interceptor-ref name="exceptionWorkFlow" />
+            <result name="success">/WEB-INF/templates/console/system/create_theme_form.ftl</result>
+        </action>
+        
+        <action name="event_save" class="systemEventAction" method="save">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/console/system/create_event_form.ftl</result>
+            <result name="success" type="redirect-action">event</result>
+        </action>
+        
+        <action name="collection_save" class="systemEventAction" method="saveCollection">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/console/system/create_collection_form.ftl</result>
+            <result name="success" type="redirect-action">event?kind=${kind}</result>
+        </action>
+        
+        <action name="theme_save" class="systemEventAction" method="saveTheme">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/console/system/create_theme_form.ftl</result>
+            <result name="success" type="redirect-action">event?kind=${kind}</result>
+        </action>
+        
+        <action name="event_edit" class="systemEventAction" method="edit">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/system/create_event_form.ftl</result>
+        </action>
+        
+        <action name="collection_edit" class="systemEventAction" method="editCollection">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/system/create_collection_form.ftl</result>
+        </action>
+        
+        <action name="theme_edit" class="systemEventAction" method="editTheme">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/system/create_theme_form.ftl</result>
+        </action>
+        
+        <action name="event_delete" class="systemEventAction" method="delete">
+        	<interceptor-ref name="basicStack" />
+            <result name="success" type="redirect-action">event?kind=${kind}</result>
+        </action>
+        
+        <!--
+        <action name="jobs" class="schedulingAction" method="list">
+        	<interceptor-ref name="exceptionWorkFlow" />
+        	<result name="success">/WEB-INF/templates/console/system/job_list.ftl</result>
+        </action>
+        
+         <action name="jobs_create" class="schedulingAction">
+        	<interceptor-ref name="exceptionWorkFlow"/>
+        	<result name="success">/WEB-INF/templates/console/system/job_form.ftl</result>
+        </action>
+        
+         <action name="jobs_detail" class="schedulingAction" method="viewJob">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success">/WEB-INF/templates/console/system/job_form.ftl</result>
+        </action>
+        
+        <action name="jobs_save" class="schedulingAction" method="addJob">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="input">/WEB-INF/templates/console/system/job_form.ftl</result>
+        	<result name="success" type="redirect-action">jobs.html</result>
+        </action>
+
+        <action name="jobs_delete" class="schedulingAction" method="removeJob">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success" type="redirect-action">jobs.html</result>
+        </action>
+        -->
+        <action name="forums_create" class="forumAction" method="create">
+        	<interceptor-ref name="exceptionWorkFlow" />
+            <result name="success">/WEB-INF/templates/console/forums/create.ftl</result>
+        </action>
+        
+        <action name="forums_save" class="forumAction" method="save">
+        	<interceptor-ref name="validationWorkflow" />
+        	<result name="input">/WEB-INF/templates/console/forums/create.ftl</result>
+			<result name="success" type="redirect-action">forums</result>
+        </action>
+        
+        <action name="forums" class="forumAction" method="list">
+        	<interceptor-ref name="exceptionWorkFlow" />
+            <result name="success">/WEB-INF/templates/console/forums/list.ftl</result>
+        </action>
+
+	</package>
+
+    <!--<package name="console/system" namespace="/console/system" extends="default">
+		
+	    <action name="jobs" class="schedulingAction" method="list">
+        	<interceptor-ref name="exceptionWorkFlow" />
+        	<result name="success">/WEB-INF/templates/console/system/job_list.ftl</result>
+        </action>
+        
+         <action name="jobs_create" class="schedulingAction">
+        	<interceptor-ref name="exceptionWorkFlow"/>
+        	<result name="success">/WEB-INF/templates/console/system/job_form.ftl</result>
+        </action>
+        
+        <action name="jobs_save" class="schedulingAction" method="addJob">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="input">/WEB-INF/templates/console/system/job_form.ftl</result>
+        	<result name="success" type="redirect-action">jobs</result>
+        </action>
+
+        <action name="jobs_delete" class="schedulingAction" method="removeJob">
+        	<interceptor-ref name="basicStack"/>
+        	<result name="success" type="redirect-action">jobs</result>
+        </action>
+   </package>-->
+   
+   
+   <!-- link -->
+	<package name="console/link" namespace="/console/link" extends="default">		
+		<!-- partner -->
+		<action name="partner" class="linkAction" method="partnerImageList">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/link/partner_list.ftl</result>
+        </action>      
+        <action name="partner_delete" class="linkAction" method="delete">
+        	<interceptor-ref name="basicStack" />
+            <result name="success" type="redirect-action">partner</result>
+        </action>     
+        <action name="partner_save" class="linkAction" method="savePartnerImage">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/console/link/partner_form.ftl</result>
+            <result name="success" type="redirect-action">partner</result>
+        </action>
+        <action name="partner_edit" class="linkAction" method="editPartnerImage">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/link/partner_form.ftl</result>
+        </action>
+        <action name="partner_create" class="linkAction">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/link/partner_form.ftl</result>
+        </action>  
+        
+        <!-- picture link -->
+		<action name="pictureLink" class="linkAction" method="pictureLinkList">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/link/picture_link_list.ftl</result>
+        </action>       
+        <action name="picture_link_delete" class="linkAction" method="delete">
+        	<interceptor-ref name="basicStack" />
+            <result name="success" type="redirect-action">pictureLink</result>
+        </action>     
+        <action name="picture_link_save" class="linkAction" method="savePictureLink">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/console/link/picture_link_form.ftl</result>
+            <result name="success" type="redirect-action">pictureLink</result>
+        </action>
+        <action name="picture_link_edit" class="linkAction" method="editPictureLink">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/link/picture_link_form.ftl</result>
+        </action>
+        <action name="picture_link_create" class="linkAction">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/link/picture_link_form.ftl</result>
+        </action>  
+        
+        <!-- text link -->
+		<action name="textLink" class="linkAction" method="textLinkageList">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/link/text_link_list.ftl</result>
+        </action>       
+        <action name="text_link_delete" class="linkAction" method="delete">
+        	<interceptor-ref name="basicStack" />
+            <result name="success" type="redirect-action">textLink</result>
+        </action>     
+        <action name="text_link_save" class="linkAction" method="saveTextLinkage">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/console/link/text_link_form.ftl</result>
+            <result name="success" type="redirect-action">textLink</result>
+        </action>
+        <action name="text_link_edit" class="linkAction" method="editTextLinkage">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/link/text_link_form.ftl</result>
+        </action>
+        <action name="text_link_create" class="linkAction">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/link/text_link_form.ftl</result>
+        </action>   
+                 
+	</package> 
+	
+	
+	<!-- Groups & Category -->
+	<package name="console/softwares" namespace="/console/softwares" extends="default">
+		
+		<action name="categories" class="softwareCategoryAction" method="view">
+        	<interceptor-ref name="basicStack" />
+            <result name="input">/WEB-INF/templates/console/groups/default.ftl</result>
+            <result name="success">/WEB-INF/templates/console/softwares/default.ftl</result>
+        </action> 
+        
+		<action name="categories_add" class="softwareCategoryAction" method="save">
+			<interceptor-ref name="validationWorkflow" />
+			<result name="input">/WEB-INF/templates/console/softwares/default.ftl</result>
+            <result name="success" type="redirect-action">categories</result>
+        </action>
+        
+        <action name="group_create" class="softwareManagerAction" method="create_group">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/console/softwares/create.ftl</result>
+        </action>
+		
+		 <action name="group_edit" class="softwareManagerAction" method="edit_group">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/console/softwares/group_form.ftl</result>
+        </action>
+        
+        <action name="save_group" class="softwareManagerAction" method="save">
+			<interceptor-ref name="basicStack" />
+			<result name="input">/WEB-INF/templates/console/softwares/create.ftl</result>
+			<result name="success" type="redirect">/console/softwares/categories.html</result>
+        </action>
+        
+         <action name="delete_group" class="softwareManagerAction" method="delete">
+			<interceptor-ref name="basicStack" />
+			<result name="success" type="redirect">/console/softwares/categories_groups.html?id=${cid}</result>
+        </action>
+         
+        <action name="categories_edit" class="softwareCategoryAction" method="edit">
+			<interceptor-ref name="validationWorkflow" />
+			<result name="input">/WEB-INF/templates/console/softwares/default.ftl</result>
+            <result name="success">/WEB-INF/templates/console/softwares/edit_category.ftl</result>
+        </action>
+         
+        <action name="categories_delete" class="softwareCategoryAction" method="remove">
+        	<interceptor-ref name="basicStack" />
+			<result name="input">/WEB-INF/templates/console/softwares/default.ftl</result>
+            <result name="success" type="redirect-action">categories</result>
+        </action>
+         
+        <action name="categories_softwares" class="softwareCategoryAction" method="listSoftwares">
+			<interceptor-ref name="basicStack" />
+			<result name="input">/WEB-INF/templates/console/softwares/default.ftl</result>
+            <result name="success">/WEB-INF/templates/console/softwares/softwares.ftl</result>
+        </action> 
+        
+         <action name="search" class="softwareCategoryAction" method="searchSoftwares">
+			<interceptor-ref name="basicStack" />
+			<result name="input">/WEB-INF/templates/console/softwares/default.ftl</result>
+            <result name="success">/WEB-INF/templates/console/softwares/softwares.ftl</result>
+        </action>
+		
+		<action name="import_software" class="importSoftwareAction" method="upload">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/console/softwares/import_software.ftl</result>
+        </action>
+		
+		 <action name="save_upload" class="importSoftwareAction" method="save_upload">
+			<interceptor-ref name="uploadStack" />
+			<result name="success" type="redirect">/console/softwares/categories_softwares?id=${cid}</result>
+        </action>
+        
+        <action name="software_edit" class="softwareManagerAction" method="software_edit">
+			<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/softwares/software_edit.ftl</result>
+        </action>
+        
+        
+        <action name="software_save" class="softwareManagerAction" method="software_save">
+			<interceptor-ref name="basicStack" />
+            <result name="success" type="redirect">/console/softwares/categories_softwares?id=${categoryid}</result>
+        </action>
+         
+	</package> 
+	
+	<package name="console/cooperation" namespace="/console/cooperation" extends="default">		
+	
+		<action name="collaborator" class="cooperationManageAction" method="collaboratorList">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/cooperation/collaborator_list.ftl</result>
+        </action>       
+        <action name="collaborator_delete" class="cooperationManageAction" method="deleteCollaborator">
+        	<interceptor-ref name="basicStack" />
+            <result name="success" type="redirect-action">collaborator</result>
+        </action>     
+        <action name="collaborator_save" class="cooperationManageAction" method="saveCollaborator">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/console/cooperation/collaborator_form.ftl</result>
+            <result name="success" type="redirect-action">collaborator</result>
+        </action>
+        
+        <action name="collaborator_update" class="cooperationManageAction" method="updateCollaborator">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/console/cooperation/collaborator_form.ftl</result>
+            <result name="success" type="redirect-action">collaborator</result>
+        </action>
+        
+        <action name="collaborator_edit" class="cooperationManageAction" method="editCollaborator">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/cooperation/collaborator_form.ftl</result>
+        </action>
+        <action name="collaborator_create" class="cooperationManageAction">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/cooperation/collaborator_form.ftl</result>
+        </action>
+        
+        <action name="partner_domains" class="cooperationManageAction" method="partnerDomains">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/cooperation/partner_domains.ftl</result>
+        </action>
+        <action name="create_pdomain" class="cooperationManageAction" method="createPartnerDomain">
+        	<interceptor-ref name="basicStack" />
+            <result name="input">/WEB-INF/templates/console/cooperation/create_partner_domain.ftl</result>
+            <result name="success" type="redirect-action">partner_domains</result>
+        </action>
+        <action name="edit_pdomain" class="cooperationManageAction" method="editPartnerDomain">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/cooperation/create_partner_domain.ftl</result>
+        </action>
+        
+        <!--<action name="exchange" class="applyAction" method="getApplyAdses">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/apply/exchange/list.ftl</result>
+        </action>
+		<action name="exchange_status" class="applyAction" method="changeApplyAdsStatus">
+	  		<interceptor-ref name="basicStack" />
+	  		<result name="from" type="redirect">${from}</result>
+            <result name="success" type="redirect">/</result>
+        </action>
+		<action name="exchange_delete" class="applyAction" method="deleteApplyAds">
+	  		<interceptor-ref name="basicStack" />
+	  		<result name="from" type="redirect">${from}</result>
+            <result name="success" type="redirect">/</result>
+        </action>
+		<action name="stat_exchange" class="applyAction" method="viewExchangeStat">
+	  		<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/apply/exchange/stat.ftl</result>
+        </action>-->
+
+	</package> 
+	
+	<package name="console/tags" namespace="/console/tags" extends="default">       
+        <!-- Tag manage -->
+        
+        <action name="search" class="tagManageAction" method="search">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/console/tag/search.ftl</result>
+		</action>
+		
+		<action name="add" class="tagManageAction" method="add">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/console/tag/tag_list.ftl</result>
+		</action>
+		
+		<action name="tags" class="tagManageAction" method="list">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/console/tag/tag_list.ftl</result>
+		</action>
+        
+        <action name="tag_save" class="tagManageAction" method="save">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/tag/tag_list.ftl</result>
+        </action>
+        
+        <action name="tags_save" class="tagManageAction" method="saveTags">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/tag/tag_list.ftl</result>
+        </action>
+        
+        <action name="tag_edit" class="tagManageAction" method="edit">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/tag/tag_form.ftl</result>
+        </action>
+        
+        <action name="new_tag" class="tagManageAction" >
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/tag/tag_form.ftl</result>
+        </action>
+        
+        <action name="tag_delete" class="tagManageAction" method="delete">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/tag/tag_list.ftl</result>
+        </action>
+        <action name="tags_clear" class="tagManageAction" method="clear">
+        	<interceptor-ref name="basicStack" />
+            <result name="input" type="redirect-action">tags</result>
+        </action>
+        
+        <action name="home_tag_delete" class="linkAction" method="delete">
+        	<interceptor-ref name="basicStack" />
+            <result name="success" type="redirect-action">userhometag</result>
+        </action>     
+        <action name="home_tag_save" class="linkAction" method="saveHomeTag">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/console/tag/home_tag_form.ftl</result>
+            <result name="success" type="redirect-action">userhometag</result>
+        </action>
+        <action name="home_tag_edit" class="linkAction" method="editHomeTag">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/tag/home_tag_form.ftl</result>
+        </action>
+        <action name="home_tag_create" class="linkAction">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/tag/home_tag_form.ftl</result>
+        </action> 
+
+		<action name="hometag" class="linkAction" method="indexTagList">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/tag/index_tag_list.ftl</result>
+        </action>
+        
+        <action name="index_tag_delete" class="linkAction" method="delete">
+        	<interceptor-ref name="basicStack" />
+            <result name="success" type="redirect-action">hometag</result>
+        </action>     
+        
+        <action name="index_tag_save" class="linkAction" method="saveIndexTag">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/console/tag/index_tag_form.ftl</result>
+            <result name="success" type="redirect-action">hometag</result>
+        </action>
+        
+        <action name="index_tag_edit" class="linkAction" method="editIndexTag">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/tag/index_tag_form.ftl</result>
+        </action>
+        
+        <action name="index_tag_create" class="linkAction">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/console/tag/index_tag_form.ftl</result>
+        </action>      
+                
+	</package> 
+
+</xwork>

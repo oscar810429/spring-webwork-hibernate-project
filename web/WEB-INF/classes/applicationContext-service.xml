@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+           
+    
+    <!--<aop:config>
+        <aop:advisor id="managerTx" advice-ref="txAdvice" pointcut="execution(* com.mingda.core.service.*Manager.*(..))" order="1"/>
+    </aop:config>-->
+	
+    <!-- Base transaction advice which will work for all managers -->
+    
+    <!--<tx:advice id="txAdvice">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true" />
+            <tx:method name="find*" read-only="true" />
+        	<tx:method name="*" />
+        </tx:attributes>
+    </tx:advice>-->
+        
+
+    <bean id="txAspect" class="com.painiu.core.aop.transaction.TransactionAspect" factory-method="aspectOf">
+    	    <property name="transactionManager"><ref bean="transactionManager"/></property>
+    </bean>
+    
+    <bean id="lookupManager" class="com.painiu.core.service.impl.LookupManagerImpl">
+        <property name="lookupDAO"><ref bean="lookupDAO"/></property>
+    </bean>
+    
+    <bean id="linkManager" class="com.painiu.core.service.impl.LinkManagerImpl">
+        <property name="linkDAO"><ref bean="linkDAO"/></property>
+    </bean>
+    
+    <!-- Generic manager that can be used to do basic CRUD operations on any objects -->
+    <bean id="manager" class="com.painiu.core.service.impl.BaseManager">
+    	<property name="DAO"><ref bean="dao"/></property>
+    </bean>
+    
+    <!-- ###################### UserManager -->
+    <bean id="userManager" class="com.painiu.core.service.impl.UserManagerImpl">
+        <property name="userDAO"><ref bean="userDAO"/></property>
+        <property name="userStatDAO"><ref bean="userStatDAO"/></property>
+        <property name="userLoginIPDAO"><ref bean="userLoginIPDAO"/></property>
+    </bean>
+    
+    <!-- ###################### CategoryManager -->
+    <bean id="categoryManager" class="com.painiu.core.service.impl.CategoryManagerImpl">
+        <property name="categoryDAO"><ref bean="categoryDAO"/></property>
+    </bean>
+    
+    <!-- ###################### AreaManager -->
+    <bean id="areaManager" class="com.painiu.core.service.impl.AreaManagerImpl">
+        <property name="areaDAO"><ref bean="areaDAO"/></property>
+    </bean>
+    
+    <!-- ###################### GroupManager -->
+    <!--<bean id="groupManager" class="com.painiu.core.service.impl.GroupManagerImpl">
+        <property name="groupDAO"><ref bean="groupDAO"/></property>
+        <property name="groupUserDAO"><ref bean="groupUserDAO"/></property>
+        <property name="groupStatDAO"><ref bean="groupStatDAO"/></property>
+        <property name="groupPhotoDAO"><ref bean="groupPhotoDAO"/></property>
+        <property name="userDAO"><ref bean="userDAO"/></property>
+    </bean>-->
+    
+    <!-- ###################### PhotoManager -->
+    <bean id="photoManager" class="com.painiu.core.service.impl.PhotoManagerImpl">
+        <property name="photoDAO"><ref bean="photoDAO"/></property>
+    </bean>
+    
+    <!-- ###################### GroupLinkManager -->
+    <!--<bean id="groupLinkManager" class="com.painiu.core.service.impl.GroupLinkManagerImpl">
+        <property name="groupLinkDAO"><ref bean="groupLinkDAO"/></property>
+    </bean>-->
+    
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="5" />
+		<property name="maxPoolSize" value="100" />
+		<property name="queueCapacity" value="4096" />
+	</bean>
+    
+    <!--########################### MessageEngine: sending mails & system messages -->
+    <bean id="messageEngine" class="com.painiu.core.service.MessageEngine">
+        <property name="mailSender"><ref bean="mailSender"/></property>
+       	<property name="messageManager"><ref bean="messageManager"/></property>
+        <property name="templateConfiguration"><ref bean="freemarkerConfiguration"/></property>
+        <property name="mailFrom"><value>${mail.default.from}</value></property>
+    </bean>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host"><value>${mail.host}</value></property>
+        <property name="username"><value>${mail.username}</value></property>
+        <property name="password"><value>${mail.password}</value></property>
+        
+        <property name="javaMailProperties">
+        	<props>
+        		<prop key="mail.smtp.host">${mail.host}</prop>
+        		<prop key="mail.smtp.port">${mail.smtp.port}</prop>
+        		<prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+        		<prop key="mail.smtp.localhost">${mail.smtp.helo}</prop>
+        		<!-- 
+        		<prop key="mail.smtp.socketFactory.class">${mail.smtp.socketFactory.class}</prop>
+        		<prop key="mail.smtp.socketFactory.fallback">${mail.smtp.socketFactory.fallback}</prop>
+        		<prop key="mail.smtp.socketFactory.port">${mail.smtp.socketFactory.port}</prop>
+        		-->
+        	</props>
+        </property>
+    </bean>
+
+    <!-- Configure FreeMarker for sending e-mail -->
+	<bean id="freemarkerConfiguration" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
+		<property name="templateLoaderPath"><value>classpath:/templates/</value></property>
+		<property name="defaultEncoding"><value>UTF-8</value></property>		
+	</bean>
+	
+    <!--<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    	<property name="dataSource"><ref bean="dataSourceCrond"/></property>
+    	<property name="transactionManager"><ref bean="transactionManager"/></property>
+    	<property name="quartzProperties">
+    		<props>
+    			<prop key="org.quartz.scheduler.instanceName">ClusteredScheduler</prop>
+    			<prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+    			<prop key="org.quartz.jobStore.driverDelegateClass">org.quartz.impl.jdbcjobstore.StdJDBCDelegate</prop>
+    			<prop key="org.quartz.jobStore.useProperties">true</prop>
+    			<prop key="org.quartz.jobStore.isClustered">false</prop>
+    			<prop key="org.quartz.jobStore.clusterCheckinInterval">30000</prop>
+    		</props>
+    	</property>
+    	<property name="applicationContextSchedulerContextKey"><value>applicationContext</value></property>-->
+    	<!-- 
+    	<property name="triggers">
+    		<list>
+      			<ref local="cotagsBuildingTrigger"/>
+    		</list>
+    	</property>
+    	-->
+    <!--</bean>-->
+    
+    	<bean id="eventMulticaster" class="com.painiu.event.SimpleEventMulticaster">
+		<property name="listeners">
+			<list>
+                   <!--<ref bean="softwareManager" />-->
+                   <ref bean="userManager" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="eventPublisher" class="com.painiu.event.SimpleEventPublisher">
+		<property name="eventMulticaster"><ref bean="eventMulticaster"/></property>
+	</bean>
+    
+
+    <!--########################### AbuseManager -->
+    <bean id="abuseManager" class="com.painiu.core.service.impl.AbuseManagerImpl">
+        <property name="abuseDAO"><ref bean="abuseDAO"/></property>
+    </bean>
+    
+    <!--########################### EventManager -->
+    <bean id="eventManager" class="com.painiu.core.service.impl.EventManagerImpl">
+        <property name="eventDAO"><ref bean="eventDAO"/></property>
+    </bean>
+    
+    <!--########################### RoleManager -->
+    <bean id="roleManager" class="com.painiu.core.service.impl.RoleManagerImpl">
+        <property name="roleDAO"><ref bean="roleDAO"/></property>
+    </bean>
+    
+    <!--########################### SystemNewsManage -->
+    <bean id="systemNewsManager" class="com.painiu.core.service.impl.SystemNewsManagerImpl">
+		<property name="systemNewsDAO"><ref bean="systemNewsDAO"/></property>
+	</bean>
+	
+	<!--########################## SystemMessageManager -->
+	<bean id="systemMessageManager" class="com.painiu.core.service.impl.SystemMessageManagerImpl">
+		<property name="systemMessageDAO"><ref bean="systemMessageDAO"/></property>
+	</bean>
+	
+	<!--########################## ApplicationManager -->
+	<bean id="applicationManager" class="com.painiu.core.service.impl.ApplicationManagerImpl">
+        <property name="applicationDAO"><ref bean="applicationDAO"/></property>
+	</bean>
+	
+	<!--########################## AuthManager -->
+    <bean id="authManager" class="com.painiu.core.service.impl.AuthenticationManagerImpl">
+        <property name="frobnitzDAO"><ref bean="frobnitzDAO"/></property>
+        <property name="authenticationDAO"><ref bean="authenticationDAO"/></property>
+	</bean>
+	
+	<!--########################## MessageManager Manager -->
+    <bean id="messageManager" class="com.painiu.core.service.impl.MessageManagerImpl">
+        <property name="messageDAO"><ref bean="messageDAO"/></property>
+	</bean>
+	
+	<!-- ######################## CollaboratorManager -->
+	<bean id="collaboratorManager" class="com.painiu.core.service.impl.CollaboratorManagerImpl">
+		<property name="collaboratorDAO"><ref bean="collaboratorDAO" /></property>
+		<property name="coUserDAO"><ref bean="coUserDAO" /></property>
+		<property name="exchangeStatDAO"><ref bean="exchangeStatDAO" /></property>
+		<property name="partnerDomainDAO"><ref bean="partnerDomainDAO" /></property>
+	</bean>
+	
+	<!-- ####################### TokenManager -->
+    <bean id="tokenManager" class="com.painiu.core.service.impl.TokenManagerImpl">
+		<property name="tokenDAO"><ref bean="tokenDAO"/></property>
+	</bean>
+	
+	<!-- ####################### SoftwareManager -->
+   <bean id="softwareManager" class="com.painiu.core.service.impl.SoftwareManagerImpl">
+		<property name="softwareDAO"><ref bean="softwareDAO"/></property>
+		<property name="tagDAO"><ref bean="tagDAO"/></property>
+		<property name="softwareStatDAO"><ref bean="softwareStatDAO"/></property>
+		<property name="eventPublisher"><ref bean="eventPublisher"/></property>
+
+	</bean>
+	
+	 <!--####################### TagsManager Manager -->
+    <bean id="tagsManager" class="com.painiu.core.service.impl.TagsManagerImpl">
+    		<property name="tagDAO"><ref bean="tagDAO"/></property>
+    </bean>
+	
+	<!--####################### Forum Manager -->
+    <bean id="forumManager" class="com.painiu.core.service.impl.ForumManagerImpl">
+    		<property name="forumDAO"><ref bean="forumDAO"/></property>
+    		<property name="topicDAO"><ref bean="topicDAO"/></property>
+    		<property name="postDAO"><ref bean="postDAO"/></property>
+    </bean>
+    
+    	<!--####################### Product Manager -->
+    <bean id="productManager" class="com.painiu.core.service.impl.ProductManagerImpl">
+    		<property name="tProductDAO"><ref bean="tProductDAO"/></property>
+    </bean>
+
+</beans>

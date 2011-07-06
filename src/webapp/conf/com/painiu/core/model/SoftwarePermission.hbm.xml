@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="privacy">
+	    <param name="enumClassname">com.painiu.core.model.Privacy</param>
+	</typedef>
+
+	<class 	name="SoftwarePermission" 
+			table="pn_software_perm" 
+			lazy="true">
+
+		<id name="id" column="software_id" unsaved-value="null">
+
+			<generator class="foreign">
+				<param name="property">software</param>
+			</generator>
+		</id>
+
+		<one-to-one name="software" class="Software" constrained="true" />
+
+		<property name="comment" column="comment" type="privacy" />
+
+		<property name="tag" column="tag" type="privacy" />
+
+		<property name="note" column="note" type="privacy" />
+		
+		<property name="download" column="download" type="privacy" />
+		
+		<property name="blog" column="blog" type="privacy" />
+		
+		<property name="exif" column="exif" type="privacy" />
+		
+	</class>
+
+</hibernate-mapping>

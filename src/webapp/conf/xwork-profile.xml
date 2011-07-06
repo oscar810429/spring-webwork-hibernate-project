@@ -1,0 +1,102 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.1.1//EN" "http://www.opensymphony.com/xwork/xwork-1.1.1.dtd">
+
+<xwork>
+
+    <package name="profile" namespace="/profile" extends="default">
+	
+	    <action name="default" class="profileAction">
+			<result name="success">/WEB-INF/templates/account/profile.ftl</result>
+		</action>
+		
+        <action name="edit_profile" class="profileAction" method="edit">
+			<result name="success">/WEB-INF/templates/account/profile_admin.ftl</result>
+		</action>
+		
+		
+	    <action name="user" class="profileAction" method="user">
+			<result name="success">/WEB-INF/templates/account/profile.ftl</result>
+		</action>
+		
+		<action name="save_profile" class="profileAction" method="save">
+            <result name="input">/WEB-INF/templates/account/profile.ftl</result>
+            <result name="success" type="redirect">/profile/admin</result>
+        </action>
+        
+        <action name="nickname" class="profileAction">
+            <result name="success">/WEB-INF/templates/account/nickname.ftl</result>
+        </action>
+        
+        <action name="city" class="profileAction">
+            <result name="success">/WEB-INF/templates/account/city.ftl</result>
+        </action>
+        
+        <action name="save_profile_city" class="profileAction" method="save_city">
+	        <interceptor-ref name="validationWorkflow" />
+            <result name="input">/WEB-INF/templates/account/city.ftl</result>
+            <result name="success" type="redirect">/profile/city</result>
+        </action>
+        
+        <action name="characteric" class="profileAction">
+            <result name="success">/WEB-INF/templates/account/characteric.ftl</result>
+        </action>
+        
+        <action name="save_profile_interesting" class="profileAction" method="save_interests">
+	        <interceptor-ref name="validationWorkflow" />
+            <result name="input">/WEB-INF/templates/account/characteric.ftl</result>
+            <result name="success" type="redirect">/profile/characteric</result>
+        </action>
+        
+        <action name="blast" class="profileAction">
+            <result name="success">/WEB-INF/templates/account/blast.ftl</result>
+        </action>
+        
+        <action name="register" class="com.painiu.webapp.action.account.BaseAccountAction">
+        	<interceptor-ref name="exceptionWorkFlow" />
+            <result name="success">/WEB-INF/templates/account/default.ftl</result>
+        </action>
+        
+        <action name="save_nickname" class="profileAction" method="save_nickname">
+        	<interceptor-ref name="validationWorkflow" />
+        	<result name="input" type="redirect">/account/nickname</result>
+            <result name="success" type="redirect">/profile/nickname</result>
+        </action>
+        
+        <action name="save_user_blast" class="profileAction" method="save_blast">
+	        <interceptor-ref name="validationWorkflow" />
+            <result name="input" type="redirect">/account/blast</result>
+            <result name="success" type="redirect">/profile/blast</result>
+        </action>
+        
+        <action name="save_email" class="profileAction" method="save_email">
+        	<interceptor-ref name="validationWorkflow" />
+        	<result name="input">/WEB-INF/templates/account/default.ftl</result>
+            <result name="success" type="redirect">/profile/</result>
+        </action>
+        
+        <action name="save_password" class="profileAction" method="save_password">
+            <interceptor-ref name="validationWorkflow" />
+         	<result name="input">/WEB-INF/templates/account/password.ftl</result>
+            <result name="success" type="redirect">/profile/edit_password</result>
+        </action>
+        
+         <action name="admin" class="profileAction" method="admin">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/account/profile_admin.ftl</result>
+        </action>
+        
+        <action name="edit_password" class="profileAction">
+        	<interceptor-ref name="basicStack" />
+         	<result name="success">/WEB-INF/templates/account/password.ftl</result>
+        </action>
+		
+				
+		<action name="create" class="passwordHintAction" method="create">
+        	  <interceptor-ref name="basicStack" />
+        	  <result name="success">/WEB-INF/templates/account/create.ftl</result>
+        </action>
+        
+        
+	
+	</package>
+
+</xwork>

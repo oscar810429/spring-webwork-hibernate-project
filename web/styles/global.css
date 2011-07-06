@@ -1,0 +1,1143 @@
+.edita {
+
+	background: #fff url(http://www.painiu.com/images/login.png) no-repeat 0 -112px;
+
+}
+/** 全局设置 **/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4,img, ol, ul{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	background: transparent;
+	}
+ul{	list-style: none;}
+a {text-decoration: none;}
+.clear{clear: both;}
+:focus{outline:0}
+body {
+	background: #fff;
+	font: 12px '微软雅黑','Lucida Grande','宋体',Lucida Sans Unicode,Arial,Verdana,sans-serif;
+	color: #393939;
+	}
+#wrapper {
+	width: 980px;
+	margin: 18px auto;
+	line-height: 20px;
+	}
+a, a:visited {
+	color: #393939;
+	text-decoration: none;
+	}
+a:hover {
+	color: #0196e3;
+	text-decoration: none;
+	}
+a:active {
+	}
+/** 顶部导航 **/
+#topnav {
+	background: url(http://www.painiu.com/images/topnav.png) no-repeat;
+	height: 38px;
+	font-size: 13px;
+	}
+.home {
+	float: left;
+	width:117px;
+	height:35px;
+	}
+.home a:hover {
+	width:117px;
+	height:36px;
+	background: url(http://www.painiu.com/images/topnav.png) 0 -38px;
+	}
+.current_page_item , .current-menu-item{
+	background: url(http://www.painiu.com/images/topnav.png) repeat-x 0 -109px;
+	}
+.current-menu-item a,.current_page_item a {
+	color: #fff !important;
+	}
+.current-menu-item  li a,.sub-menu a ,.current_page_item li a{
+	color: #393939 !important;
+	}
+.sub-menu a:hover {
+	color: #0196e3 !important;
+	}
+#topnav li {
+	height:36px;
+	border-right:1px solid #a7a7a7;
+	float: left;
+	font-weight:bold;
+	}
+#topnav li a, #topnav li a:link, #topnav li a:visited {
+	display: block;
+	padding: 0 30px 0 30px;
+	line-height:36px; 
+	color: #616161;
+	text-shadow: 0px 1px 0px #d1d1d1;
+	}
+#topnav li a:hover, #topnav li a:active {
+	background: url(http://www.painiu.com/images/topnav.png) repeat-x 0 -74px;
+	color: #fff;
+	display: block;
+	text-decoration: none;
+	line-height:36px; 
+	padding: 0 30px 0 30px;
+	}
+#topnav li li a, #topnav li li a:link, #topnav li li a:visited {
+	background: #fff;
+	width: 100px;
+	color: #393939;
+	font-weight:normal;
+	font-size:12px;
+	float: none;
+	line-height:35px; 
+	border: 1px solid #e5e5e5;
+	}
+#topnav li li a:hover {
+	background: #fff;
+	width: 100px;
+	color: #0196e3;
+	float: none;
+	line-height:35px;
+	border-right: 2px solid #0196e3;
+	}
+#topnav li ul {
+	z-index: 9999;
+	width: 162px;
+	position: absolute;
+	left: -9999px;
+	}
+#topnav li li {
+	border:none;
+	}
+#topnav li ul a {}
+#topnav li ul ul {
+	border: none;
+	}
+#topnav li:hover ul ul, #topnav li:hover ul ul ul, #topnav li.sfhover ul ul, #topnav li.sfhover ul ul ul {
+	left: -9999px;
+	}
+#topnav li:hover ul, #topnav li li:hover ul, #topnav li li li:hover ul, #topnav li.sfhover ul, #topnav li li.sfhover ul, #topnav li li li.sfhover ul {
+	left: auto;
+	}
+#topnav li:hover, #topnav li.sfhover {
+	position: static;
+	}
+#topnav .left li ul il a {}
+
+/** 导航搜索 **/
+#searchbar {
+	width: 159px;
+	height: 28px;
+	float:right;
+	background: url(http://www.painiu.com/images/search.gif) no-repeat;
+	margin:3px 5px 0 0;
+	}
+#searchbar #s { 
+	height: 16px;
+	float: right;
+	margin: 7px 0 0 0;
+	border: 0;
+	width: 130px;
+	background: none;
+	color:#393939;
+	font-size:12px;
+	}
+#searchbar #go {
+	float:left;
+	margin: 8px 0 0 8px;
+	width:13px;
+	height:13px;
+	}
+#searchresult { 
+	padding-right:20px;
+	width:200px;
+	}
+/** 页眉 **/
+.header_c {
+	width: 980px;
+	margin: 0;
+	padding: 0;
+	}
+.logo {
+	background:url(http://www.painiu.com/images/logo.gif) no-repeat;
+	float: left;
+	width: 300px;
+	height: 53px;
+	margin: 5px 0 0 5px;
+	}
+h1 {
+	float: left;
+	font-size: 26px;
+	width: 300px;
+	height: 43px;
+	padding: 15px 0 0 10px;
+	}
+h1 a:hover {
+	color:#2971A7;
+	}
+.blog-title {
+	font-size: 12px;
+	font-weight:normal;
+	}
+.login_t {
+	float:right;
+	margin: 0 10px 0 0;
+	text-transform: uppercase;
+	}
+.login_t p{
+	float: right;
+	display: block;
+	margin: 5px 0 0 0;
+	padding: 0 0 0 10px;
+	}
+.inputbox{
+	margin: 2px 0 0 -4px;
+	}
+.password input {
+	background: #fff url(http://www.painiu.com/images/login.png) no-repeat 0 -19px;
+	padding: 2px 4px 2px 19px;
+	border:1px solid #ccc;
+	margin: 1px 0;
+	}
+.login input {
+	background: #fff url(http://www.painiu.com/images/login.png) no-repeat;
+	padding: 2px 4px 2px 19px;
+	border:1px solid #ccc;
+	margin: 1px 0;
+	}
+#submit {
+	background: url(http://www.painiu.com/images/submit.png) no-repeat;
+	width:64px;
+	height:23px;
+	color:#fff;
+	cursor:pointer;
+	font-size:11px;
+	border:0px;	 
+	margin: 1px 0;
+	}
+/** 热点文章 **/
+#featured {
+	margin: 0 0 10px 0;
+	height: 155px;
+	}
+#featured .item {
+	position: relative;
+	overflow:hidden;
+	width:236px;
+	height:155px; 
+	float:left;
+	padding:0 0 0 7px;
+	}
+#featured .item img {
+	width:236px;
+	position:absolute;
+	z-index:1;
+	}
+#featured .item .boxCaption {
+	width:211px;
+	padding:10px;
+	margin: 60px 0 0 3px;
+	position:absolute;
+	top:160px;
+	z-index:3;
+	background:url(http://www.painiu.com/images/bg-box.png) repeat top left;
+	color:#fff;
+	}
+.top_box {
+	background: url(http://www.painiu.com/images/boxtop.png) no-repeat;
+	position:absolute;
+	z-index:2;
+	width:236px;
+	height:155px;
+	}
+.top_box a{
+	position: absolute;
+	padding:152px 0 0 185px;
+	}
+#featured .item h2 {
+	font-weight:normal;
+	text-align:center;
+	}
+#featured .item a {
+	color:#fff;
+	}
+#featured .item a:hover {
+ color:#d9d9d9;
+	}
+/** 现在位置 **/
+#menu {
+	background: #E3E3E3 url(http://www.painiu.com/images/menu_img.png) 0 -35px;
+	height: 27px;
+	}
+#feed,#rss  { text-indent:-10000px;}
+#feed a,#rss a  {
+	float:right;
+	background:url(http://www.painiu.com/images/rss.gif) no-repeat;
+	width:27px;
+	height:15px;
+	margin: 6px 8px 0 0;
+	}
+#menu_b {
+	background: #E3E3E3 url(http://www.painiu.com/images/menu_img.png) 0 -35px;
+	width: 732px;
+	height: 27px;
+	margin: 10px 0 0 0;
+	}
+#menu_b h2 {
+	float: left;
+	line-height:27px; 
+	padding: 0 20px 0 20px;
+	border-right: 1px solid #ccc;
+	}
+.browse {
+	text-shadow: 0px 1px 0px #d1d1d1;
+	width:550px;
+	float:left;
+	line-height:27px; 
+	padding:0 0 0 10px;
+	}
+.browse a,.browse{
+	text-shadow: 0px 1px 0px #fff;
+	}
+.browse a:hover　{
+ 	color: #0196e3;
+	}
+/** 首页 **/
+#post {
+	float: left;
+	width: 732px;
+	overflow:hidden;
+	}
+.box_entry_title{
+	float:left;
+	width: 692px;
+	}
+#post h3 {
+	font-size: 13px;
+ 	font-weight: bold;
+	}
+.box_entry{
+	padding: 10px 0 10px 0;
+	border-bottom: 1px dashed #e5e5e5;
+	}
+.post_entry {
+	}
+.info a:visited {
+	color:#8C8C8C;
+	}
+.info a:hover {
+	color: #0196e3;
+	}
+.info, .info a {
+	color:#b2b2b2;
+	margin: 0 0 5px 0;
+	}
+.new {
+	float:right;
+	}
+.sticky-post{
+	float:right;
+	background:url(http://www.painiu.com/images/sticky.gif) no-repeat;
+	width:36px;
+	height:29px;
+	margin:10px 0 0 0;
+	}
+.cat_ico{
+	float:left;
+	width: 40px;
+	height:40px;
+	margin:0 5px 0 0;
+	white-space: nowrap;
+	overflow: hidden;
+	}
+.archive_more a,.archive_more a:visited {
+	float:right;
+	background: url(http://www.painiu.com/images/more.png) 0 26px;
+	width:87px;
+	height:25px;
+ 	color: #fff;
+	line-height: 25px;
+	text-align:center;
+	text-shadow: 0px 1px 0px #393939;
+	}
+.archive_more a:hover,.archive_more a:active {
+	float:right;
+	background: url(http://www.painiu.com/images/more.png) no-repeat;
+	width:87px;
+	height:25px;
+	color: #393939;
+	text-shadow: 0px 1px 0px #f1f1f1;
+	}
+.postviews {
+	float:left;
+	width:148px;
+	margin:5px 0 0 0;
+	text-align:center;
+	border:1px solid  #e5e5e5;
+	}
+.thumbnail img{
+	float: left;
+	width: 140px;
+	height:100px;
+	margin: 8px 10px 5px 0;
+	padding: 4px;
+	border:1px solid  #e5e5e5;
+	}
+/** 首页底部 **/
+#bottom {
+	width:732px;
+	list-style: none;
+	}
+#bottom h2 {
+ 	color: #0196e3;
+	}
+.random {
+	float:left;
+	line-height:21px;
+	width:360px;
+	margin: 10px 0 0 0;
+	border-right: 1px solid #e5e5e5;
+	}
+.random_c ol {
+	margin: 0 0 0 24px;
+	}
+.random_c ol li{
+ 	color: #8C8C8C;
+	}
+.random_c ol li a{
+	margin:0 0 0 -5px;
+	}
+.tag {
+	float:right;
+	width:340px;
+	}
+.tag a{
+	line-height:23px;
+	}
+.tag h2 {
+	line-height:25px;
+	margin: 10px 0 0 0;
+	width:340px;
+	}
+.link {
+	width:728px;
+	line-height:25px;
+	font-weight:normal;
+	}
+.link li h2 {
+	float:left;
+	line-height:20px;
+	width:700px;
+	margin: 5px 0 0 0;
+	}
+.link li ul li{
+	float:left;
+	margin: 0 10px 0 0;
+	}
+.blogroll li {
+	display: inline;
+	padding:0 10px 0 0;
+	}
+/** 首页底部挂件 **/
+.bottom_widget{
+	margin: 10px 0 0 0;
+	}
+.widget_box {
+	float:left;
+	width:350px;
+	margin: 0 12px 10px 0;
+	}
+.bottom_widget h3 {
+ 	color: #0196e3;
+	}
+/** 内页 **/
+#content {
+	float: left;
+	width: 100%;
+	overflow:hidden;
+	}
+#content h3 {
+	font-size: 13px;
+	font-weight: bold;
+	color: #000;
+	}
+/** 档案页面 **/
+.archive_box {
+	padding: 5px 0 10px 0;
+	border-bottom:1px dashed  #e5e5e5;
+	}
+.archive_title_box {
+	float:left;
+	width: 732px;
+	margin: 5px 0 5px 0;
+	}
+.archive_info, .archive_info a,.archive_info a:visited{
+	color:#b2b2b2;
+	}
+.archive_info a:hover{
+	color: #0196e3;
+	}
+/** 正文 **/
+.entry {
+	margin: 10px 0 15px 0;
+	line-height:23px;
+	}
+.entry p {
+	padding:0 0 10px 0;
+	text-align:justify;
+	letter-spacing:1px
+	}
+code {
+	width: 650px;
+	background: #FFF url(http://www.painiu.com/images/code.png) no-repeat right top;
+	color: #393939;
+	font: 12px/17px tahoma, arial, sans-serif;
+	display: block;
+	margin: 10px auto 10px auto;
+	padding: 25px 10px 2px 10px;
+	border-left: 5px solid #8391A7;
+	border-right: 1px solid #8391A7;
+	border-top: 1px solid #8391A7;
+	border-bottom: 1px solid #8391A7;
+	}
+blockquote {
+	color: #4e6384;
+	width: 650px;
+	margin: 10px auto 10px auto;
+	padding: 0 10px 0 10px;
+	clear: both;
+	border: 1px solid #8391A7;
+	}
+blockquote p {
+	text-align:left !important;
+	}
+.entry_title_box  {
+	margin: 10px 0 0 0;
+	}
+.entry_title_box a:hover {
+	color:#0196e3;
+	}
+.entry_title {
+	font-size: 14px;
+ 	font-weight: bold;
+	}
+.entry strong {
+	font-weight: bold;
+	}
+.entry a {
+	color: #0196e3;
+	}
+.entry a:visited,.entry a:hover,.entry a:link{
+	color: #0196e3;
+	}
+.entry a:hover,.entry a:active {
+	color: #0196e3;
+	}
+.entry a img {
+	border: none;
+	}
+.entrymeta {
+	margin: 10px 0 10px 0;
+	padding: 10px;
+	border:1px solid #e5e5e5;
+	}
+.entrymeta {
+	color: #8C8C8C;
+	font-size: 12px;
+	}
+.entrymeta a:visited {
+	color:#0196e3;
+	}
+.authorbio{
+	float:left;
+	margin: 0 10px 0 0;
+	padding: 5px;
+	text-align:center;
+	border:1px solid #e5e5e5;
+	}
+.spostinfo{
+	width:720px;
+	background:#fdfdfd;
+	margin: 10px 0 20px 0;
+	padding: 5px;
+	line-height:23px;
+	border:1px solid #e5e5e5;
+	}
+.spostinfo a{
+	color:#0196e3;
+	}
+.spostinfo a:hover {
+	color: #393939;
+	}
+.post {
+	float: left;
+	width: 732px;
+	line-height: 20px;
+	}
+/**  相关日志 **/
+.entry_b{
+	width:730px;
+	border: 1px solid #e5e5e5;
+	}
+.relatedposts {
+	float: left;
+	width:340px;
+	padding: 10px;
+	}
+.relatedposts h3{
+	margin:0 0 10px 0;
+	}
+.relatedposts ol li{
+	line-height:23px; 
+	margin:0 0 0 20px;
+	}
+.relatedposts a,.relatedposts a:visited {
+	color: #393939;
+	}
+.relatedposts a:hover, .relatedposts a:active {
+	color: #0196e3;
+	}
+.related_img {
+	float:right;
+	width:360px;
+	margin:10px 0 0 0;
+	}
+.related_img img{
+	float: left;
+	width:80px;
+	height:60px;
+	margin:0 0 5px 5px;
+	padding: 2px;
+	}
+/** 日志分页 **/
+p.pages {
+	margin:2px auto 0;
+	width:500px;
+	color: #0196e3;
+	text-align:center;
+	}
+p.pages a {
+	padding: 3px 6px;
+	border: 1px solid #e5e5e5;
+	}
+/** 404 **/
+.error{
+	background:#FFF url(http://www.painiu.com/images/404.jpg) no-repeat bottom;
+	margin: 20px 0 0 200px;
+	width: 300px;
+	height:300px;
+	}
+.error h2{
+	font-size: 16px;
+	text-align: center;
+	}
+/** 内页结束 **/
+/** 侧边栏 **/
+
+#sidebar {
+	overflow:hidden;
+	float: right;
+	width: 236px;
+	}
+#sidebar a:hover {
+	color: #0196e3;
+	}
+.widget ul li{
+	list-style: none;
+	margin: 0;
+	line-height:23px; 
+	background: #fff;
+	}
+#sidebar h3 {
+	padding: 0 0 0 15px;
+	height:25px;
+	line-height:25px; 
+	background:#72839d url(http://www.painiu.com/images/drawer.png) no-repeat 0 -25px;
+	color: #fff;
+	font-size: 13px;
+	font-weight: normal;
+	}
+.box {
+	height:101%;
+	background: #fff;
+	padding: 5px 10px 5px 10px;
+	border-left: 1px solid #e5e5e5;
+	border-right: 1px solid #e5e5e5;
+	}
+.box-bottom {
+	background:url(http://www.painiu.com/images/box-bottom.png) no-repeat;
+	height:5px;
+	margin:0 0 15px 0 !important;
+	margin:0 0 5px 0;
+ 	}
+/** 滑动菜单 **/ 
+#drawer {
+	margin: 0 0 15px 0;
+	width: 236px;	
+	list-style-type: none;
+	background: #fdfdfd;
+	}
+#drawer a {
+	display: block;
+	font-weight: normal;
+	}
+#drawer ul {
+	overflow: hidden;
+	}
+#drawer li {
+	list-style-type: none
+	}
+#drawer li a {
+	display: block;
+	padding: 0 0 0 15px;
+	width: 221px;
+	color: #000; 
+	line-height:25px;
+	}
+#drawer li a.closed {
+	background: url(http://www.painiu.com/images/drawer.png) 0 -75px;
+	color: #000;
+	text-shadow: 0px 1px 0px #d1d1d1;
+	}
+#drawer li.firstitem a.closed {
+	background:#939393 url(http://www.painiu.com/images/drawer.png);
+	color: #000;
+	}
+#drawer li.lastitem a.closed {
+	background:#939393 url(http://www.painiu.com/images/drawer.png) 0 -100px;
+	color: #000;
+	}
+#drawer ul a {
+	width: 200px;
+	}
+#drawer ol a {
+	width: 219px;
+	border-right:1px solid #e5e5e5;
+	border-left:1px solid #e5e5e5;
+	}
+#drawer ol a:hover {
+	}
+#drawer li a.opened {
+	background:#72839d url(http://www.painiu.com/images/drawer.png) 0 -50px;
+	color: #fff;
+	text-shadow: 0px 1px 0px #000;
+	}
+#drawer li.firstitem a.opened {
+	background:#72839d url(http://www.painiu.com/images/drawer.png) 0 -25px;
+	color: #fff;
+	text-shadow: 0px 1px 0px #000;
+	}
+#drawer li.lastitem ul {
+	background-position: 50% bottom;
+	background-image: url(http://www.painiu.com/images/box-bottom.png); 
+	padding:0 0 4px 0; 
+	background-repeat: no-repeat
+	}
+/** 读者墙 **/ 
+#top-comments-author img  {
+	width:32px;
+	padding: 5px;
+	}
+.box_comment li {
+	display: block;
+	display: inline;
+	}
+.box_comment {
+	margin: 0 0 0 2px;
+	}
+ /** 管理面板 **/
+.admin {
+	float:left;
+	width:234px;
+	padding:10px 0 10px 0;
+	}
+.admin-bottom{
+	background:url(http://www.painiu.com/images/box-bottom.png) no-repeat;
+	height:5px;
+	margin:0 0 15px 0 !important;
+	margin:0 0 5px 0;
+	}
+.admin_bar {
+	float:left;
+	width:110px;
+	}
+.admin_bar li {
+	margin:0 0 5px 35px;
+	}
+/** 侧边分类 **/
+.categories {
+	height:101%;
+	}
+.categories_c {
+	padding: 5px 10px 0 10px;
+	}
+.categories_c ul li {
+	float:left;
+	width:46%;
+	padding: 0 0 0 5px;
+	margin:3px 0 3px 0;
+	text-align:center;
+	}
+ /** 侧边评论 **/ 
+.r_comments {
+	color:#0196e3;
+	}
+.r_comments ul {
+	padding: 10px;
+ 	}
+.r_comments li {
+	line-height:20px; 
+	margin: 0 0 8px 0;
+	}
+.r_comments ul li img{
+	height:32px;
+	float:left;
+	padding:1px;
+	margin:4px 4px 0 0;
+	}
+/** 广告位 **/
+.ads_c {
+	height:101%;
+	padding:5px 5px 0 5px;
+	}
+/** 订阅 **/
+#rssfeed {
+	padding: 0 0 5px 0;
+	}
+#message {
+	display:none;
+	}
+#message a {
+	padding: 2px 0 2px 60px;
+	}
+#message li{list-style:none}
+#message,#rssfeed,.ads_c,.r_comments,.admin,.categories {
+	background: #fff;
+	border-left: 1px solid #e5e5e5;
+	border-right: 1px solid #e5e5e5;
+	}
+/** 评论 **/
+h2#comments{
+	font-size:13px;
+	margin:0 0 5px 0;
+	font-weight:bold;
+	margin:20px 0 0 0;
+	}
+.commentlist {
+	width:732px;
+	padding: 0;
+	}
+.commentlist .comment {
+	margin: 10px 0 0 0;
+	padding: 10px;
+	list-style: none;
+	background:#fafafa;
+	border:1px solid #ccc;
+	}
+.commentlist li  {
+	position: relative;
+	}
+.commentlist .alt {
+	background:#fff;
+	}
+
+.commentlist p {
+	margin: 0 0 0 50px;
+	line-height:23px;
+	}
+ol.commentlist li div.vcard img.avatar {
+	float: left;
+	margin: 0 10px 0 0;
+	}
+ol.commentlist li div.vcard img.photo {
+	padding: 2px;
+	background: #fff;
+	border: 1px solid #ccc;
+	}
+.reply{
+	position:absolute;
+	background:url(http://www.painiu.com/images/reply.png) no-repeat center;
+	float:right;
+	right:20px;
+	top:-1px;
+	display:block;
+	}
+* html .reply{/* IE6 */
+	position:absolute;
+	background:url(http://www.painiu.com/images/reply.png) no-repeat;
+	float:right;
+	right:100px;
+	top:0px;
+	display:block;
+	padding: 1px 0 2px 0;
+	}
+.comment-reply-link {
+	width:54px;
+	height:27px;
+	font-size:12px;
+	color: #fff;
+	text-align:center;
+	padding: 2px 15px 2px 15px;
+	}
+.comment-reply-link:hover {
+	color: #d6d6d6;
+	}
+.cancel-comment-reply a {
+	font-size:12px;
+	color: #0196e3;
+	}
+.datetime, .datetime a {
+	padding:0 0 5px 0;
+	color:#B2B2B2;
+	}
+#commentform p {
+	margin: 5px 0;
+	color: #000;
+	}
+#commentform label{
+	color: #868686;
+	}
+#commentform input{
+	width:200px;
+	font-size:12px;
+	padding:5px;
+	}
+#commentform {
+	color: #868686;
+	margin-top: 10px;
+	}
+#commentform input {
+	width: 210px;
+	margin: 5px 5px 1px 0;
+	padding: 5px;
+	border: 1px solid #ccc;
+	}
+#commentform input:focus {
+	border: 1px solid #ccc;
+	}
+#commentform #author {
+	background:#fff  url(http://www.painiu.com/images/login.png) no-repeat 0 -38px;
+	padding: 4px 3px 4px 20px;
+	}
+#commentform #email {
+	background:#fff url(http://www.painiu.com/images/login.png) no-repeat 0 -62px;
+	padding: 4px 3px 4px 20px;
+	}
+#commentform #url {
+	background:#fff url(http://www.painiu.com/images/login.png) no-repeat 0 -86px;
+	padding: 4px 3px 4px 20px;
+	}
+#commentform textarea{
+	width: 75%;
+	height: 100px;
+	font-size:12px;
+	padding:4px;
+	margin:15px 0 0 0;
+	border: 1px solid #ccc;
+	}
+#commentform textarea:focus {
+	border: 1px solid #ccc;
+	}
+#commentform input#submit{
+	cursor:pointer;
+	background: url(http://www.painiu.com/images/more.png) 0 26px;
+	width:87px;	
+	height:26px;
+ 	color: #fff;
+	text-align:center;
+	text-shadow: 0px 1px 0px #393939;
+	border:0px;	 
+	}
+#commentform #submit:hover {
+	 cursor:pointer;
+	 font-weight:bold;
+	}
+#commentform input#reset{
+	cursor:pointer;
+	background: url(http://www.painiu.com/images/more.png);
+	width:87px;
+	height:26px;
+ 	color: #393939;
+	text-align:center;
+	text-shadow: 0px 1px 0px #fff;
+	border:0px;	 
+	}
+#commentform #reset:hover {
+	 cursor:pointer;
+	 font-weight:bold;
+	}
+.navigation_c{
+	padding: 0 5px 0 5px;
+	margin: 5px 0 10px 0;
+	}
+.previous {
+	text-align:center;
+	}
+.page-numbers{
+	padding: 0 5px 0 5px;
+	border:1px solid #ccc;
+	}
+.current{
+	color:#fff;
+	background:#0196E3;
+	}
+.author_avatar{
+	float:left;
+	margin: 0 5px 0 0;
+	}
+.author{
+	line-height:48px; 
+	}
+input#comment_mail_notify {
+	width:12px;
+	border:none;
+	}
+/* 评论结束 */
+/** 页脚 **/ 
+.footer_top{
+	background: #fff url(http://www.painiu.com/images/menu_img.png) no-repeat;
+	height:35px;
+	margin: 15px 0 5px 0;
+	}
+.footer_top h2 a{
+	padding: 0 0 0 40px;
+	margin: 0 0 0 10px;
+	line-height: 35px;
+	}
+.footer_center  {
+	height:35px;
+	border-bottom:1px solid #e5e5e5;
+	}
+.footer_cat li  {
+	display: inline;
+	text-transform: uppercase;
+	padding: 0 10px 0 10px;
+	line-height: 30px;
+	}
+.footer_cat li a {
+	color: #0196e3;
+	}
+.footer_cat li a:hover {
+	color: #393939;
+	}
+#back_top a {
+	float:right;
+	background:url(http://www.painiu.com/images/top.png) no-repeat;;
+	width:25px;
+	height:25px;
+	margin: 2px 5px 0 0;
+	}
+/** 图文混排 **/
+img.centered  {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	}
+img.alignnone {
+	margin: 0 0 10px 0;
+	display: inline;
+	}
+img.alignright {
+	margin: 0 0 10px 10px;
+	display: inline;
+	}
+img.alignleft {
+	margin: 0 10px 10px 0;
+	display: inline;
+	}
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+	}
+.alignright {
+	float: right;
+	margin: 0 0 10px 10px;
+	}
+.alignleft {
+	float: left;
+	margin: 0 10px 10px 0;
+	}
+ /** 留言板 **/ 
+.message {
+	color:#0088CC;
+	}
+.message ul li {
+	padding:10px;
+	border-bottom:1px dashed  #e5e5e5;
+	}
+.message li {
+	line-height:20px; 
+	margin: 0 0 5px 0;
+	}
+.message img{
+	height:32px;
+	float:left;
+	padding:1px;
+	margin:4px 4px 0 0;
+	border: 1px solid #e5e5e5;
+	}
+
+ /** search **/ 
+.center {
+	height:250px;
+	padding:50px 0 0 0;
+	text-align:center;
+	}
+/** 翻页 **/
+.navigation {
+	float:right;
+	width:700px;
+	margin: 10px 0 0 0;
+	text-align:right;
+	}
+.pagination{
+	line-height:25px;
+	}
+.pagination span, .pagination a{
+	font-size:12px;
+	margin: 2px 6px 2px 0;
+	background:#fff;
+	border:1px solid #e5e5e5;
+	color:#787878;
+	padding:2px 5px 2px 5px;
+	}
+.pagination a:hover{
+	background: #0196E3;
+	border:1px solid #fff;
+	color:#fff;
+	}
+.pagination .current{
+	background: #0196E3;
+	color:#fff;
+	font-size:12px;
+	padding:2px 5px 2px 5px;
+	}
+/** 翻屏 **/
+#roll_top,#fall,#ct{
+	position:relative;
+	cursor:pointer;
+	height:40px;
+	width:10px;
+	}
+#roll_top{
+	background:url(http://www.painiu.com/images/roll.png) no-repeat;
+	}
+#fall{
+	background:url(http://www.painiu.com/images/roll.png) no-repeat 0 -80px;
+	}
+#ct{
+	background:url(http://www.painiu.com/images/roll.png) no-repeat 0 -40px;
+	}
+#roll{
+	position:fixed;
+	top:40%;
+	right:0;
+	_position:absolute;
+	_margin-top:300px;
+	_top:expression(eval(document.documentElement.scrollTop));
+	}

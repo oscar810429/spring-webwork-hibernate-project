@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="relation">
+		<param name="enumClassname">com.painiu.core.model.Relation</param>
+	</typedef> 
+	
+	<class 	name="Invite" 
+			table="pn_invites" 
+			lazy="true">
+
+		<id	name="id" 
+			column="invite_id"
+			type="string" 
+			unsaved-value="null">
+			
+			<generator 	class="uuid" />
+		</id>
+
+		<many-to-one 	name="from"
+						class="User" 
+						column="from_user_id" 
+						not-null="true"
+						update="false"
+						cascade="none"
+						outer-join="false" />
+
+		<many-to-one 	name="to" 
+						class="User"
+						column="to_user_id" 
+						cascade="none"
+						outer-join="false" />
+		
+		<property 	name="email" 
+					column="email"
+					type="string" />
+
+		<property 	name="name" 
+					column="name"
+					type="string" />
+					
+		<property 	name="relation" 
+					column="relation"
+					type="relation" 
+					not-null="true" />
+					
+       	<property   name="message"
+                   	type="string"
+                  	column="message" />
+                  	
+		<property 	name="invitedDate" 
+					column="invited_date"
+					type="timestamp" 
+					not-null="true"
+					update="false" />
+					
+		<property 	name="acceptedDate" 
+					column="accepted_date"
+					type="timestamp" />
+
+		<!--<many-to-one 	name="group"
+						class="Group" 
+						column="group_id" 
+						cascade="none"
+						outer-join="false" />-->
+	</class>
+
+</hibernate-mapping>

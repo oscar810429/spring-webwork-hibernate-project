@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 1.0//EN" "http://www.getahead.ltd.uk/dwr/dwr10.dtd">
+
+<dwr>
+    <allow>
+        <!--<create creator="new" javascript="UploadMonitor">
+            <param name="class" value="com.yupoo.webapp.upload.UploadMonitor"/>
+        </create>
+        <create creator="new" javascript="ContactsImporter">
+            <param name="class" value="com.yupoo.webapp.invite.ContactsImporter"/>
+        </create>
+        <convert converter="bean" match="com.yupoo.webapp.upload.UploadInfo"/>
+        <convert converter="bean" match="com.yupoo.webapp.upload.ProcessInfo"/>
+        <convert converter="bean" match="com.yupoo.webapp.invite.Contact"/>-->    
+    </allow>
+</dwr>

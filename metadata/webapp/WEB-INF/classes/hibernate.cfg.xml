@@ -1,0 +1,97 @@
+<!DOCTYPE hibernate-configuration PUBLIC 
+	"-//Hibernate/Hibernate Configuration DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+	
+<hibernate-configuration>
+<session-factory>
+	<!-- properteis -->
+	<property name="show_sql">false</property>
+	<property name="format_sql">false</property>
+
+	<!--<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>-->
+
+	<!-- Add bitwise and SQLFunction -->
+	<property name="hibernate.dialect">
+		com.painiu.core.persistence.MySQLDialect
+	</property>
+	<property name="hibernate.cache.provider_class">
+		com.painiu.core.persistence.cache.SystemCacheProvider
+	</property>
+
+	<!-- mappings -->
+	<mapping resource="com/painiu/core/model/UserCookie.hbm.xml" />
+	<mapping resource="com/painiu/core/model/UserLoginIP.hbm.xml" />
+    <mapping resource="com/painiu/core/model/Role.hbm.xml" />
+	<mapping resource="com/painiu/core/model/User.hbm.xml" />
+    <mapping resource="com/painiu/core/model/UserProfile.hbm.xml" />
+	<mapping resource="com/painiu/core/model/UserStat.hbm.xml" />
+	<mapping resource="com/painiu/core/model/UserPreference.hbm.xml" />
+	<mapping resource="com/painiu/core/model/Category.hbm.xml" />
+	<mapping resource="com/painiu/core/model/Message.hbm.xml" />
+	<mapping resource="com/painiu/core/model/Invite.hbm.xml" />
+	<mapping resource="com/painiu/core/model/Area.hbm.xml" />
+	<mapping resource="com/painiu/core/model/Comment.hbm.xml" />
+	<mapping resource="com/painiu/core/model/Link.hbm.xml" />
+	<mapping resource="com/painiu/core/model/SystemMessage.hbm.xml" />
+	<mapping resource="com/painiu/core/model/SystemNews.hbm.xml" />
+	<mapping resource="com/painiu/core/model/Event.hbm.xml" />
+	<mapping resource="com/painiu/core/model/Abuse.hbm.xml" />
+	<mapping resource="com/painiu/core/model/Application.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/Authentication.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/Frobnitz.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/Collaborator.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/Cotag.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/CoUser.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/ExchangeStat.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/Partner.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/PartnerDomain.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/Photo.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/Tag.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/Forum.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/Topic.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/Post.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/Token.hbm.xml"/>
+	<mapping resource="com/painiu/core/model/TProduct.hbm.xml"/>
+
+
+	<!-- CACHES -->
+	<!-- WE USE NONSTRICT-READ-WRITE CACHES, OUR CACHE IMPLEMENTATION DOES NOT SUPPORT LOCKING -->
+
+	<class-cache class="com.painiu.core.model.UserCookie" usage="nonstrict-read-write" />
+	<class-cache class="com.painiu.core.model.UserLoginIP" usage="nonstrict-read-write" />
+	<class-cache class="com.painiu.core.model.Role" usage="nonstrict-read-write" />
+	<class-cache class="com.painiu.core.model.User" usage="nonstrict-read-write" />
+	<class-cache class="com.painiu.core.model.UserProfile" usage="nonstrict-read-write" />
+	<class-cache class="com.painiu.core.model.UserPreference" usage="nonstrict-read-write" />
+	<class-cache class="com.painiu.core.model.UserStat" usage="nonstrict-read-write" />
+	<class-cache class="com.painiu.core.model.Category" usage="nonstrict-read-write" />
+	<class-cache class="com.painiu.core.model.Message" usage="nonstrict-read-write" />
+	<class-cache class="com.painiu.core.model.Invite" usage="nonstrict-read-write" />
+	<class-cache class="com.painiu.core.model.Area" usage="nonstrict-read-write" />
+	<class-cache class="com.painiu.core.model.Comment" usage="nonstrict-read-write" />
+	<class-cache class="com.painiu.core.model.SystemMessage" usage="nonstrict-read-write" />
+	<class-cache class="com.painiu.core.model.SystemNews" usage="nonstrict-read-write" />
+	<class-cache class="com.painiu.core.model.Application" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.Authentication" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.Frobnitz" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.Collaborator" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.Cotag" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.CoUser" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.ExchangeStat" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.Partner" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.PartnerDomain" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.Photo" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.Tag" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.Forum" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.Topic" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.Post" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.Token" usage="nonstrict-read-write"/>
+	<class-cache class="com.painiu.core.model.TProduct" usage="nonstrict-read-write"/>
+	
+	<!-- collection cache -->
+	<collection-cache collection="com.painiu.core.model.User.roles" usage="nonstrict-read-write"/>
+
+
+
+</session-factory>
+</hibernate-configuration>

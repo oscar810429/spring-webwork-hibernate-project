@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="situation">
+    	<param name="enumClassname">com.painiu.core.model.Comment$Situation</param>
+	</typedef>
+	<class 	name="Post" 
+			table="pn_post" 
+			lazy="true">
+
+		<id	name="id" 
+			column="post_id"
+			type="string" 
+			unsaved-value="null">
+			
+			<generator 	class="uuid" />
+		</id>
+    	
+		<property 	name="content"
+					column="content"
+					type="string"
+					not-null="true" />
+		
+		<property 	name="postedDate" 
+					column="posted_date" 
+					type="timestamp" 
+					update="false" />
+					
+		<property 	name="modifiedDate" 
+					column="modified_date" 
+					type="timestamp" />
+					
+		<property 	name="situation"
+					column="situation"
+					type="situation" 
+					not-null="true" />
+					
+		<many-to-one 	name="topic" 
+						class="Topic" 
+						column="topic_id" 
+						not-null="true" 
+						cascade="none" 
+						outer-join="false"  
+						update="false" />
+						
+		<many-to-one 	name="forum" 
+						class="Forum" 
+						column="forum_id" 
+						not-null="true" 
+						cascade="none" 
+						outer-join="false"  
+						update="false" />
+
+		<!--<many-to-one 	name="group" 
+						class="Group" 
+						column="group_id" 
+						cascade="none" 
+						outer-join="false"  
+						update="false" />-->
+		
+		<many-to-one 	name="author" 
+						class="User" 
+						column="author"
+						not-null="true" 
+						cascade="none" 
+						outer-join="false" 
+						update="false" />
+						
+		<many-to-one 	name="modifiedBy"
+						class="User"
+						column="modified_by"
+						cascade="none"
+					 	outer-join="false" />
+		<!-- 
+		<property 	name="authorName"
+					column="username"
+					type="string"
+					insert="false"
+					update="false" />
+		-->
+	</class>
+</hibernate-mapping>

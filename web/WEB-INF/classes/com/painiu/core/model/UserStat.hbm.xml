@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+	<class 	name="UserStat" 
+			table="pn_user_stats" 
+			lazy="true">
+
+		<id name="id" column="user_id" unsaved-value="null">
+			<generator class="foreign">
+				<param name="property">user</param>
+			</generator>
+		</id>
+
+		<one-to-one name="user" class="User" constrained="true" />
+
+		<property name="streamViews" column="stream_views" type="integer" />
+
+		<property name="profileViews" column="profile_views" type="integer" />
+		
+		<property name="score" column="score" type="integer" />
+
+		<property name="logins" column="login_count" type="integer" />
+		
+		<property name="prevLoginDate" column="prev_login" type="timestamp" />
+
+		<property name="lastLoginDate" column="last_login" type="timestamp" />
+
+		<property name="lastLoginIP" column="last_login_ip" type="string" />
+		
+		<property name="inactive" column="inactive" type="boolean" />
+		
+	</class>
+
+</hibernate-mapping>

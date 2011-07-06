@@ -1,0 +1,328 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.1.1//EN" "http://www.opensymphony.com/xwork/xwork-1.1.1.dtd">
+
+<xwork>
+
+ <package name="groups" namespace="/groups" extends="default">
+ 
+    	    <action name="view" class="groupAction" method="view">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/default.ftl</result>
+		</action>
+		
+		 <action name="detail" class="groupAction" method="detail">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/detail.ftl</result>
+		</action>
+		
+	   <action name="coments" class="groupAction" method="coments">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/coments.ftl</result>
+		</action>
+		
+	     <action name="photos" class="groupAction" method="photos">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/photos.ftl</result>
+		</action>
+
+ </package>
+
+ <package name="profile/groups" namespace="/profile/groups" extends="default">
+ 
+   	    <action name="editinfo" class="groupAction" method="edit">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/default.ftl</result>
+		</action>
+		
+		<action name="admin" class="groupAction" method="edit">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/default.ftl</result>
+		</action>
+		
+		<action name="group_save" class="groupAction" method="group_save">
+		    <interceptor-ref name="basicStack" />
+			<result name="input" type="redirect">/profile/groups/editinfo.html?id=${id}</result>
+			<result name="success" type="redirect">/profile/groups/editinfo.html?id=${id}</result>
+		</action>
+ 
+  	    <action name="owners" class="groupAction" method="ownedGroups">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/ownergroups.ftl</result>
+		</action>
+
+ </package>
+ 
+    <package name="profile/groups/icon" namespace="/profile/groups/icon" extends="default">
+    
+		<action name="default" class="groupIconAction">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/buddyicon.ftl</result>
+		</action>
+		
+        <action name="upload" class="groupIconAction" method="upload">
+        	<interceptor-ref name="uploadStack" />
+        	<result name="input">/WEB-INF/templates/groups/admin/buddyicon.ftl</result>
+            <result name="success">/WEB-INF/templates/groups/admin/buddyicon.ftl</result>
+        </action>
+        
+        <action name="delete" class="groupIconAction" method="delete">
+	        <interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/groups/admin/buddyicon.ftl</result>
+        </action>
+      
+	</package>
+	
+    <package name="profile/groups/photos" namespace="/profile/groups/photos" extends="default">
+    
+    	<interceptors>
+            <interceptor name="multipart-parse" class="com.mingda.webapp.interceptor.MultipartParseInterceptor"/>
+            <interceptor name="multipart-extract" class="com.mingda.webapp.interceptor.MultipartExtractInterceptor"/>
+            
+            <interceptor-stack name="uploadStack">
+            	<interceptor-ref name="exception" />
+            	<interceptor-ref name="servlet-config" />
+            	<interceptor-ref name="multipart-parse" />
+            	<interceptor-ref name="multipart-extract" />
+            </interceptor-stack>
+
+        </interceptors>
+    
+		<action name="default" class="groupPhotosAction">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/photos/default.ftl</result>
+		</action>
+		
+	    <action name="list" class="groupPhotosAction" method="list">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/photos/default.ftl</result>
+		</action>
+		
+	    <action name="upload" class="photoUploadAction" method="upload">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/photos/upload.ftl</result>
+		</action>
+		
+	    <action name="save_upload" class="photoUploadAction" method="save">
+        	<interceptor-ref name="uploadStack" />
+            <result name="input">/WEB-INF/templates/photos/upload.ftl</result>
+            <!--<result name="batch" type="redirect">/profile/groups/photos/batch.html?ids=${ids}&amp;upload=1</result>-->
+            <result name="batch" type="redirect">/profile/groups/photos/list.html?id=${group_id}</result>
+            <result name="success" type="redirect">/photos/</result>
+            <result name="activity">/WEB-INF/templates/photos/upload_activity.ftl</result>
+            <result name="simple">/WEB-INF/templates/photos/upload_simple.ftl</result>
+        </action>
+      
+	</package>
+	
+	
+	<package name="profile/groups/members" namespace="/profile/groups/members" extends="default">
+		
+		<action name="default" class="groupMemberAction">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/groups/admin/members/default.ftl</result>
+        </action>
+		
+		<action name="create" class="groupMemberAction" method="create">
+        	<interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/groups/admin/members/create.ftl</result>
+        </action>
+		
+		 <action name="save" class="groupMemberAction" method="save">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/groups/admin/members/create.ftl</result>
+        	<result name="success" type="redirect">/profile/groups/members/?groupId=${group.id}</result>
+        </action>
+	        
+        <action name="search" class="groupMemberAction" method="search">
+        	<interceptor-ref name="basicStack" />
+        	<result name="success">/WEB-INF/templates/groups/admin/members/default.ftl</result>
+        </action>
+        
+        <action name="manage" class="groupMemberAction" method="manage">
+        	<interceptor-ref name="basicStack" />
+        	<result name="success">/WEB-INF/templates/groups/admin/members/manage.ftl</result>
+        </action>
+        
+        <action name="commend" class="groupMemberAction" method="commend">
+        	<interceptor-ref name="basicStack" />
+        	<result name="success" type="redirect">/groups/members/manage?groupId=${groupId}</result>
+        </action>
+
+	    <action name="join" class="groupMemberAction" method="join">
+        	<interceptor-ref name="basicStack" />
+        	<result name="success" type="redirect">/groups/view?id=${group.id}</result>
+        </action>
+        
+        <action name="quit" class="groupMemberAction" method="quit">
+        	<interceptor-ref name="basicStack" />
+        	<result name="groups" type="redirect">/groups/</result>
+        	<result name="success" type="redirect">/groups/view?id=${group.id}</result>
+        </action>
+        
+        <action name="accept" class="groupMemberAction" method="accept">
+        	<interceptor-ref name="basicStack" />
+        	<result name="success" type="redirect">/groups/members/manage?groupId=${group.id}&amp;page=${page}</result>
+        </action>
+        
+        <action name="reject" class="groupMemberAction" method="reject">
+        	<interceptor-ref name="basicStack" />
+        	<result name="success" type="redirect">/groups/members/manage?groupId=${group.id}&amp;page=${page}</result>
+        </action>
+        
+        <action name="block" class="groupMemberAction" method="block">
+        	<interceptor-ref name="basicStack" />
+        	<result name="success" type="redirect">/groups/members/manage?groupId=${group.id}&amp;page=${page}</result>
+        </action>
+
+        <action name="unblock" class="groupMemberAction" method="unblock">
+        	<interceptor-ref name="basicStack" />
+        	<result name="success" type="redirect">/groups/members/manage?groupId=${group.id}&amp;page=${page}</result>
+        </action>
+        
+        <action name="delete" class="groupMemberAction" method="delete">
+        	<interceptor-ref name="basicStack" />
+        	<result name="success" type="redirect">/groups/members/manage?groupId=${group.id}&amp;page=${page}</result>
+        </action>
+        
+        <action name="promote" class="groupMemberAction" method="promote">
+        	<interceptor-ref name="basicStack" />
+        	<result name="success" type="redirect">/groups/members/manage?groupId=${group.id}&amp;page=${page}</result>
+        </action>
+        
+        <action name="dismiss" class="groupMemberAction" method="dismiss">
+        	<interceptor-ref name="basicStack" />
+        	<result name="success" type="redirect">/groups/members/manage?groupId=${group.id}&amp;page=${page}</result>
+        </action>
+        
+		<!--<action name="invite" class="groupInviteAction">
+        	<interceptor-ref name="basicStack" />
+        	<result name="success">/WEB-INF/templates/groups/members/invite.ftl</result>
+        </action>
+        
+		<action name="send_invite" class="groupInviteAction" method="send">
+        	<interceptor-ref name="basicStack" />
+        	<result name="input">/WEB-INF/templates/groups/members/invite.ftl</result>
+        	<result name="success" type="redirect">/groups/view?id=${group.id}</result>
+        </action>
+        
+         <action name="invitetogroup" class="groupInviteAction" method="inviteToGroup">
+	        <interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/groups/members/invitetogroup.ftl</result>
+        </action>-->
+	</package>
+	
+ 
+ 
+  <package name="profile/groups/people" namespace="/profile/groups/people" extends="default">
+  
+		<action name="default" class="peopleAction">
+  	     <result name="success">/WEB-INF/templates/groups/admin/people/default.ftl</result>
+  	    </action>
+  	    
+  	    <action name="list" class="peopleAction" method="list">
+  	     <interceptor-ref name="basicStack" />
+  	     <result name="success">/WEB-INF/templates/groups/admin/people/default.ftl</result>
+  	    </action>
+  	    
+  	    <action name="create" class="peopleAction" method="create">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/people/create.ftl</result>
+		</action>
+		
+		<action name="edit" class="peopleAction" method="edit">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/people/edit.ftl</result>
+		</action>
+		
+        <action name="delete" class="peopleAction" method="delete">
+			<interceptor-ref name="basicStack" />
+			<result name="success" type="redirect">/profile/groups/people/list.html?id=${groupid}</result>
+		</action>
+		
+		<action name="save" class="peopleAction" method="save">
+			<interceptor-ref name="validationWorkflow" />
+			<result name="input" type="redirect">/profile/groups/people/create.html?id=${id}</result>
+			<result name="success" type="redirect">/profile/groups/people/list.html?id=${id}</result>
+		</action>
+		
+		<action name="icon" class="peopleIconAction" method="icon">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/people/buddyicon.ftl</result>
+		</action>
+		
+        <action name="icon_upload" class="peopleIconAction" method="upload">
+        	<interceptor-ref name="uploadStack" />
+        	<result name="input">/WEB-INF/templates/groups/admin/people/buddyicon.ftl</result>
+            <result name="success">/WEB-INF/templates/groups/admin/people/buddyicon.ftl</result>
+        </action>
+        
+        <action name="icon_delete" class="peopleIconAction" method="delete">
+	        <interceptor-ref name="basicStack" />
+            <result name="success">/WEB-INF/templates/groups/admin/people/buddyicon.ftl</result>
+        </action>
+  	    
+  	    
+  
+  </package>
+ 
+ 
+  <package name="profile/groups/department" namespace="/profile/groups/department" extends="default">
+ 
+   	    <action name="list" class="groupAction" method="departmentlist">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/department/default.ftl</result>
+		</action>
+		
+		<action name="create" class="groupAction" method="add_department">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/department/create.ftl</result>
+		</action>
+		
+		<action name="edit" class="groupAction" method="edit_department">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/department/edit.ftl</result>
+		</action>
+		
+        <action name="delete" class="groupAction" method="delete_department">
+			<interceptor-ref name="basicStack" />
+			<result name="success" type="redirect">/profile/groups/department/list.html?id=${groupid}</result>
+		</action>
+		
+		<action name="save" class="groupAction" method="save_department">
+			<interceptor-ref name="basicStack" />
+			<result name="input" type="redirect">/profile/groups/department/create.html?id=${id}</result>
+			<result name="success" type="redirect">/profile/groups/department/list.html?id=${id}</result>
+		</action>
+		
+		<action name="categorylist" class="groupAction" method="department_categorylist">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/department/categorylist.ftl</result>
+		</action>
+		
+	    <action name="create_category" class="groupAction" method="department_addcategory">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/department/create_category.ftl</result>
+		</action>
+		
+	    <action name="delete_category" class="groupAction" method="department_deletecategory">
+			<interceptor-ref name="basicStack" />
+			<result name="success" type="redirect">/profile/groups/department/categorylist.html?groupid=${groupid}</result>
+		</action>
+		
+        <action name="save_category" class="groupAction" method="department_savecategory">
+			<interceptor-ref name="basicStack" />
+			<result name="input" type="redirect">/profile/groups/department/create_category.html?id=${id}</result>
+			<result name="success" type="redirect">/profile/groups/department/categorylist.html?groupid=${groupid}</result>
+		</action>
+		
+		 <action name="edit_category" class="groupAction" method="department_editcategory">
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/groups/admin/department/categorylist.ftl</result>
+		</action>
+ 
+
+ </package>
+ 
+ 
+
+
+</xwork>

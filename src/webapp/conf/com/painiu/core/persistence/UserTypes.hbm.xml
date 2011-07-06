@@ -1,0 +1,32 @@
+<!-- <?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="">-->
+
+<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="privacy">
+    <param name="enumClassname">com.painiu.core.model.Privacy</param>
+</typedef>
+
+<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="relation">
+    <param name="enumClassname">com.painiu.core.model.Relation</param>
+</typedef>
+
+<typedef class="com.painiu.core.persistence.ntegerEnumUserType" name="license">
+    <param name="enumClassname">com.painiu.core.model.License</param>
+</typedef>
+
+<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="user_state">
+    <param name="enumClassname">com.painiu.core.model.User$State</param>
+</typedef>
+
+<!--<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="photo_state">
+    <param name="enumClassname">com.painiu.core.model.Photo$State</param>
+</typedef>
+
+<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="message_state">
+    <param name="enumClassname">com.painiu.core.model.Message$State</param>
+</typedef>
+
+</hibernate-mapping> -->

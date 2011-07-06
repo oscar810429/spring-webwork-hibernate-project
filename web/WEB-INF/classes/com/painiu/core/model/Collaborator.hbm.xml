@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+
+	<typedef class="com.painiu.core.persistence.StringSetUserType" name="string_set" />
+
+	<class 	name="Collaborator" 
+			table="pn_collas"
+			lazy="true">
+
+		<id name="id" 
+			column="colla_id"
+			type="string" >
+			
+			<generator 	class="assigned" />
+		</id>
+		
+		<property 	name="secret" 
+					column="secret" 
+					type="string" />
+					
+		<property 	name="name" 
+					column="name" 
+					type="string" />
+					
+		<property 	name="description" 
+					column="description" 
+					type="string" />
+
+		<property 	name="homeURL" 
+					column="home_url" 
+					type="string" />
+					
+		<property 	name="logoURL" 
+					column="logo_url" 
+					type="string" />
+
+		<property 	name="hostAddresses" 
+					column="host_addresses" 
+					type="string_set" />
+
+		<property 	name="createdDate"
+					column="created_date"
+					type="timestamp" 
+					update="false" />			
+					
+	</class>
+
+</hibernate-mapping>

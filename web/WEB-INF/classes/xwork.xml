@@ -1,0 +1,96 @@
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.1.1//EN" "http://www.opensymphony.com/xwork/xwork-1.1.1.dtd">
+<!-- 
+$Id: xwork.xml 2 2010-01-03 19:46:53Z zhangsf $
+ -->
+<xwork>
+	<!-- Include webwork defaults -->
+	<include file="webwork-default.xml"/>
+	
+	<!-- Configuration for the default package. --> 
+	<package name="default" namespace="/" extends="webwork-default">
+		<result-types>
+			<result-type name="freemarker" class="com.painiu.webapp.views.freemarker.FreemarkerResult" default="true" />
+			<result-type name="dynamic-freemarker" class="com.painiu.webapp.views.freemarker.DynamicFreemarkerResult" />
+		</result-types>
+		
+		<interceptors>
+			<!-- Interceptor to handle allowing only admins to certain actions -->
+       <interceptor name="adminOnly" class="adminInterceptor"/>
+			<interceptor name="multipart-parse" class="com.painiu.webapp.interceptor.MultipartParseInterceptor"/>
+			<interceptor name="validation-result" class="com.painiu.webapp.interceptor.ValidationResultInterceptor"/>
+            
+            <interceptor-stack name="adminCheck">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="adminOnly"/>
+            </interceptor-stack>
+            
+            <interceptor-stack name="exceptionWorkFlow">
+                <interceptor-ref name="exception"/>
+                <interceptor-ref name="workflow"/>
+            </interceptor-stack>
+            
+            <interceptor-stack name="validationWorkflow">
+                <interceptor-ref name="basicStack"/>
+                <interceptor-ref name="validation"/>
+                <interceptor-ref name="validation-result"/>                
+                <interceptor-ref name="workflow"/>
+            </interceptor-stack>
+            
+            <interceptor-stack name="uploadStack">
+            	<interceptor-ref name="multipart-parse" />
+            	<interceptor-ref name="fileUploadStack" />
+            </interceptor-stack>
+			
+			     <interceptor-stack name="uploadSimpleStack">
+            <!--<interceptor-ref name="multipart-parse" />-->
+            	<interceptor-ref name="fileUploadStack" />
+            </interceptor-stack>
+            
+        </interceptors>
+        
+        <global-results>
+            <result name="error">/WEB-INF/templates/error.ftl</result>
+            <result name="accessDenied">/WEB-INF/templates/accessDenied.ftl</result>
+            <result name="missingParameter">/WEB-INF/templates/missingParameter.ftl</result>
+            <result name="objectRetrievalFailure">/WEB-INF/templates/objectRetrievalFailure.ftl</result>
+            <!--<result name="privacyForbidden">/WEB-INF/templates/privacyForbidden.ftl</result>-->
+            <result name="dataAccessFailure">/WEB-INF/templates/dataAccessFailure.ftl</result>
+        </global-results>
+        
+        <global-exception-mappings>
+      
+        	<exception-mapping exception="org.acegisecurity.AccessDeniedException" result="accessDenied"/>
+        	<exception-mapping exception="org.springframework.orm.ObjectRetrievalFailureException" result="objectRetrievalFailure"/>
+        	<exception-mapping exception="org.springframework.dao.DataAccessException" result="dataAccessFailure"/>
+        	<!--<exception-mapping exception="com.painiu.webapp.exception.PrivacyForbiddenException" result="privacyForbidden"/>-->
+        	<exception-mapping exception="com.painiu.core.exception.MissingParameterException" result="missingParameter"/>
+        </global-exception-mappings>
+        
+	   <action name="default" class="homeAction">
+			<!--<interceptor-ref name="exceptionWorkFlow" />-->
+			<interceptor-ref name="basicStack" />
+			<result name="success">/WEB-INF/templates/home.ftl</result>
+		</action>
+		
+	   <action name="gotourl" class="homeAction" method="gotourl">
+			<result name="success">/WEB-INF/templates/goto.ftl</result>
+		</action>
+		
+	    <action name="gotosite" class="homeAction" method="gotosite">
+			<result name="success">/WEB-INF/templates/goto.ftl</result>
+		</action>
+		
+	</package>
+	
+			
+    <include file="xwork-account.xml"/>
+    <include file="xwork-console.xml"/>
+	<include file="xwork-profile.xml"/>
+    <include file="xwork-messages.xml"/>
+    <include file="xwork-buddyicon.xml"/>
+    <include file="xwork-search.xml"/>
+    <include file="xwork-softwares.xml"/>
+    <!--<include file="xwork-apidocs.xml"/>-->
+	
+
+</xwork>

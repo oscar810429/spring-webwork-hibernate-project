@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+	<class 	name="SoftwareTag" 
+			table="pn_software_tag" 
+			lazy="true">
+
+		<composite-id 	name="id" 
+						class="SoftwareTag$Id" >
+
+			<key-property 	name="softwareId" 
+							access="field"
+							column="software_id" />
+
+			<key-property 	name="tagName" 
+							access="field"
+							column="tag_name" />
+		</composite-id>
+
+		<many-to-one 	name="software" 
+						column="software_id"
+						class="Software" 
+						not-null="true"
+						insert="false" 
+						update="false"
+						cascade="none"
+						outer-join="false" />
+
+		<many-to-one 	name="tag" 
+						column="tag_name" 
+						class="Tag"
+						not-null="true"
+						insert="false" 
+						update="false"
+						cascade="none" />
+
+		<many-to-one 	name="user" 
+						class="User"
+						column="user_id" 
+						not-null="true" 
+						update="false"
+						cascade="none"
+						outer-join="false" />
+						
+		<many-to-one 	name="owner" 
+						class="User"
+						column="owner_id" 
+						not-null="true" 
+						update="false"
+						cascade="none"
+						outer-join="false" />
+
+		<property 	name="taggedDate" 
+					column="tagged_date"
+					type="timestamp" 
+					not-null="true" />
+
+		
+		<property 	name="softwareId"
+					column="software_id"
+					type="string"
+					update="false"
+					insert="false" />
+
+		<property 	name="tagName"
+					column="tag_name"
+					type="string"
+					update="false"
+					insert="false" />
+					
+		<property 	name="userId"
+					column="user_id"
+					type="string"
+					insert="false"
+					update="false" />
+					
+		<property 	name="ownerId"
+					column="owner_id"
+					type="string"
+					insert="false"
+					update="false" />
+					
+	</class>
+
+<!-- 
+<sql-query name="recentPopularTags">
+	<return alias="tag" class="Tag"/>
+	<![CDATA[
+	select  tag.name            as {tag.name},
+			tag.created_date    as {tag.createdDate},
+			count(pt.photo_id)  as {tag.times},
+	from yp_photo_tag pt inner join yp_tag tag on pt.tag_name = tag.name 
+	where pt.tagged_date > :date
+			group by tag.name
+			order by tag.times desc limit :limit
+	]]>
+</sql-query>
+-->
+</hibernate-mapping>

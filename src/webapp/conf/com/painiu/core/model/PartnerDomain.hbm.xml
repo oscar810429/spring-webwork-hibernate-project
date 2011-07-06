@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+
+	<class 	name="PartnerDomain" 
+			table="pn_partner_domain"
+			lazy="true">
+
+		<id name="domain" 
+			column="partner_domain"
+			type="string">
+			
+			<generator class="assigned" />
+		</id>
+		
+		<property 	name="partnerName" 
+					column="partner_name" 
+					type="string"
+					not-null="true" />
+					
+		<property 	name="userDomainPattern" 
+					column="user_domain_pattern" 
+					type="string"
+					not-null="true" />
+		
+		<property 	name="flashDomain" 
+					column="flash_domain" 
+					type="string" />
+		
+		<property	name="host" 
+					column="host" 
+					type="string" />
+
+		<property 	name="mediaRoot" 
+					column="media_root" 
+					type="string" />
+					
+		<property 	name="photoURLPattern" 
+					column="photo_url_pattern" 
+					type="string" />
+					
+		<property 	name="iconURLPattern" 
+					column="icon_url_pattern" 
+					type="string" />
+
+		<property 	name="createDate"
+					column="create_date"
+					type="timestamp"  />
+
+	</class>
+
+</hibernate-mapping>

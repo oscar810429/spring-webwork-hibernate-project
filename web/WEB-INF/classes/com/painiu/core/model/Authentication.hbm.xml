@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.painiu.core.model">
+
+	<typedef class="com.painiu.core.persistence.IntegerEnumUserType" name="auth_perms">
+    	<param name="enumClassname">com.painiu.core.model.Authentication$Permission</param>
+	</typedef>
+
+	<class 	name="Authentication" 
+			table="yp_auths"
+			lazy="true">
+
+		<id name="token" 
+			column="token"
+			type="string" 
+			unsaved-value="null">
+			
+			<generator 	class="uuid" />
+		</id>
+
+		<many-to-one 	name="user" 
+						class="User" 
+						column="user_id"
+						not-null="true" 
+						cascade="none" 
+						outer-join="false" 
+						update="false" />
+						
+
+		<many-to-one 	name="application"
+						class="Application" 
+						column="api_key" 
+						not-null="true"
+						update="false"
+						cascade="none"
+						outer-join="false" />
+						
+						
+		<property 	name="permission" 
+					column="permission" 
+					type="auth_perms" />
+
+		<property 	name="authDate"
+					column="auth_date"
+					type="timestamp" />
+
+		<property 	name="expireDate"
+					column="expire_date"
+					type="timestamp" />
+
+	</class>
+
+</hibernate-mapping>

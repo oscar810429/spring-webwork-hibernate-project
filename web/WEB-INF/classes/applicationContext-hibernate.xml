@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- Hibernate SessionFactory -->
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+		<property name="configLocation"><value>classpath:hibernate.cfg.xml</value></property>
+  </bean>
+	
+	<!--<bean id="readOnlySessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <property name="dataSource"><ref bean="readOnlyDataSource"/></property>
+    <property name="configLocation"><value>classpath:hibernate.cfg.xml</value></property>
+  </bean>-->
+
+    <!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	
+    <!-- Generic DAO - can be used when doing standard CRUD -->
+	<bean id="dao" class="com.painiu.core.dao.hibernate.BaseDAOHibernate" autowire="byName"/>
+	
+    <!-- LookupDAO: Hibernate implementation -->
+	<bean id="lookupDAO" class="com.painiu.core.dao.hibernate.LookupDAOHibernate" autowire="byName"/>
+	
+	<!-- RoleDAO: Hibernate implementation -->
+	<bean id="roleDAO" class="com.painiu.core.dao.hibernate.RoleDAOHibernate" autowire="byName"/>
+	
+	<!-- UserDAO: Hibernate implementation -->
+	<bean id="userDAO" class="com.painiu.core.dao.hibernate.UserDAOHibernate" autowire="byName"/>
+	
+	<!-- UserStatDAO: Hibernate implementation -->
+	<bean id="userStatDAO" class="com.painiu.core.dao.hibernate.UserStatDAOHibernate" autowire="byName"/>
+	
+	<!-- UserLoginIPDAO: Hibernate implementation -->
+	<bean id="userLoginIPDAO" class="com.painiu.core.dao.hibernate.UserLoginIPDAOHibernate" autowire="byName"/>
+	
+	<!-- ContactDAO: Hibernate implementation -->
+	<!--<bean id="contactDAO" class="com.painiu.core.dao.hibernate.ContactDAOHibernate" autowire="byName"/>-->
+	
+	<!-- CategoryDAO: Hibernate implementation -->
+	<bean id="categoryDAO" class="com.painiu.core.dao.hibernate.CategoryDAOHibernate" autowire="byName"/>
+	
+	<!-- AreaDAO: Hibernate implementation -->
+	<bean id="areaDAO" class="com.painiu.core.dao.hibernate.AreaDAOHibernate" autowire="byName"/>
+	
+	<!-- groupUserDAO: Hibernate implementation -->
+	<!--<bean id="groupUserDAO" class="com.painiu.core.dao.hibernate.GroupUserDAOHibernate" autowire="byName"/>-->
+	
+	<!-- groupStatDAO: Hibernate implementation -->
+	<!--<bean id="groupStatDAO" class="com.painiu.core.dao.hibernate.GroupStatDAOHibernate" autowire="byName"/>-->
+	
+     <!-- groupPhotoDAO: Hibernate implementation -->
+	<!--<bean id="groupPhotoDAO" class="com.painiu.core.dao.hibernate.GroupPhotoDAOHibernate" autowire="byName"/>-->
+	
+	<!-- groupLinkDAO: Hibernate implementation -->
+	<!--<bean id="groupLinkDAO" class="com.painiu.core.dao.hibernate.GroupLinkDAOHibernate" autowire="byName"/>-->
+	
+	<!-- groupNoticeDAO: Hibernate implementation -->
+	<!--<bean id="groupNoticeDAO" class="com.painiu.core.dao.hibernate.GroupNoticeDAOHibernate" autowire="byName"/>-->
+	
+	<!-- groupDAO: Hibernate implementation -->
+	<!--<bean id="groupDAO" class="com.painiu.core.dao.hibernate.GroupDAOHibernate" autowire="byName"/>-->
+	
+	<!-- SystemNewsDAO: Hibernate implementation -->
+	<bean id="systemNewsDAO" class="com.painiu.core.dao.hibernate.SystemNewsDAOHibernate" autowire="byName"/>
+	
+	<!-- SystemMessageDAO: Hibernate implementation -->
+	<bean id="systemMessageDAO" class="com.painiu.core.dao.hibernate.SystemMessageDAOHibernate" autowire="byName"/>
+	
+	<!-- MessageDAO: Hibernate implementation -->
+	<bean id="messageDAO" class="com.painiu.core.dao.hibernate.MessageDAOHibernate" autowire="byName"/>
+	
+	<!-- linkDAO: Hibernate implementation -->
+	<bean id="linkDAO" class="com.painiu.core.dao.hibernate.LinkDAOHibernate" autowire="byName"/>
+	
+	<!-- eventDAO: Hibernate implementation -->
+	<bean id="eventDAO" class="com.painiu.core.dao.hibernate.EventDAOHibernate" autowire="byName"/>
+	
+	<!-- abuseDAO: Hibernate implementation -->
+	<bean id="abuseDAO" class="com.painiu.core.dao.hibernate.AbuseDAOHibernate" autowire="byName"/>
+	
+	<!-- ApplicationDAO: Hibernate implementation -->
+	<bean id="applicationDAO" class="com.painiu.core.dao.hibernate.ApplicationDAOHibernate" autowire="byName"/>
+		
+	<!-- AuthenticationDAO: Hibernate implementation -->
+	<bean id="authenticationDAO" class="com.painiu.core.dao.hibernate.AuthenticationDAOHibernate" autowire="byName"/>
+		
+	<!-- frobnitzDAO: Hibernate implementation -->
+	<bean id="frobnitzDAO" class="com.painiu.core.dao.hibernate.FrobnitzDAOHibernate" autowire="byName"/>
+	
+	<!-- collaboratorDAO: Hibernate implementation -->
+	<bean id="collaboratorDAO" class="com.painiu.core.dao.hibernate.CollaboratorDAOHibernate" autowire="byName"/>
+	
+	<!-- coUserDAO: Hibernate implementation -->
+	<bean id="coUserDAO" class="com.painiu.core.dao.hibernate.CoUserDAOHibernate" autowire="byName"/>
+	
+	<!-- exchangeStatDAO: Hibernate implementation -->
+	<bean id="exchangeStatDAO" class="com.painiu.core.dao.hibernate.ExchangeStatDAOHibernate" autowire="byName"/>
+	
+	<!-- partnerDomainDAO: Hibernate implementation -->
+	<bean id="partnerDomainDAO" class="com.painiu.core.dao.hibernate.PartnerDomainDAOHibernate" autowire="byName"/>
+	
+    <!-- TokenDAO: Hibernate implementation -->
+	<bean id="tokenDAO" class="com.painiu.core.dao.hibernate.TokenDAOHibernate" autowire="byName"/>
+	
+    <!-- PhotoDAO: Hibernate implementation -->
+	<bean id="photoDAO" class="com.painiu.core.dao.hibernate.PhotoDAOHibernate" autowire="byName"/>
+	
+	 <!-- SoftwareDAO: Hibernate implementation -->
+	<bean id="softwareDAO" class="com.painiu.core.dao.hibernate.SoftwareDAOHibernate" autowire="byName"/>
+	 
+	 <!-- SoftwareStatDAO: Hibernate implementation -->
+	<bean id="softwareStatDAO" class="com.painiu.core.dao.hibernate.SoftwareStatDAOHibernate" autowire="byName"/>
+	
+	<!-- TagDAO: Hibernate implementation -->
+	<bean id="tagDAO" class="com.painiu.core.dao.hibernate.TagDAOHibernate" autowire="byName"/>
+	
+    <!-- ForumDAO: Hibernate implementation -->
+	<bean id="forumDAO" class="com.painiu.core.dao.hibernate.ForumDAOHibernate" autowire="byName"/>
+	
+	<!-- TopicDAO: Hibernate implementation -->
+	<bean id="topicDAO" class="com.painiu.core.dao.hibernate.TopicDAOHibernate" autowire="byName"/>
+	
+	<!-- PostDAO: Hibernate implementation -->
+	<bean id="postDAO" class="com.painiu.core.dao.hibernate.PostDAOHibernate" autowire="byName"/>
+	
+    <!-- TProductDAO: Hibernate implementation -->
+	<bean id="tProductDAO" class="com.painiu.core.dao.hibernate.TProductDAOHibernate" autowire="byName"/>
+	
+</beans>

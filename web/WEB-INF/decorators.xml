@@ -1,0 +1,19 @@
+<decorators defaultdir="/decorators">
+
+    <excludes>
+        <pattern>/scripts/skin/*</pattern>
+        <pattern>/uploads/*</pattern>
+        <pattern>/scripts/plugins/*</pattern>
+        <pattern>/apidoc/*</pattern>
+        <pattern>/jopen/*</pattern>
+    </excludes>
+    
+    <decorator name="console" page="console.ftl">
+    	<pattern>/console/*</pattern>
+    </decorator>
+    
+    <decorator name="default" page="default.ftl">
+        <pattern>/*</pattern>
+    </decorator>
+    
+</decorators>
