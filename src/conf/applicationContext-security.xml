@@ -170,7 +170,7 @@
                 <ref local="daoAuthenticationProvider"/>
                 <ref local="anonymousAuthenticationProvider"/>
                 <ref local="rememberMeAuthenticationProvider"/>
-				       <ref local="existsAuthenticationProvider"/>
+			   <ref local="existsAuthenticationProvider"/>
                 <ref local="tokenAuthenticationProvider"/>
              </list>
         </property>
